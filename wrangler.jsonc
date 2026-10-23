@@ -1,0 +1,10 @@
+{
+  "name": "khonsugraph-site",
+  "compatibility_date": "2026-10-22",
+  "build": { "command": "sh scripts/build.sh" },
+  "assets": {
+    "directory": "./dist/site",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "khonsugraph-site",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "node scripts/serve.mjs home",
+    "dev:docs": "npm --prefix docs run dev",
+    "generate": "node scripts/generate-home.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist/site",
+    "check": "node scripts/check.mjs"
+  }
+}

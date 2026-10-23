@@ -1,0 +1,9 @@
+# KhonsuGraph
+
+> Local-first HawDB graph workbench. Cypher, SQL, a graph canvas, data-source plugins and reviewable .dash dashboards. Independent of HawDB. Apache-2.0.
+
+- [English overview](/index.md)
+- [中文介绍](/zh/index.md)
+- [Documentation](/docs/llms-full.txt)
+- [中文文档](/docs/zh/llms-full.txt)
+- [Source](https://github.com/JetSquirrel/KhonsuGraph)

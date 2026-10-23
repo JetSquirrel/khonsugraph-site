@@ -1,0 +1,8 @@
+{
+  "name": "khonsugraph-docs",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": { "dev": "vitepress dev", "build": "vitepress build" },
+  "devDependencies": { "vitepress": "1.6.4" }
+}
