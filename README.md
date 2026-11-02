@@ -1,6 +1,6 @@
 # KhonsuGraph website
 
-The bilingual product website and documentation for [KhonsuGraph](https://github.com/JetSquirrel/KhonsuGraph), a local-first HawDB graph workbench. Built following the structure of `ducklocal-site` and `cloudbridge-site`.
+The bilingual product website and documentation for [KhonsuGraph](https://github.com/JetSquirrel/KhonsuGraph), an open-source, local-first graph investigation workbench built for hunters. Built following the structure of `ducklocal-site` and `cloudbridge-site`.
 
 | Path | Contents |
 | --- | --- |

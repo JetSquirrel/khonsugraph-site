@@ -1,6 +1,8 @@
-# KhonsuGraph
+# KhonsuGraph — Built for Hunters.
 
-A local-first desktop workbench for HawDB graphs. Explore relationships with Cypher and SQL, connect your data, and build dashboards with your AI agent.
+Follow the connections. Uncover the evidence.
+
+An open-source, local-first graph investigation workbench for security, infrastructure, and beyond. Follow connections in HawDB graphs with Cypher and SQL, connect your data, and build dashboards with your AI agent.
 
 ## A STORY OF EXPLORATION
 
@@ -40,9 +42,16 @@ Seemingly unrelated events, assets, and identities reveal their story through th
 
 From tracks in the wilderness to charts of the night sky and networks of digital relationships, we have always been doing the same thing: Connecting clues. Finding the truth.
 
-This is Khonsu Graph. A local graph analysis workspace for people and AI. Make complex relationships visible, and hidden threats traceable.
+This is KhonsuGraph. Built for Hunters. An open-source, local-first graph investigation workbench for security, infrastructure, and beyond. Make complex relationships visible, and hidden problems traceable.
 
-Khonsu Graph — Follow the traces. Reveal the unseen.
+A hunter isn’t only a threat hunter. It’s anyone who finds problems by following clues and connections.
+
+- **Threat hunters**: Trace attack paths and threats.
+- **SREs**: Trace root causes and dependencies.
+- **Fraud investigators**: Trace anomalous transactions and hidden links.
+- **Researchers**: Explore patterns in complex networks.
+
+KhonsuGraph — Built for Hunters. Follow the connections. Uncover the evidence.
 
 ## Connect your sources
 

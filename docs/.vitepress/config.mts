@@ -34,7 +34,7 @@ function locale(zh = false) {
   }
 }
 export default defineConfig({
-  title: 'KhonsuGraph Docs', description: 'Guides for the local-first graph workbench.',
+  title: 'KhonsuGraph Docs', description: 'Guides for KhonsuGraph, the local-first graph investigation workbench built for hunters.',
   base: '/docs/', outDir: '../dist/site/docs', cleanUrls: true, ignoreDeadLinks: false,
   head: [['link', {rel:'icon', href:'/assets/logo.png'}]],
   sitemap: origin ? { hostname: `${origin}/docs/` } : undefined,
