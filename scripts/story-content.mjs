@@ -20,8 +20,6 @@ export const stories = {
     bridge: '从荒野中的足迹，到夜空中的星图，再到数字世界的关系网络，<br>人类始终在做同一件事：',
     conclusion: '连接线索，发现真相。',
     product: '这就是 KhonsuGraph。为猎手而造。',
-    description: '开源、本地优先的图调查工作台，面向安全、基础设施以及更多领域。让复杂的关系变得可见，让隐藏的问题有迹可循。',
-    huntersIntro: '这里的猎手不只是威胁猎人，而是所有通过线索和关系发现问题的人。',
     hunters: [['威胁猎人', '追踪攻击路径与威胁。'], ['SRE', '追踪故障根因与依赖关系。'], ['欺诈调查员', '追踪异常交易与隐藏关联。'], ['研究者', '探索复杂网络中的模式。']],
     read: '沿着故事探索',
   },
@@ -39,8 +37,6 @@ export const stories = {
     bridge: 'From tracks in the wilderness to charts of the night sky and networks of digital relationships,<br>we have always been doing the same thing:',
     conclusion: 'Connecting clues. Finding the truth.',
     product: 'This is KhonsuGraph. Built for Hunters.',
-    description: 'An open-source, local-first graph investigation workbench for security, infrastructure, and beyond. Make complex relationships visible, and hidden problems traceable.',
-    huntersIntro: 'A hunter isn’t only a threat hunter. It’s anyone who finds problems by following clues and connections.',
     hunters: [['Threat hunters', 'Trace attack paths and threats.'], ['SREs', 'Trace root causes and dependencies.'], ['Fraud investigators', 'Trace anomalous transactions and hidden links.'], ['Researchers', 'Explore patterns in complex networks.']],
     read: 'Follow the story',
   }

@@ -13,3 +13,7 @@ Scene: a vast near-black night. A small solitary traveler seen from behind stand
 Style: sophisticated editorial illustration, hand-cut silhouette and refined woodcut / screen-print aesthetic, bold ink masses with restrained fine lines, subtle paper grain, spare and poetic, premium book-cover art. Match a black, warm ivory and pale gold visual identity. Flat graphic shapes with gentle tonal texture; no glossy 3D.
 Composition: wide landscape composition, one unified scene, balanced negative space in upper left, strongest luminous network detail center-right; all key subjects comfortably within edges. This is only the artwork placed beside HTML heading text, not a screenshot or website mockup. Dark margins should visually blend into website background #111411. Palette near-black #111411, warm ivory #f6f3e9, pale gold #f1c56b. Gold used sparingly for the moon and path.
 Constraints: no typography, no letters, no logos, no watermark, no border, no split panels, no collage, no UI, no charts with labels, no computer monitors, no neon blue or purple, no photorealism, no exaggerated glow. Output an opaque, publication-quality raster illustration.
+
+## Glow layer
+
+`home/assets/hero-glow.webp` is the gold route extracted from this illustration, so the page can light up the painted line without drawing a second one. Regenerate it after replacing the illustration: `python artifacts/hero-glow.py home/assets/hero-traces.png home/assets/hero-glow.webp preview.png`.

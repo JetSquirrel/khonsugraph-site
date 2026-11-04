@@ -42,9 +42,7 @@ Seemingly unrelated events, assets, and identities reveal their story through th
 
 From tracks in the wilderness to charts of the night sky and networks of digital relationships, we have always been doing the same thing: Connecting clues. Finding the truth.
 
-This is KhonsuGraph. Built for Hunters. An open-source, local-first graph investigation workbench for security, infrastructure, and beyond. Make complex relationships visible, and hidden problems traceable.
-
-A hunter isn’t only a threat hunter. It’s anyone who finds problems by following clues and connections.
+This is KhonsuGraph. Built for Hunters.
 
 - **Threat hunters**: Trace attack paths and threats.
 - **SREs**: Trace root causes and dependencies.
