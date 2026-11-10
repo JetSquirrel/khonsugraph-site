@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 
 const repository = 'https://github.com/JetSquirrel/KhonsuGraph'
-const origin = process.env.SITE_URL ? new URL(process.env.SITE_URL).origin : ''
+const origin = new URL(process.env.SITE_URL || 'https://khonsugraph.com').origin
 const pages = [
   ['getting-started', 'Getting started', '快速开始'],
   ['data-sources', 'Data sources', '数据源'],
@@ -37,7 +37,6 @@ export default defineConfig({
   title: 'KhonsuGraph Docs', description: 'Guides for KhonsuGraph, the local-first graph investigation workbench built for hunters.',
   base: '/docs/', outDir: '../dist/site/docs', cleanUrls: true, ignoreDeadLinks: false,
   head: [['link', {rel:'icon', href:'/assets/logo.png'}]],
-  sitemap: origin ? { hostname: `${origin}/docs/` } : undefined,
   locales: { root: locale(), zh: locale(true) },
   themeConfig: {
     logo: {src:'/logo.png',alt:'KhonsuGraph'},

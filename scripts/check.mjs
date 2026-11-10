@@ -36,5 +36,15 @@ for (const file of ['index.html','zh/index.html']) {
     if (isResource && /(?:src|href)="https?:\/\//.test(tag)) errors.push(`${file}: external asset request`);
   }
 }
+const sitemap = await readFile(resolve(root,'sitemap.xml'),'utf8').catch(() => '');
+const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => new URL(m[1]));
+if (!sitemap.startsWith('<?xml') || !locs.length) errors.push('sitemap.xml: missing or empty');
+for (const url of locs) {
+  const path = resolve(root,'.' + decodeURIComponent(url.pathname));
+  let found = false;
+  for (const candidate of [path+'.html',resolve(path,'index.html')]) if (await stat(candidate).then(s=>s.isFile()).catch(()=>false)) found = true;
+  if (!found) errors.push(`sitemap.xml: no page for ${url.href}`);
+}
+if (!(await readFile(resolve(root,'robots.txt'),'utf8')).includes(`Sitemap: ${locs[0]?.origin}/sitemap.xml`)) errors.push('robots.txt: missing Sitemap line');
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
 console.log(`Checked ${html.length} HTML pages: internal links, fragments, assets, metadata and structured data passed.`);

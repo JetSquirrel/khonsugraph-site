@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { caseArt, heroSky, heroTrace } from './art.mjs';
 import { artwork, stories } from './story-content.mjs';
 const repo = 'https://github.com/JetSquirrel/KhonsuGraph';
-const origin = process.env.SITE_URL ? new URL(process.env.SITE_URL).origin : '';
+const origin = new URL(process.env.SITE_URL || 'https://khonsugraph.com').origin;
 if (origin && !origin.startsWith('https://')) throw new Error('SITE_URL must use HTTPS');
 const translations = {
   en: {
@@ -77,7 +77,6 @@ ${origin ? `<link rel="canonical" href="${origin}${path}"><meta property="og:url
   await writeFile(`home${path}index.html`, html);
   await writeFile(`home${path}index.md`, `# KhonsuGraph — ${t.title}\n\n${t.tagline}\n\n${t.description}\n\n## ${story.eyebrow}\n\n${story.intro}\n\n${story.chapters.map(c => `### ${c.era} — ${c.title}\n\n${c.paragraphs.join("\n\n")}\n\n${c.insight.replaceAll("<br>", " ")}`).join("\n\n")}\n\n${story.bridge.replaceAll("<br>", " ")} ${story.conclusion}\n\n${story.product}\n\n${story.hunters.map(([r, b]) => `- **${r}**: ${b}`).join('\n')}\n\nKhonsuGraph — Built for Hunters. ${t.tagline}\n\n${t.steps.map(s => `## ${s[1]}\n\n${s[2]}\n\n[${s[3]}](${origin}${docs}${s[4]})`).join('\n\n')}\n\n${t.faq.map(([q, a]) => `## ${q}\n\n${a}`).join('\n\n')}\n\n[GitHub](${repo})\n`);
 }
-await writeFile('home/robots.txt', `User-agent: *\nAllow: /\n${origin ? `Sitemap: ${origin}/sitemap.xml\nSitemap: ${origin}/docs/sitemap.xml\n` : ''}`);
+// scripts/sitemap.mjs writes sitemap.xml after the docs build.
+await writeFile('home/robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
 await writeFile('home/llms.txt', `# KhonsuGraph\n\n> Built for Hunters. Open-source, local-first graph investigation workbench on HawDB. Cypher, SQL, a graph canvas, data-source plugins and reviewable .dash dashboards. Independent of HawDB. Apache-2.0.\n\n- [English overview](${origin}/index.md)\n- [中文介绍](${origin}/zh/index.md)\n- [Documentation](${origin}/docs/llms-full.txt)\n- [中文文档](${origin}/docs/zh/llms-full.txt)\n- [Source](${repo})\n`);
-if (origin) await writeFile('home/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${origin}/</loc></url><url><loc>${origin}/zh/</loc></url></urlset>`);
-else { const { rm } = await import('node:fs/promises'); await rm('home/sitemap.xml', { force: true }); }
