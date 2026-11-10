@@ -42,15 +42,15 @@ The `hawdb-wasm-demo` project is a design and interaction reference only; the we
 
 ## Deployment
 
-No domain or live deployment is assumed. Set `SITE_URL` to the real HTTPS origin when it is known:
+The site is served at `https://khonsugraph.com`. Canonical URLs, language alternates and absolute discovery links use that origin; override it with `SITE_URL` for another deployment:
 
 ```sh
-SITE_URL=https://your-domain.example npm run build
+SITE_URL=https://preview.example npm run build
 ```
 
-This enables canonical URLs, language alternates, sitemaps and absolute discovery links. Without it, the build intentionally omits canonical URLs and sitemaps rather than advertising a made-up domain.
+The build writes `/sitemap.xml` from the canonical URL of every published page and adds its `Sitemap:` line to `robots.txt`, so adding or removing a page updates both on the next deploy.
 
-For Cloudflare Workers Builds, use project name `khonsugraph-site` and deploy command `npx wrangler deploy`. The configuration runs `sh scripts/build.sh`, installs the locked docs dependencies, and serves `dist/site`. Set `SITE_URL` in build environment variables. Domain binding is a separate hosting setup step.
+For Cloudflare Workers Builds, use project name `khonsugraph-site` and deploy command `npx wrangler deploy`. The configuration runs `sh scripts/build.sh`, installs the locked docs dependencies, and serves `dist/site`. Domain binding is a separate hosting setup step.
 
 Routing follows [Cloudflare's static HTML handling](https://developers.cloudflare.com/workers/static-assets/routing/advanced/html-handling/): document routes resolve without `.html`, directory indexes retain trailing slashes, and unknown routes use a 404 page.
 

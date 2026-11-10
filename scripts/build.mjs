@@ -9,4 +9,5 @@ await rm('dist/site', { recursive: true, force: true });
 await mkdir('dist/site', { recursive: true });
 run('npm', ['--prefix', 'docs', 'run', 'build']);
 await cp('home', 'dist/site', { recursive: true });
+run('node', ['scripts/sitemap.mjs']);
 run('node', ['scripts/check.mjs']);

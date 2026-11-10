@@ -55,19 +55,19 @@ KhonsuGraph — Built for Hunters. Follow the connections. Uncover the evidence.
 
 Import nodes and relationships from CSV, sync AWS resources, or write a plugin for your own system.
 
-[Data sources](/docs/data-sources)
+[Data sources](https://khonsugraph.com/docs/data-sources)
 
 ## Ask in Cypher or SQL
 
 Inspect the schema, write a query, and see the results as a table or a graph you can explore.
 
-[Query your graph](/docs/queries)
+[Query your graph](https://khonsugraph.com/docs/queries)
 
 ## Keep the insight
 
 Turn queries into a plain-text .dash file with graph panels, charts, tables, and shared filters.
 
-[Build a dashboard](/docs/dashboards)
+[Build a dashboard](https://khonsugraph.com/docs/dashboards)
 
 ## What is KhonsuGraph?
 

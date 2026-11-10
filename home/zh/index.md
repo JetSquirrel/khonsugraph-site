@@ -55,19 +55,19 @@ KhonsuGraph — Built for Hunters. 追踪关系，揭示证据。
 
 从 CSV 导入节点与关系，同步 AWS 资源，或编写插件连接自己的系统。
 
-[了解数据源](/docs/zh/data-sources)
+[了解数据源](https://khonsugraph.com/docs/zh/data-sources)
 
 ## 用 Cypher 或 SQL 提问
 
 先查看 Schema，再编写查询。在表格中核对结果，在画布上探索关系。
 
-[开始查询](/docs/zh/queries)
+[开始查询](https://khonsugraph.com/docs/zh/queries)
 
 ## 把发现保存下来
 
 用纯文本 .dash 文件组合关系图、图表、表格与联动筛选，形成可复用的仪表盘。
 
-[构建仪表盘](/docs/zh/dashboards)
+[构建仪表盘](https://khonsugraph.com/docs/zh/dashboards)
 
 ## KhonsuGraph 是什么？
 
