@@ -128,3 +128,4 @@ h1 em{background:linear-gradient(100deg,#ffe2a1,#f1c56b 55%,#c9963f);-webkit-bac
 .case-art .ca-status{fill:#a39a80!important;font-size:8.5px;letter-spacing:.4px}
 @media(max-width:600px){.case-art{margin-bottom:20px}}
 @media(prefers-reduced-motion:reduce){.case:hover .case-art svg{transform:none}}
+.fine a{color:#d9cfae;font-weight:550}

@@ -53,7 +53,7 @@ KhonsuGraph — Built for Hunters. Follow the connections. Uncover the evidence.
 
 ## Connect your sources
 
-Import nodes and relationships from CSV, sync AWS resources, or write a plugin for your own system.
+Import nodes and relationships from CSV, sync AWS resources, copy a Neo4j or Cartography database, or write a plugin for your own system.
 
 [Data sources](https://khonsugraph.com/docs/data-sources)
 
@@ -63,7 +63,25 @@ Inspect the schema, write a query, and see the results as a table or a graph you
 
 [Query your graph](https://khonsugraph.com/docs/queries)
 
-## Keep the insight
+## Follow the path
+
+Walk outward from any node, bounded by hops and relationship types, and get the fewest-hops path to a target.
+
+[Trace a path](https://khonsugraph.com/docs/investigations)
+
+## Find what matters
+
+Rank nodes with PageRank and betweenness, find communities and components, and measure shortest paths. Results match networkx.
+
+[Analyze the graph](https://khonsugraph.com/docs/analysis)
+
+## Keep the evidence
+
+Every record says which source wrote it and when. Save an investigation, reopen it after the data changes, and see whether the conclusion still holds.
+
+[Save an investigation](https://khonsugraph.com/docs/investigations#saved-investigations)
+
+## Share the finding
 
 Turn queries into a plain-text .dash file with graph panels, charts, tables, and shared filters.
 
@@ -88,5 +106,13 @@ No. KhonsuGraph is an independent project built on HawDB. It is free and open so
 ## Can I use any Cypher query?
 
 KhonsuGraph uses HawDB’s supported Cypher syntax, which differs from other graph databases. See the query guide for supported patterns and current limitations.
+
+## How is it different from Neo4j Browser or Bloom?
+
+KhonsuGraph is a desktop app with its own embedded graph engine, HawDB, so there is no database server to run. It adds path exploration, record-level evidence, graph algorithms, and a JSON command line for AI agents. Its Neo4j plugin can copy an existing Neo4j database, including one that Cartography fills, into a local graph.
+
+## Does it work with Claude Code and other AI agents?
+
+Yes. The khonsu command line prints structured JSON from every command, so any agent that can run shell commands can use it, and the app can install an agent skill for Claude Code. The agent reads the schema, runs queries, and writes dashboards; you review the result in the window.
 
 [GitHub](https://github.com/JetSquirrel/KhonsuGraph)

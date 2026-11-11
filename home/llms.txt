@@ -1,9 +1,24 @@
 # KhonsuGraph
 
-> Built for Hunters. Open-source, local-first graph investigation workbench on HawDB. Cypher, SQL, a graph canvas, data-source plugins and reviewable .dash dashboards. Independent of HawDB. Apache-2.0.
+> Built for Hunters. Open-source, local-first graph investigation workbench on HawDB, for macOS and Windows. Cypher and PostgreSQL SQL, a graph canvas, path exploration, record-level evidence, graph algorithms, saved investigations, data-source plugins (CSV, AWS, Neo4j) and reviewable .dash dashboards, with a JSON CLI for AI agents. Independent of HawDB. Apache-2.0.
+
+## Overview
 
 - [English overview](https://khonsugraph.com/index.md)
 - [中文介绍](https://khonsugraph.com/zh/index.md)
-- [Documentation](https://khonsugraph.com/docs/llms-full.txt)
-- [中文文档](https://khonsugraph.com/docs/zh/llms-full.txt)
 - [Source](https://github.com/JetSquirrel/KhonsuGraph)
+
+## Documentation
+
+- [All guides in one file](https://khonsugraph.com/docs/llms-full.txt)
+- [中文文档合集](https://khonsugraph.com/docs/zh/llms-full.txt)
+- [Getting started](https://khonsugraph.com/docs/getting-started.md): install, create a graph, import a CSV
+- [Data sources](https://khonsugraph.com/docs/data-sources.md): CSV, AWS and Neo4j plugins, sync semantics
+- [Cypher & SQL](https://khonsugraph.com/docs/queries.md): supported Cypher, shortest paths, limits
+- [Investigations](https://khonsugraph.com/docs/investigations.md): explore paths, evidence, saved investigations, snapshots
+- [Graph analysis](https://khonsugraph.com/docs/analysis.md): PageRank, betweenness, communities, components
+- [Dashboards](https://khonsugraph.com/docs/dashboards.md): the .dash format
+- [CLI & AI agents](https://khonsugraph.com/docs/cli.md): the khonsu JSON CLI and the agent skill
+- [Plugin development](https://khonsugraph.com/docs/plugins.md): the JSON Lines plugin protocol
+- [Examples](https://khonsugraph.com/docs/examples.md): dashboards on public datasets
+- [Troubleshooting](https://khonsugraph.com/docs/troubleshooting.md): locks, old formats, empty panels

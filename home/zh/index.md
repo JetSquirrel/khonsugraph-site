@@ -53,7 +53,7 @@ KhonsuGraph — Built for Hunters. 追踪关系，揭示证据。
 
 ## 接入你的数据
 
-从 CSV 导入节点与关系，同步 AWS 资源，或编写插件连接自己的系统。
+从 CSV 导入节点与关系，同步 AWS 资源，复制 Neo4j 或 Cartography 数据库，或编写插件连接自己的系统。
 
 [了解数据源](https://khonsugraph.com/docs/zh/data-sources)
 
@@ -63,7 +63,25 @@ KhonsuGraph — Built for Hunters. 追踪关系，揭示证据。
 
 [开始查询](https://khonsugraph.com/docs/zh/queries)
 
-## 把发现保存下来
+## 沿着路径追踪
+
+从任意节点向外探索，按跳数和关系类型限定范围，并得到通往目标的最短跳数路径。
+
+[追踪一条路径](https://khonsugraph.com/docs/zh/investigations)
+
+## 找出关键节点
+
+用 PageRank 和介数中心性为节点排序，发现社区与连通分量，计算最短路径。结果与 networkx 一致。
+
+[分析图结构](https://khonsugraph.com/docs/zh/analysis)
+
+## 留下证据
+
+每条记录都能说明由哪个数据源写入、何时写入。保存一次调查，数据变化后重新打开，确认结论是否依然成立。
+
+[保存调查](https://khonsugraph.com/docs/zh/investigations#saved-investigations)
+
+## 分享调查结论
 
 用纯文本 .dash 文件组合关系图、图表、表格与联动筛选，形成可复用的仪表盘。
 
@@ -88,5 +106,13 @@ KhonsuGraph 是免费开源的本地 HawDB 图数据桌面工作台，集成 Cyp
 ## 可以运行任意 Cypher 查询吗？
 
 KhonsuGraph 使用 HawDB 支持的 Cypher 语法，与其他图数据库有所不同。支持的语法与当前限制请参阅查询指南。
+
+## 它和 Neo4j Browser、Bloom 有什么不同？
+
+KhonsuGraph 是桌面应用，内置嵌入式图引擎 HawDB，不需要运行数据库服务。它提供路径探索、记录级证据、图算法，以及面向 AI Agent 的 JSON 命令行。Neo4j 插件可以把已有的 Neo4j 数据库（包括由 Cartography 写入的数据库）复制成本地图。
+
+## 可以配合 Claude Code 等 AI Agent 使用吗？
+
+可以。khonsu 命令行的每条命令都输出结构化 JSON，任何能执行 shell 命令的 Agent 都能使用；应用还可以为 Claude Code 安装 Agent skill。Agent 查看 Schema、执行查询、编写仪表盘，你在窗口中审阅结果。
 
 [GitHub](https://github.com/JetSquirrel/KhonsuGraph)

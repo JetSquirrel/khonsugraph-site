@@ -8,6 +8,8 @@ const pages = [
   ['getting-started', 'Getting started', '快速开始'],
   ['data-sources', 'Data sources', '数据源'],
   ['queries', 'Cypher & SQL', 'Cypher 与 SQL'],
+  ['investigations', 'Investigations', '调查'],
+  ['analysis', 'Graph analysis', '图分析'],
   ['dashboards', 'Dashboards', '仪表盘'],
   ['cli', 'CLI & AI agents', 'CLI 与 AI Agent'],
   ['plugins', 'Plugin development', '插件开发'],
@@ -34,9 +36,15 @@ function locale(zh = false) {
   }
 }
 export default defineConfig({
-  title: 'KhonsuGraph Docs', description: 'Guides for KhonsuGraph, the local-first graph investigation workbench built for hunters.',
+  title: 'KhonsuGraph Docs', description: 'Guides for KhonsuGraph, the open-source, local-first graph investigation workbench: Cypher and SQL queries, path exploration, evidence, graph analysis and dashboards.',
   base: '/docs/', outDir: '../dist/site/docs', cleanUrls: true, ignoreDeadLinks: false,
-  head: [['link', {rel:'icon', href:'/assets/logo.png'}]],
+  head: [
+    ['link', {rel:'icon', href:'/assets/logo.png'}],
+    ['meta', {name:'theme-color', content:'#141a1b'}],
+    ['meta', {property:'og:site_name', content:'KhonsuGraph'}],
+    ['meta', {property:'og:type', content:'article'}],
+    ['meta', {name:'twitter:card', content:'summary_large_image'}],
+  ],
   locales: { root: locale(), zh: locale(true) },
   themeConfig: {
     logo: {src:'/logo.png',alt:'KhonsuGraph'},
@@ -49,13 +57,29 @@ export default defineConfig({
   transformHead({ pageData, title, description }) {
     if (!origin || pageData.isNotFound) return []
     const path = pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')
-    const en = path.replace(/^zh\//,'')
+    const en = path.replace(/^zh\//,''), zh = path.startsWith('zh/')
+    const url = `${origin}/docs/${path}`, card = `${origin}/assets/og-card.jpg`
+    const home = `${origin}/docs/${zh ? 'zh/' : ''}`
+    const crumbs = [['KhonsuGraph', `${origin}/${zh ? 'zh/' : ''}`], [zh ? '文档' : 'Docs', home], ...(en ? [[pageData.title, url]] : [])]
+    const structured = {'@context':'https://schema.org','@graph':[
+      {'@type':'TechArticle', headline: pageData.title, description, url, inLanguage: zh ? 'zh-CN' : 'en', image: card,
+        isPartOf: {'@type':'WebSite','@id':`${origin}/#website`}, about: {'@type':'SoftwareApplication','@id':`${origin}/#app`, name:'KhonsuGraph'}},
+      {'@type':'BreadcrumbList', itemListElement: crumbs.map(([name,item],i) => ({'@type':'ListItem', position: i+1, name, item}))},
+    ]}
     return [
-      ['link', {rel:'canonical',href:`${origin}/docs/${path}`}],
+      ['link', {rel:'canonical',href:url}],
       ['link', {rel:'alternate',hreflang:'en',href:`${origin}/docs/${en}`}],
       ['link', {rel:'alternate',hreflang:'zh-CN',href:`${origin}/docs/zh/${en}`}],
+      ['link', {rel:'alternate',hreflang:'x-default',href:`${origin}/docs/${en}`}],
+      ['meta', {property:'og:url',content:url}],
+      ['meta', {property:'og:locale',content:zh ? 'zh_CN' : 'en_US'}],
       ['meta', {property:'og:title',content:title}],
       ['meta', {property:'og:description',content:description}],
+      ['meta', {property:'og:image',content:card}],
+      ['meta', {name:'twitter:title',content:title}],
+      ['meta', {name:'twitter:description',content:description}],
+      ['meta', {name:'twitter:image',content:card}],
+      ['script', {type:'application/ld+json'}, JSON.stringify(structured)],
     ]
   },
   async buildEnd(config) {
