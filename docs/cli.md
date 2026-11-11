@@ -1,5 +1,5 @@
 ---
-description: Use the khonsu JSON CLI to inspect graphs, query data and collaborate on dashboards.
+description: The khonsu command line prints JSON from every command, so Claude Code and other AI agents can inspect a graph, query it, trace paths and write dashboards.
 ---
 # CLI & AI agents
 
@@ -17,10 +17,17 @@ The [agent skill](https://github.com/JetSquirrel/KhonsuGraph/tree/main/skills/kh
 | `khonsu query --db DIR --sql "…"` | Execute one read-only SQL statement |
 | `khonsu query --db DIR --file query.cypher` | Run a query file; `.sql` selects SQL |
 | `khonsu explain --db DIR --cypher "…"` | Explain a query |
+| `khonsu explore --db DIR --from NODE [--to NODE]` | [Walk outward from a node](./investigations#explore) and report a path |
+| `khonsu evidence --db DIR --node NODE --rel REL` | Show [what supports a record](./investigations#evidence) |
+| `khonsu analyze ALGORITHM --db DIR` | Run a [graph algorithm](./analysis): PageRank, communities, components and more |
+| `khonsu investigation save FILE --db DIR --from NODE` | [Save an investigation](./investigations#saved-investigations); `reopen FILE` runs it again |
+| `khonsu snapshot save FILE --db DIR` | Keep the graph's records; [`snapshot diff A B`](./investigations#snapshots) compares two |
+| `khonsu rebuild --db DIR` | Rebuild an old-format graph from its data sources |
 | `khonsu plugin list` | List plugins and permissions |
 | `khonsu plugin describe ID` | Show a plugin's configuration fields and output types |
 | `khonsu plugin install DIR --yes` | Install a plugin directory or ZIP and approve its permissions |
-| `khonsu plugin sync --source ID` | Sync a source; add `--dry-run` to preview or `--incremental` |
+| `khonsu plugin sync --source ID` | Sync a source; `--dry-run` previews, `--incremental` and `--append` add without removing |
+| `khonsu plugin analyze ID ANALYSIS --db DIR` | Run a [plugin's analysis](./investigations#plugin-analyses), such as AWS `exposure` |
 | `khonsu source list` | List configured sources |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | Configure a source; `--test` checks it first |
 | `khonsu source remove ID` | Remove a source |
@@ -53,4 +60,4 @@ khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --reso
 khonsu presence overview.dash --doing idle
 ```
 
-While the app holds a graph, read queries and `check` run through the window and return `via_window: true`. Do not remove locks to force a write. See [troubleshooting](./troubleshooting).
+While the app holds a graph, read queries, `check` and `plugin sync` run through the window and return `via_window: true`. Query writes, `explore` and `investigation` need the graph free. Do not remove locks to force a write. See [troubleshooting](./troubleshooting).

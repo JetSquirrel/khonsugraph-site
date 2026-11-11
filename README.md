@@ -40,6 +40,12 @@ The `hawdb-wasm-demo` project is a design and interaction reference only; the we
 
 `home/assets/hero-traces.png` is the custom hero illustration generated with the built-in ChatGPT image generation tool. The generation prompt is saved in `artifacts/hero-image-prompt.md`. The page serves `hero-traces.webp` and a 960 px `hero-traces-960.webp` for narrow screens; regenerate them with `cwebp -q 82 -m 6` (add `-resize 960 0` for the small one) after replacing the PNG.
 
+`home/assets/og-card.jpg` is the 1200×630 link-preview image every page names in `og:image`. `node scripts/og-card.mjs` renders it from the hero illustration and the logo; it needs `rsvg-convert` and macOS `sips`, and runs by hand, not in the build.
+
+## Search and sharing metadata
+
+The homepage title, meta description and structured data (`WebSite`, `SoftwareApplication`, `FAQPage`) come from `metaTitle`, `metaDescription`, `steps` and `faq` in `scripts/generate-home.mjs`. Documentation pages take their description from front matter; `docs/.vitepress/config.mts` adds canonical and language-alternate links, Open Graph and Twitter tags, and `TechArticle` and `BreadcrumbList` data. The sitemap repeats each page's language alternates. Headings that other pages link to carry explicit IDs (`## Title {#id}`) so English and Chinese anchors match.
+
 ## Deployment
 
 The site is served at `https://khonsugraph.com`. Canonical URLs, language alternates and absolute discovery links use that origin; override it with `SITE_URL` for another deployment:
@@ -56,7 +62,7 @@ Routing follows [Cloudflare's static HTML handling](https://developers.cloudflar
 
 ## Content provenance
 
-Product content comes from the app README, CLI reference, plugin protocol, examples and HawDB 0.12.0 upgrade notes. Downloads link to the releases listing without assuming a release asset exists. The logo and `.dash` samples are copied from the application repository. Update documentation when application behavior changes.
+Product content comes from the app README, PRD, agent skill and CLI reference, plugin protocol, investigation and snapshot docs, and examples, as of KhonsuGraph 0.3.0 (HawDB 0.29.0). Downloads link to the releases listing without assuming a release asset exists. The logo and `.dash` samples are copied from the application repository. Update documentation when application behavior changes.
 
 Each documentation page is also exported as Markdown; `/llms.txt` points to the combined English and Chinese references. Full docs are available at `/docs/llms-full.txt` and `/docs/zh/llms-full.txt`.
 

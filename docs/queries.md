@@ -1,5 +1,5 @@
 ---
-description: Query graphs in Cypher and tables in SQL, understand the canvas and current HawDB limits.
+description: Query a local graph in Cypher and tables in PostgreSQL SQL. Supported Cypher clauses, shortest paths, parameters and current HawDB limits.
 ---
 # Cypher & SQL
 
@@ -21,7 +21,7 @@ LIMIT 20
 
 Returning whole nodes and relationships supplies both table values and graph elements. Returning only `a.name` gives a scalar column, not a connected graph. In the CLI, graph elements appear in a separate `graph` object.
 
-Cypher supports `MATCH`, `OPTIONAL MATCH`, `WHERE`, `RETURN [DISTINCT]`, `ORDER BY`, `SKIP`, `LIMIT`, `WITH` and bounded variable-length patterns. With `--write`, `CREATE`, `MERGE`, `SET`, `DELETE` and `DETACH DELETE` are also available. For example, with a service graph:
+Cypher supports `MATCH`, `OPTIONAL MATCH`, `WHERE`, `RETURN [DISTINCT]`, `ORDER BY`, `SKIP`, `LIMIT`, `WITH`, `UNWIND`, `CASE` and bounded variable-length patterns. With `--write`, `CREATE`, `MERGE`, `SET`, `DELETE` and `DETACH DELETE` are also available. For example, with a service graph:
 
 ```cypher
 MATCH (a:Service)-[:CALLS*1..4]->(b:Service)
@@ -30,6 +30,17 @@ LIMIT 50
 ```
 
 This returns endpoints. Query one-hop relationships separately to draw the intervening connections.
+
+## Shortest paths
+
+```cypher
+MATCH p = shortestPath((a:Host {name: 'web'})-[:CALLS*..6]->(b:Host {name: 'db'}))
+RETURN p, length(p) AS hops
+```
+
+`allShortestPaths`, `nodes(p)` and `relationships(p)` also work. Both endpoints must be bound by a property map, a `WHERE` or an earlier clause. Returning `p` draws the path on the canvas. An unbounded `*` stops at 256 hops and fails rather than report that no path exists.
+
+To walk outward from a node with caps on hops and size, use [`khonsu explore`](./investigations#explore). For weighted paths, centrality and communities, see [graph analysis](./analysis).
 
 ## SQL and parameters
 
@@ -43,17 +54,23 @@ khonsu query --db graphs/demo --cypher \
 
 `-p` values are parsed as JSON when possible, otherwise as strings. SQL uses positional parameters (`$1` with `-p 1=value`).
 
-## Current limitations
+## Current limitations {#current-limitations}
 
-The checked source uses HawDB 0.12.0:
+KhonsuGraph 0.3.0 uses HawDB 0.29.0, whose Cypher differs from other graph databases:
 
-- Cypher `sum()`, `labels()`, `keys()`, `properties()`, `shortestPath`, path variables, `CALL db.*` and `SHOW` are not supported by this workflow. Use `khonsu schema` for metadata.
-- `count`, `collect`, `min`, `max` and `avg` are supported aggregates.
-- Variable-length patterns require a relationship type and no relationship variable.
-- `UNWIND` must be followed by a write clause; a standalone read-only `UNWIND` and `WHERE true` are not supported.
-- `OPTIONAL MATCH`, scalar `IN`, `json_value()` on JSON text and relationship-property `SET` are supported.
+- `labels()`, `keys()`, `properties()`, `CALL db.*` and `SHOW` are not supported. Use `khonsu schema` for metadata.
+- `count`, `sum`, `collect`, `min`, `max` and `avg` are the supported aggregates, also over expressions.
+- A read starts with `MATCH` or `UNWIND`. A bare `RETURN 1` does not parse, and `OPTIONAL MATCH` cannot be the first clause.
+- Variable-length patterns require a relationship type and no relationship variable. An untyped relationship pattern works for one hop only.
+- Path variables work only on `shortestPath` and `allShortestPaths`.
+- Strings cannot be concatenated with `+`, and `toLower`, `toUpper`, `reduce`, `any`, `all`, `none` and `exists` are not available.
+- `CREATE` takes one pattern per statement. `LOAD CSV` is switched off; bring files in with a [data source](./data-sources).
+- Scalar `IN`, list comprehensions, `json_value()` on JSON text, dates and durations, and relationship-property `SET` are supported.
 - Reads have a 100,000-row execution ceiling. `--max-rows` only limits displayed rows after execution, so use `LIMIT` in the query as well.
-- Vector values are returned as JSON number arrays. Read result columns by name; the engine can reorder them.
+- Vector values are returned as JSON number arrays. Columns come back in `RETURN` order; still read them by name.
+- `WHERE true` works in Cypher but not in SQL.
+
+A graph written before HawDB 0.25, by KhonsuGraph 0.2.0 or earlier, cannot be read by this version; see [troubleshooting](./troubleshooting#old-format).
 
 ## Read and write access
 

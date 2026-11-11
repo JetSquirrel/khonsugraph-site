@@ -17,6 +17,10 @@ On Windows, keep `khonsu.exe` with the rest of the extracted package and add tha
 
 One process owns a HawDB graph directory. Reads and dashboard checks route through the running window, but writes and source syncs require the graph to be free. Close the graph in the other process. Never delete `khonsugraph.lock`, `owner.hawdb.lock` or database files to bypass a lease.
 
+## The graph reports old_format {#old-format}
+
+HawDB 0.25 changed its storage format and reads no older graph, so a graph written by KhonsuGraph 0.2.0 or earlier fails to open with kind `old_format`. `khonsu rebuild --db DIR` makes it again from its data sources and keeps the old directory beside it as `DIR.hawdb-old`. Anything written by hand rather than synced is not carried over.
+
 ## A graph panel is empty
 
 Return whole nodes and relationships (`RETURN a, r, b`) instead of only names. Check that you opened the graph the dashboard was written for. Use `khonsu schema --db DIR` and run the query directly to verify the labels and result.
