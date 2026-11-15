@@ -49,7 +49,7 @@ This is KhonsuGraph. Built for Hunters.
 - **Fraud investigators**: Trace anomalous transactions and hidden links.
 - **Researchers**: Explore patterns in complex networks.
 
-KhonsuGraph — Built for Hunters. Follow the connections. Uncover the evidence.
+KhonsuGraph — Built for Hunters.
 
 ## Connect your sources
 

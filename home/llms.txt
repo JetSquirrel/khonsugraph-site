@@ -4,14 +4,19 @@
 
 ## Overview
 
-- [English overview](https://khonsugraph.com/index.md)
-- [中文介绍](https://khonsugraph.com/zh/index.md)
+- [English](https://khonsugraph.com/index.md)
+- [简体中文](https://khonsugraph.com/zh/index.md)
+- [日本語](https://khonsugraph.com/ja/index.md)
+- [한국어](https://khonsugraph.com/ko/index.md)
+- [Français](https://khonsugraph.com/fr/index.md)
+- [Deutsch](https://khonsugraph.com/de/index.md)
 - [Source](https://github.com/JetSquirrel/KhonsuGraph)
 
 ## Documentation
 
-- [All guides in one file](https://khonsugraph.com/docs/llms-full.txt)
-- [中文文档合集](https://khonsugraph.com/docs/zh/llms-full.txt)
+### English
+
+- [llms-full.txt](https://khonsugraph.com/docs/llms-full.txt)
 - [Getting started](https://khonsugraph.com/docs/getting-started.md): install, create a graph, import a CSV
 - [Data sources](https://khonsugraph.com/docs/data-sources.md): CSV, AWS and Neo4j plugins, sync semantics
 - [Cypher & SQL](https://khonsugraph.com/docs/queries.md): supported Cypher, shortest paths, limits
@@ -22,3 +27,73 @@
 - [Plugin development](https://khonsugraph.com/docs/plugins.md): the JSON Lines plugin protocol
 - [Examples](https://khonsugraph.com/docs/examples.md): dashboards on public datasets
 - [Troubleshooting](https://khonsugraph.com/docs/troubleshooting.md): locks, old formats, empty panels
+
+### 简体中文
+
+- [llms-full.txt](https://khonsugraph.com/docs/zh/llms-full.txt)
+- [快速开始](https://khonsugraph.com/docs/zh/getting-started.md): 安装、创建图、导入 CSV
+- [数据源](https://khonsugraph.com/docs/zh/data-sources.md): CSV、AWS 与 Neo4j 插件，同步规则
+- [Cypher 与 SQL](https://khonsugraph.com/docs/zh/queries.md): 支持的 Cypher、最短路径与限制
+- [调查](https://khonsugraph.com/docs/zh/investigations.md): 路径探索、证据、保存调查与快照
+- [图分析](https://khonsugraph.com/docs/zh/analysis.md): PageRank、介数中心性、社区与连通分量
+- [仪表盘](https://khonsugraph.com/docs/zh/dashboards.md): .dash 格式
+- [CLI 与 AI Agent](https://khonsugraph.com/docs/zh/cli.md): khonsu JSON 命令行与 Agent skill
+- [插件开发](https://khonsugraph.com/docs/zh/plugins.md): JSON Lines 插件协议
+- [示例](https://khonsugraph.com/docs/zh/examples.md): 基于公开数据集的仪表盘
+- [常见问题](https://khonsugraph.com/docs/zh/troubleshooting.md): 锁、旧格式、空白画布
+
+### 日本語
+
+- [llms-full.txt](https://khonsugraph.com/docs/ja/llms-full.txt)
+- [はじめに](https://khonsugraph.com/docs/ja/getting-started.md): インストール、グラフの作成、CSV のインポート
+- [データソース](https://khonsugraph.com/docs/ja/data-sources.md): CSV、AWS、Neo4j プラグインと同期の仕組み
+- [Cypher と SQL](https://khonsugraph.com/docs/ja/queries.md): 対応する Cypher、最短経路、制限
+- [調査](https://khonsugraph.com/docs/ja/investigations.md): 経路探索、証拠、調査の保存、スナップショット
+- [グラフ分析](https://khonsugraph.com/docs/ja/analysis.md): PageRank、媒介中心性、コミュニティ、連結成分
+- [ダッシュボード](https://khonsugraph.com/docs/ja/dashboards.md): .dash 形式
+- [CLI と AI エージェント](https://khonsugraph.com/docs/ja/cli.md): khonsu JSON CLI とエージェントスキル
+- [プラグイン開発](https://khonsugraph.com/docs/ja/plugins.md): JSON Lines プラグインのプロトコル
+- [例](https://khonsugraph.com/docs/ja/examples.md): 公開データセットのダッシュボード
+- [トラブルシューティング](https://khonsugraph.com/docs/ja/troubleshooting.md): ロック、旧形式、空のパネル
+
+### 한국어
+
+- [llms-full.txt](https://khonsugraph.com/docs/ko/llms-full.txt)
+- [시작하기](https://khonsugraph.com/docs/ko/getting-started.md): 설치, 그래프 생성, CSV 가져오기
+- [데이터 소스](https://khonsugraph.com/docs/ko/data-sources.md): CSV, AWS, Neo4j 플러그인과 동기화 방식
+- [Cypher 및 SQL](https://khonsugraph.com/docs/ko/queries.md): 지원되는 Cypher, 최단 경로, 제한
+- [조사](https://khonsugraph.com/docs/ko/investigations.md): 경로 탐색, 증거, 조사 저장, 스냅샷
+- [그래프 분석](https://khonsugraph.com/docs/ko/analysis.md): PageRank, 매개 중심성, 커뮤니티, 연결 요소
+- [대시보드](https://khonsugraph.com/docs/ko/dashboards.md): .dash 형식
+- [CLI 및 AI 에이전트](https://khonsugraph.com/docs/ko/cli.md): khonsu JSON CLI와 에이전트 스킬
+- [플러그인 개발](https://khonsugraph.com/docs/ko/plugins.md): JSON Lines 플러그인 프로토콜
+- [예제](https://khonsugraph.com/docs/ko/examples.md): 공개 데이터셋 기반 대시보드
+- [문제 해결](https://khonsugraph.com/docs/ko/troubleshooting.md): 잠금, 이전 형식, 빈 패널
+
+### Français
+
+- [llms-full.txt](https://khonsugraph.com/docs/fr/llms-full.txt)
+- [Premiers pas](https://khonsugraph.com/docs/fr/getting-started.md): installation, création d’un graphe, import CSV
+- [Sources de données](https://khonsugraph.com/docs/fr/data-sources.md): plugins CSV, AWS et Neo4j, sémantique de synchronisation
+- [Cypher et SQL](https://khonsugraph.com/docs/fr/queries.md): Cypher pris en charge, plus courts chemins, limites
+- [Investigations](https://khonsugraph.com/docs/fr/investigations.md): exploration de chemins, preuves, investigations enregistrées, instantanés
+- [Analyse de graphe](https://khonsugraph.com/docs/fr/analysis.md): PageRank, betweenness, communautés, composantes
+- [Tableaux de bord](https://khonsugraph.com/docs/fr/dashboards.md): le format .dash
+- [CLI et agents IA](https://khonsugraph.com/docs/fr/cli.md): la CLI JSON khonsu et la compétence d’agent
+- [Développement de plugins](https://khonsugraph.com/docs/fr/plugins.md): le protocole JSON Lines
+- [Exemples](https://khonsugraph.com/docs/fr/examples.md): tableaux de bord sur des jeux de données publics
+- [Dépannage](https://khonsugraph.com/docs/fr/troubleshooting.md): verrous, anciens formats, panneaux vides
+
+### Deutsch
+
+- [llms-full.txt](https://khonsugraph.com/docs/de/llms-full.txt)
+- [Erste Schritte](https://khonsugraph.com/docs/de/getting-started.md): Installation, Graph erstellen, CSV importieren
+- [Datenquellen](https://khonsugraph.com/docs/de/data-sources.md): CSV-, AWS- und Neo4j-Plugins, Synchronisierung
+- [Cypher & SQL](https://khonsugraph.com/docs/de/queries.md): unterstütztes Cypher, kürzeste Pfade, Grenzen
+- [Untersuchungen](https://khonsugraph.com/docs/de/investigations.md): Pfade erkunden, Belege, gespeicherte Untersuchungen, Snapshots
+- [Graphanalyse](https://khonsugraph.com/docs/de/analysis.md): PageRank, Betweenness, Communities, Komponenten
+- [Dashboards](https://khonsugraph.com/docs/de/dashboards.md): das .dash-Format
+- [CLI & KI-Agenten](https://khonsugraph.com/docs/de/cli.md): die khonsu-JSON-CLI und der Agent-Skill
+- [Plugin-Entwicklung](https://khonsugraph.com/docs/de/plugins.md): das JSON-Lines-Protokoll
+- [Beispiele](https://khonsugraph.com/docs/de/examples.md): Dashboards auf öffentlichen Datensätzen
+- [Fehlerbehebung](https://khonsugraph.com/docs/de/troubleshooting.md): Sperren, alte Formate, leere Panels
