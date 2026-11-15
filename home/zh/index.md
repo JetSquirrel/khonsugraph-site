@@ -49,7 +49,7 @@
 - **欺诈调查员**: 追踪异常交易与隐藏关联。
 - **研究者**: 探索复杂网络中的模式。
 
-KhonsuGraph — Built for Hunters. 追踪关系，揭示证据。
+KhonsuGraph — Built for Hunters. 为猎手而造。
 
 ## 接入你的数据
 
