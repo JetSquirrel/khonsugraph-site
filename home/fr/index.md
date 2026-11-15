@@ -53,21 +53,39 @@ KhonsuGraph — Built for Hunters. Conçu pour les chasseurs.
 
 ## Connectez vos sources
 
-Importez des nœuds et des relations depuis un CSV, synchronisez vos ressources AWS ou écrivez un plugin pour votre propre système.
+Importez des nœuds et des relations depuis un CSV, synchronisez vos ressources AWS, copiez une base Neo4j ou Cartography, ou écrivez un plugin pour votre propre système.
 
-[Sources de données](/docs/fr/data-sources)
+[Sources de données](https://khonsugraph.com/docs/fr/data-sources)
 
 ## Interrogez en Cypher ou en SQL
 
 Inspectez le schéma, écrivez une requête et affichez le résultat sous forme de tableau ou de graphe à explorer.
 
-[Interroger votre graphe](/docs/fr/queries)
+[Interroger votre graphe](https://khonsugraph.com/docs/fr/queries)
 
-## Gardez l’essentiel
+## Suivez le chemin
+
+Partez de n’importe quel nœud, en limitant la marche par nombre de sauts et par types de relations, et obtenez le chemin le plus court vers une cible.
+
+[Tracer un chemin](https://khonsugraph.com/docs/fr/investigations)
+
+## Trouvez l’essentiel
+
+Classez les nœuds avec PageRank et la betweenness, trouvez les communautés et les composantes, et mesurez les plus courts chemins. Les résultats concordent avec networkx.
+
+[Analyser le graphe](https://khonsugraph.com/docs/fr/analysis)
+
+## Conservez les preuves
+
+Chaque enregistrement indique quelle source l’a écrit et quand. Enregistrez une investigation, rouvrez-la après une mise à jour des données et vérifiez si la conclusion tient toujours.
+
+[Enregistrer une investigation](https://khonsugraph.com/docs/fr/investigations#saved-investigations)
+
+## Partagez la conclusion
 
 Transformez vos requêtes en un fichier .dash en texte brut avec des panneaux de graphe, des graphiques, des tableaux et des filtres partagés.
 
-[Créer un tableau de bord](/docs/fr/dashboards)
+[Créer un tableau de bord](https://khonsugraph.com/docs/fr/dashboards)
 
 ## Qu’est-ce que KhonsuGraph ?
 
@@ -88,5 +106,13 @@ Non. KhonsuGraph est un projet indépendant construit sur HawDB. Il est gratuit 
 ## Puis-je utiliser n’importe quelle requête Cypher ?
 
 KhonsuGraph utilise la syntaxe Cypher prise en charge par HawDB, qui diffère des autres bases de données de graphes. Consultez le guide des requêtes pour les motifs pris en charge et les limites actuelles.
+
+## Quelle différence avec Neo4j Browser ou Bloom ?
+
+KhonsuGraph est une application de bureau dotée de son propre moteur de graphe embarqué, HawDB : aucun serveur de base de données à exploiter. Elle ajoute l’exploration de chemins, des preuves au niveau des enregistrements, des algorithmes de graphe et une ligne de commande JSON pour les agents IA. Son plugin Neo4j peut copier une base Neo4j existante, y compris une base remplie par Cartography, dans un graphe local.
+
+## Fonctionne-t-il avec Claude Code et d’autres agents IA ?
+
+Oui. La ligne de commande khonsu imprime du JSON structuré pour chaque commande ; tout agent capable d’exécuter des commandes shell peut donc l’utiliser, et l’application peut installer une compétence d’agent pour Claude Code. L’agent lit le schéma, exécute des requêtes et rédige des tableaux de bord ; vous vérifiez le résultat dans la fenêtre.
 
 [GitHub](https://github.com/JetSquirrel/KhonsuGraph)

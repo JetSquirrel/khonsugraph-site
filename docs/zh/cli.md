@@ -17,10 +17,17 @@ description: 使用 khonsu JSON CLI 查看图、查询数据，并与 Agent 协�
 | `khonsu query --db DIR --sql "…"` | 执行一条只读 SQL |
 | `khonsu query --db DIR --file query.cypher` | 执行查询文件；`.sql` 使用 SQL |
 | `khonsu explain --db DIR --cypher "…"` | 查看查询计划 |
+| `khonsu explore --db DIR --from NODE [--to NODE]` | [从节点向外探索](./investigations#explore)并给出路径 |
+| `khonsu evidence --db DIR --node NODE --rel REL` | 查看[一条记录的依据](./investigations#evidence) |
+| `khonsu analyze ALGORITHM --db DIR` | 运行[图算法](./analysis)：PageRank、社区发现、连通分量等 |
+| `khonsu investigation save FILE --db DIR --from NODE` | [保存调查](./investigations#saved-investigations)；`reopen FILE` 重新执行 |
+| `khonsu snapshot save FILE --db DIR` | 保存图中的记录；[`snapshot diff A B`](./investigations#snapshots) 比较两个快照 |
+| `khonsu rebuild --db DIR` | 用数据源重建旧格式的图 |
 | `khonsu plugin list` | 列出插件与权限 |
 | `khonsu plugin describe ID` | 查看插件的配置字段与输出类型 |
 | `khonsu plugin install DIR --yes` | 安装插件目录或 ZIP，并批准其权限 |
-| `khonsu plugin sync --source ID` | 同步数据源；`--dry-run` 预览，`--incremental` 增量同步 |
+| `khonsu plugin sync --source ID` | 同步数据源；`--dry-run` 预览，`--incremental` 和 `--append` 只新增和更新、不删除 |
+| `khonsu plugin analyze ID ANALYSIS --db DIR` | 运行[插件自带的分析](./investigations#plugin-analyses)，例如 AWS `exposure` |
 | `khonsu source list` | 列出已配置数据源 |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | 配置数据源；`--test` 先测试连接 |
 | `khonsu source remove ID` | 删除数据源 |

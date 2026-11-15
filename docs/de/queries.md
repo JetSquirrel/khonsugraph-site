@@ -1,5 +1,5 @@
 ---
-description: Fragen Sie Graphen in Cypher und Tabellen in SQL ab, und verstehen Sie die Zeichenfläche sowie aktuelle HawDB-Grenzen.
+description: Fragen Sie einen lokalen Graphen in Cypher und Tabellen in PostgreSQL-SQL ab. Unterstützte Cypher-Klauseln, kürzeste Pfade, Parameter und aktuelle HawDB-Grenzen.
 ---
 # Cypher & SQL
 
@@ -21,7 +21,7 @@ LIMIT 20
 
 Wenn Sie ganze Knoten und Beziehungen zurückgeben, erhalten Sie sowohl Tabellenwerte als auch Graphelemente. Wenn Sie nur `a.name` zurückgeben, erhalten Sie eine skalare Spalte, keinen verbundenen Graphen. In der CLI erscheinen Graphelemente in einem separaten `graph`-Objekt.
 
-Cypher unterstützt `MATCH`, `OPTIONAL MATCH`, `WHERE`, `RETURN [DISTINCT]`, `ORDER BY`, `SKIP`, `LIMIT`, `WITH` und begrenzte Muster variabler Länge. Mit `--write` stehen außerdem `CREATE`, `MERGE`, `SET`, `DELETE` und `DETACH DELETE` zur Verfügung. Zum Beispiel mit einem Service-Graphen:
+Cypher unterstützt `MATCH`, `OPTIONAL MATCH`, `WHERE`, `RETURN [DISTINCT]`, `ORDER BY`, `SKIP`, `LIMIT`, `WITH`, `UNWIND`, `CASE` und begrenzte Muster variabler Länge. Mit `--write` stehen außerdem `CREATE`, `MERGE`, `SET`, `DELETE` und `DETACH DELETE` zur Verfügung. Zum Beispiel mit einem Service-Graphen:
 
 ```cypher
 MATCH (a:Service)-[:CALLS*1..4]->(b:Service)
@@ -30,6 +30,17 @@ LIMIT 50
 ```
 
 Dies gibt Endpunkte zurück. Fragen Sie Beziehungen mit einem Sprung separat ab, um die dazwischenliegenden Verbindungen zu zeichnen.
+
+## Kürzeste Pfade
+
+```cypher
+MATCH p = shortestPath((a:Host {name: 'web'})-[:CALLS*..6]->(b:Host {name: 'db'}))
+RETURN p, length(p) AS hops
+```
+
+`allShortestPaths`, `nodes(p)` und `relationships(p)` funktionieren ebenfalls. Beide Endpunkte müssen durch eine Eigenschaftszuordnung, ein `WHERE` oder eine vorherige Klausel gebunden sein. Wenn Sie `p` zurückgeben, wird der Pfad auf der Zeichenfläche gezeichnet. Ein unbegrenztes `*` endet nach 256 Sprüngen und schlägt fehl, statt zu melden, dass kein Pfad existiert.
+
+Um von einem Knoten mit Obergrenzen für Sprünge und Größe nach außen zu gehen, verwenden Sie [`khonsu explore`](./investigations#explore). Für gewichtete Pfade, Zentralität und Communities siehe [Graphenanalyse](./analysis).
 
 ## SQL und Parameter
 
@@ -45,15 +56,21 @@ Werte für `-p` werden, wenn möglich, als JSON geparst, andernfalls als Zeichen
 
 ## Aktuelle Einschränkungen {#current-limitations}
 
-Der geprüfte Quellstand verwendet HawDB 0.12.0:
+KhonsuGraph 0.3.0 verwendet HawDB 0.29.0, dessen Cypher sich von anderen Graphdatenbanken unterscheidet:
 
-- Cypher `sum()`, `labels()`, `keys()`, `properties()`, `shortestPath`, Pfadvariablen, `CALL db.*` und `SHOW` werden von diesem Ablauf nicht unterstützt. Verwenden Sie `khonsu schema` für Metadaten.
-- `count`, `collect`, `min`, `max` und `avg` sind unterstützte Aggregatfunktionen.
-- Muster variabler Länge erfordern einen Beziehungstyp und keine Beziehungsvariable.
-- Auf `UNWIND` muss eine Schreibklausel folgen; ein eigenständiges, schreibgeschütztes `UNWIND` und `WHERE true` werden nicht unterstützt.
-- `OPTIONAL MATCH`, skalares `IN`, `json_value()` auf JSON-Text und `SET` auf Beziehungseigenschaften werden unterstützt.
+- `labels()`, `keys()`, `properties()`, `CALL db.*` und `SHOW` werden nicht unterstützt. Verwenden Sie `khonsu schema` für Metadaten.
+- `count`, `sum`, `collect`, `min`, `max` und `avg` sind die unterstützten Aggregatfunktionen, auch über Ausdrücke.
+- Ein Lesevorgang beginnt mit `MATCH` oder `UNWIND`. Ein bloßes `RETURN 1` wird nicht geparst, und `OPTIONAL MATCH` kann nicht die erste Klausel sein.
+- Muster variabler Länge erfordern einen Beziehungstyp und keine Beziehungsvariable. Ein Muster ohne Beziehungstyp funktioniert nur für einen Sprung.
+- Pfadvariablen funktionieren nur bei `shortestPath` und `allShortestPaths`.
+- Zeichenketten lassen sich nicht mit `+` verketten, und `toLower`, `toUpper`, `reduce`, `any`, `all`, `none` und `exists` stehen nicht zur Verfügung.
+- `CREATE` nimmt ein Muster pro Anweisung. `LOAD CSV` ist abgeschaltet; bringen Sie Dateien mit einer [Datenquelle](./data-sources) ein.
+- Skalares `IN`, Listenverständnisse, `json_value()` auf JSON-Text, Datumsangaben und Zeitdauern sowie `SET` auf Beziehungseigenschaften werden unterstützt.
 - Lesevorgänge haben eine Ausführungsobergrenze von 100.000 Zeilen. `--max-rows` begrenzt nur die angezeigten Zeilen nach der Ausführung, verwenden Sie daher zusätzlich `LIMIT` in der Abfrage.
-- Vektorwerte werden als JSON-Zahlenarrays zurückgegeben. Lesen Sie Ergebnisspalten über ihren Namen; die Engine kann sie umordnen.
+- Vektorwerte werden als JSON-Zahlenarrays zurückgegeben. Spalten kommen in der Reihenfolge des `RETURN` zurück; lesen Sie sie dennoch über ihren Namen.
+- `WHERE true` funktioniert in Cypher, aber nicht in SQL.
+
+Ein Graph, der vor HawDB 0.25 geschrieben wurde, also von KhonsuGraph 0.2.0 oder früher, kann von dieser Version nicht gelesen werden; siehe [Fehlerbehebung](./troubleshooting#old-format).
 
 ## Lese- und Schreibzugriff
 

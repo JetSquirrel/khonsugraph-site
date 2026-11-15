@@ -17,6 +17,10 @@ Unter Windows behalten Sie `khonsu.exe` zusammen mit dem Rest des entpackten Pak
 
 Jeweils ein Prozess besitzt ein HawDB-Graphverzeichnis. Lesevorgänge und Dashboard-Prüfungen werden über das laufende Fenster geleitet, aber Schreibvorgänge und Quellen-Synchronisierungen erfordern, dass der Graph frei ist. Schließen Sie den Graphen im anderen Prozess. Löschen Sie niemals `khonsugraph.lock`, `owner.hawdb.lock` oder Datenbankdateien, um eine Sperre zu umgehen.
 
+## Der Graph meldet old_format {#old-format}
+
+HawDB 0.25 hat sein Speicherformat geändert und liest keinen älteren Graphen, daher lässt sich ein von KhonsuGraph 0.2.0 oder früher geschriebener Graph nicht mit der Art `old_format` öffnen. `khonsu rebuild --db DIR` erstellt ihn aus seinen Datenquellen neu und behält das alte Verzeichnis daneben als `DIR.hawdb-old`. Alles, was von Hand statt durch eine Synchronisierung geschrieben wurde, wird nicht übernommen.
+
 ## Ein Graph-Panel ist leer
 
 Geben Sie ganze Knoten und Beziehungen zurück (`RETURN a, r, b`) statt nur Namen. Prüfen Sie, ob Sie den Graphen geöffnet haben, für den das Dashboard geschrieben wurde. Verwenden Sie `khonsu schema --db DIR` und führen Sie die Abfrage direkt aus, um Labels und Ergebnis zu verifizieren.

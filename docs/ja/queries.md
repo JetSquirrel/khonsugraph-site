@@ -1,5 +1,5 @@
 ---
-description: Cypher でグラフを、SQL でテーブルをクエリし、キャンバスと現在の HawDB の制限を理解します。
+description: Cypher でローカルのグラフを、PostgreSQL の SQL でテーブルをクエリします。サポートされている Cypher の句、最短経路、パラメーター、現在の HawDB の制限について説明します。
 ---
 # Cypher と SQL
 
@@ -21,7 +21,7 @@ LIMIT 20
 
 ノードとリレーションシップを丸ごと返すと、テーブルの値とグラフ要素の両方が得られます。`a.name` だけを返すとスカラーの列になり、接続されたグラフにはなりません。CLI では、グラフ要素は別の `graph` オブジェクトに現れます。
 
-Cypher は `MATCH`、`OPTIONAL MATCH`、`WHERE`、`RETURN [DISTINCT]`、`ORDER BY`、`SKIP`、`LIMIT`、`WITH`、および上限付きの可変長パターンをサポートします。`--write` を付けると、`CREATE`、`MERGE`、`SET`、`DELETE`、`DETACH DELETE` も使用できます。たとえば、サービスグラフの場合:
+Cypher は `MATCH`、`OPTIONAL MATCH`、`WHERE`、`RETURN [DISTINCT]`、`ORDER BY`、`SKIP`、`LIMIT`、`WITH`、`UNWIND`、`CASE`、および上限付きの可変長パターンをサポートします。`--write` を付けると、`CREATE`、`MERGE`、`SET`、`DELETE`、`DETACH DELETE` も使用できます。たとえば、サービスグラフの場合:
 
 ```cypher
 MATCH (a:Service)-[:CALLS*1..4]->(b:Service)
@@ -30,6 +30,17 @@ LIMIT 50
 ```
 
 これは端点を返します。間に挟まる接続を描画するには、1 ホップのリレーションシップを別途クエリしてください。
+
+## 最短経路
+
+```cypher
+MATCH p = shortestPath((a:Host {name: 'web'})-[:CALLS*..6]->(b:Host {name: 'db'}))
+RETURN p, length(p) AS hops
+```
+
+`allShortestPaths`、`nodes(p)`、`relationships(p)` も動作します。両方の端点は、プロパティマップ、`WHERE`、またはそれより前の句によってバインドされている必要があります。`p` を返すと、キャンバス上に経路が描画されます。上限のない `*` は 256 ホップで停止し、経路が存在しないと報告する代わりに失敗します。
+
+ホップ数とサイズに上限を設けてノードから外側へたどるには、[`khonsu explore`](./investigations#explore) を使用してください。重み付き経路、中心性、コミュニティについては、[グラフ分析](./analysis) を参照してください。
 
 ## SQL とパラメーター
 
@@ -45,15 +56,21 @@ khonsu query --db graphs/demo --cypher \
 
 ## 現在の制限 {#current-limitations}
 
-確認済みのソースは HawDB 0.12.0 を使用しています:
+KhonsuGraph 0.3.0 は HawDB 0.29.0 を使用しており、その Cypher は他のグラフデータベースとは異なります:
 
-- Cypher の `sum()`、`labels()`、`keys()`、`properties()`、`shortestPath`、パス変数、`CALL db.*`、`SHOW` は、このワークフローではサポートされていません。メタデータには `khonsu schema` を使用してください。
-- `count`、`collect`、`min`、`max`、`avg` が、サポートされている集計関数です。
-- 可変長パターンにはリレーションシップ型が必要で、リレーションシップ変数は使用できません。
-- `UNWIND` の後には書き込み句が必要です。単独の読み取り専用 `UNWIND` と `WHERE true` はサポートされていません。
-- `OPTIONAL MATCH`、スカラーの `IN`、JSON テキストに対する `json_value()`、リレーションシッププロパティの `SET` はサポートされています。
+- `labels()`、`keys()`、`properties()`、`CALL db.*`、`SHOW` はサポートされていません。メタデータには `khonsu schema` を使用してください。
+- `count`、`sum`、`collect`、`min`、`max`、`avg` が、サポートされている集計関数です。式に対しても使用できます。
+- 読み取りは `MATCH` または `UNWIND` で始まります。単独の `RETURN 1` は解析されず、`OPTIONAL MATCH` を最初の句にすることはできません。
+- 可変長パターンにはリレーションシップ型が必要で、リレーションシップ変数は使用できません。型のないリレーションシップパターンは 1 ホップのみ動作します。
+- パス変数は `shortestPath` と `allShortestPaths` でのみ動作します。
+- 文字列は `+` で連結できず、`toLower`、`toUpper`、`reduce`、`any`、`all`、`none`、`exists` は使用できません。
+- `CREATE` は 1 文につき 1 つのパターンを受け取ります。`LOAD CSV` は無効になっています。ファイルは [データソース](./data-sources) を使って取り込んでください。
+- スカラーの `IN`、リスト内包表記、JSON テキストに対する `json_value()`、日付と期間、リレーションシッププロパティの `SET` はサポートされています。
 - 読み取りには 100,000 行の実行上限があります。`--max-rows` は実行後の表示行を制限するだけなので、クエリ内でも `LIMIT` を使用してください。
-- ベクトル値は JSON の数値配列として返されます。結果の列は名前で読み取ってください。エンジンが列の順序を入れ替えることがあります。
+- ベクトル値は JSON の数値配列として返されます。列は `RETURN` の順序で返されますが、引き続き名前で読み取ってください。
+- `WHERE true` は Cypher では動作しますが、SQL では動作しません。
+
+HawDB 0.25 より前、つまり KhonsuGraph 0.2.0 以前に書き込まれたグラフは、このバージョンでは読み取れません。[トラブルシューティング](./troubleshooting#old-format) を参照してください。
 
 ## 読み取りと書き込みのアクセス
 

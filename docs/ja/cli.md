@@ -1,5 +1,5 @@
 ---
-description: khonsu JSON CLI を使用して、グラフを調査し、データをクエリし、ダッシュボードで共同作業します。
+description: khonsu コマンドラインはすべてのコマンドで JSON を出力するため、Claude Code やその他の AI エージェントがグラフを調査し、クエリし、経路をたどり、ダッシュボードを書くことができます。
 ---
 # CLI と AI エージェント
 
@@ -17,10 +17,17 @@ description: khonsu JSON CLI を使用して、グラフを調査し、データ
 | `khonsu query --db DIR --sql "…"` | 読み取り専用の SQL 文を 1 つ実行する |
 | `khonsu query --db DIR --file query.cypher` | クエリファイルを実行する。`.sql` を指定すると SQL が選択される |
 | `khonsu explain --db DIR --cypher "…"` | クエリを説明する |
+| `khonsu explore --db DIR --from NODE [--to NODE]` | [ノードから外側へたどり](./investigations#explore)、経路を報告する |
+| `khonsu evidence --db DIR --node NODE --rel REL` | [レコードを支えるもの](./investigations#evidence)を表示する |
+| `khonsu analyze ALGORITHM --db DIR` | [グラフアルゴリズム](./analysis)(PageRank、コミュニティ、連結成分など)を実行する |
+| `khonsu investigation save FILE --db DIR --from NODE` | [調査を保存する](./investigations#saved-investigations)。`reopen FILE` で再実行する |
+| `khonsu snapshot save FILE --db DIR` | グラフのレコードを保存する。[`snapshot diff A B`](./investigations#snapshots) は 2 つを比較する |
+| `khonsu rebuild --db DIR` | 古い形式のグラフをデータソースから再構築する |
 | `khonsu plugin list` | プラグインと権限を一覧表示する |
 | `khonsu plugin describe ID` | プラグインの設定フィールドと出力型を表示する |
 | `khonsu plugin install DIR --yes` | プラグインディレクトリまたは ZIP をインストールし、その権限を承認する |
-| `khonsu plugin sync --source ID` | ソースを同期する。プレビューには `--dry-run`、増分同期には `--incremental` を追加する |
+| `khonsu plugin sync --source ID` | ソースを同期する。`--dry-run` はプレビュー、`--incremental` と `--append` は削除を行わずに追加する |
+| `khonsu plugin analyze ID ANALYSIS --db DIR` | [プラグインの分析](./investigations#plugin-analyses)(たとえば AWS の `exposure`)を実行する |
 | `khonsu source list` | 設定済みのソースを一覧表示する |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | ソースを設定する。`--test` を付けると最初にチェックする |
 | `khonsu source remove ID` | ソースを削除する |
@@ -53,4 +60,4 @@ khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --reso
 khonsu presence overview.dash --doing idle
 ```
 
-アプリがグラフを保持している間、読み取りクエリと `check` はそのウィンドウ経由で実行され、`via_window: true` を返します。書き込みを強制するためにロックを削除しないでください。[トラブルシューティング](./troubleshooting) を参照してください。
+アプリがグラフを保持している間、読み取りクエリ、`check`、`plugin sync` はそのウィンドウ経由で実行され、`via_window: true` を返します。クエリによる書き込み、`explore`、`investigation` にはグラフが空いている必要があります。書き込みを強制するためにロックを削除しないでください。[トラブルシューティング](./troubleshooting) を参照してください。

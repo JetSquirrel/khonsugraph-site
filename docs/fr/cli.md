@@ -1,5 +1,5 @@
 ---
-description: Utilisez la CLI JSON khonsu pour inspecter des graphes, interroger des données et collaborer sur des tableaux de bord.
+description: La ligne de commande khonsu imprime du JSON pour chaque commande, afin que Claude Code et d'autres agents IA puissent inspecter un graphe, l'interroger, suivre des chemins et écrire des tableaux de bord.
 ---
 # CLI et agents IA
 
@@ -17,10 +17,17 @@ La [compétence d'agent](https://github.com/JetSquirrel/KhonsuGraph/tree/main/sk
 | `khonsu query --db DIR --sql "…"` | Exécuter une instruction SQL en lecture seule |
 | `khonsu query --db DIR --file query.cypher` | Exécuter un fichier de requête ; `.sql` sélectionne SQL |
 | `khonsu explain --db DIR --cypher "…"` | Expliquer une requête |
+| `khonsu explore --db DIR --from NODE [--to NODE]` | [Partir d'un nœud vers l'extérieur](./investigations#explore) et signaler un chemin |
+| `khonsu evidence --db DIR --node NODE --rel REL` | Afficher [ce qui soutient un enregistrement](./investigations#evidence) |
+| `khonsu analyze ALGORITHM --db DIR` | Exécuter un [algorithme de graphe](./analysis) : PageRank, communautés, composantes et plus |
+| `khonsu investigation save FILE --db DIR --from NODE` | [Enregistrer une investigation](./investigations#saved-investigations) ; `reopen FILE` la réexécute |
+| `khonsu snapshot save FILE --db DIR` | Conserver les enregistrements du graphe ; [`snapshot diff A B`](./investigations#snapshots) en compare deux |
+| `khonsu rebuild --db DIR` | Reconstruire un graphe à l'ancien format depuis ses sources de données |
 | `khonsu plugin list` | Lister les plugins et leurs permissions |
 | `khonsu plugin describe ID` | Afficher les champs de configuration et les types de sortie d'un plugin |
 | `khonsu plugin install DIR --yes` | Installer un répertoire ou un ZIP de plugin et approuver ses permissions |
-| `khonsu plugin sync --source ID` | Synchroniser une source ; ajoutez `--dry-run` pour prévisualiser ou `--incremental` |
+| `khonsu plugin sync --source ID` | Synchroniser une source ; `--dry-run` prévisualise, `--incremental` et `--append` ajoutent sans supprimer |
+| `khonsu plugin analyze ID ANALYSIS --db DIR` | Exécuter [l'analyse d'un plugin](./investigations#plugin-analyses), telle que `exposure` d'AWS |
 | `khonsu source list` | Lister les sources configurées |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | Configurer une source ; `--test` la vérifie d'abord |
 | `khonsu source remove ID` | Supprimer une source |
@@ -53,4 +60,4 @@ khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --reso
 khonsu presence overview.dash --doing idle
 ```
 
-Lorsque l'application détient un graphe, les requêtes de lecture et `check` passent par la fenêtre et renvoient `via_window: true`. Ne supprimez pas de verrous pour forcer une écriture. Voir [dépannage](./troubleshooting).
+Lorsque l'application détient un graphe, les requêtes de lecture, `check` et `plugin sync` passent par la fenêtre et renvoient `via_window: true`. Les écritures de requête, `explore` et `investigation` exigent que le graphe soit libre. Ne supprimez pas de verrous pour forcer une écriture. Voir [dépannage](./troubleshooting).

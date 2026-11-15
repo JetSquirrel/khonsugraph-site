@@ -9,7 +9,7 @@ const run = (command, args) => {
   const viaNode = command === 'npm' && existsSync(npmCli);
   const r = viaNode
     ? spawnSync(process.execPath, [npmCli, ...args], { stdio: 'inherit' })
-    : spawnSync(command, args, { stdio: 'inherit', shell: process.platform === 'win32' });
+    : spawnSync(command, args, { stdio: 'inherit', shell: command === 'npm' });
   if (r.status !== 0) process.exit(r.status || 1);
 };
 // CI hosts may run `npm run build` directly without installing the docs workspace.
@@ -19,4 +19,5 @@ await rm('dist/site', { recursive: true, force: true });
 await mkdir('dist/site', { recursive: true });
 run('npm', ['--prefix', 'docs', 'run', 'build']);
 await cp('home', 'dist/site', { recursive: true });
+run('node', ['scripts/sitemap.mjs']);
 run('node', ['scripts/check.mjs']);

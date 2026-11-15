@@ -17,6 +17,10 @@ Sous Windows, conservez `khonsu.exe` avec le reste du paquet extrait et ajoutez 
 
 Un seul processus possède un répertoire de graphe HawDB. Les lectures et les vérifications de tableau de bord passent par la fenêtre en cours d'exécution, mais les écritures et les synchronisations de source exigent que le graphe soit libre. Fermez le graphe dans l'autre processus. Ne supprimez jamais `khonsugraph.lock`, `owner.hawdb.lock` ou des fichiers de base de données pour contourner un bail.
 
+## Le graphe signale old_format {#old-format}
+
+HawDB 0.25 a changé son format de stockage et ne lit aucun graphe plus ancien, de sorte qu'un graphe écrit par KhonsuGraph 0.2.0 ou une version antérieure échoue à l'ouverture avec le type `old_format`. `khonsu rebuild --db DIR` le reconstruit à partir de ses sources de données et conserve l'ancien répertoire à côté sous le nom `DIR.hawdb-old`. Tout ce qui a été écrit à la main plutôt que synchronisé n'est pas reporté.
+
 ## Un panneau de graphe est vide
 
 Renvoyez des nœuds et des relations complets (`RETURN a, r, b`) au lieu de seulement des noms. Vérifiez que vous avez ouvert le graphe pour lequel le tableau de bord a été écrit. Utilisez `khonsu schema --db DIR` et exécutez la requête directement pour vérifier les libellés et le résultat.

@@ -53,21 +53,39 @@ KhonsuGraph — Built for Hunters. 狩人たちのために。
 
 ## データソースを接続
 
-CSV からノードと関係をインポートし、AWS リソースを同期するか、自社システム向けのプラグインを書きます。
+CSV からノードと関係をインポートし、AWS リソースを同期するか、Neo4j や Cartography のデータベースをコピーする、あるいは自社システム向けのプラグインを書きます。
 
-[データソース](/docs/ja/data-sources)
+[データソース](https://khonsugraph.com/docs/ja/data-sources)
 
 ## Cypher か SQL で問いかける
 
 スキーマを確認してクエリを書き、結果を表で、あるいは探索できるグラフで表示します。
 
-[グラフをクエリする](/docs/ja/queries)
+[グラフをクエリする](https://khonsugraph.com/docs/ja/queries)
 
-## 洞察を残す
+## 経路をたどる
+
+任意のノードから外側へ探索し、ホップ数とリレーションシップ型で範囲を限定して、対象までの最小ホップ数の経路を求めます。
+
+[経路を追跡](https://khonsugraph.com/docs/ja/investigations)
+
+## 重要なものを見つける
+
+PageRank と媒介中心性でノードを順位付けし、コミュニティと連結成分を見つけ、最短経路を測定します。結果は networkx と一致します。
+
+[グラフを分析](https://khonsugraph.com/docs/ja/analysis)
+
+## 証拠を残す
+
+各レコードには、どのソースがいつ書き込んだかが記録されます。調査を保存し、データが変わった後に開き直して、結論が今も成り立つか確認できます。
+
+[調査を保存](https://khonsugraph.com/docs/ja/investigations#saved-investigations)
+
+## 発見を共有する
 
 クエリを、グラフパネル、チャート、表、共有フィルターを備えたプレーンテキストの .dash ファイルにまとめます。
 
-[ダッシュボードを作る](/docs/ja/dashboards)
+[ダッシュボードを作る](https://khonsugraph.com/docs/ja/dashboards)
 
 ## KhonsuGraph とは？
 
@@ -88,5 +106,13 @@ Apple silicon の macOS と 64 ビット Windows 向けのリリースパッケ�
 ## 任意の Cypher クエリを使えますか？
 
 KhonsuGraph は HawDB がサポートする Cypher 構文を使用しており、他のグラフデータベースとは異なります。対応パターンと現在の制限はクエリガイドを参照してください。
+
+## Neo4j Browser や Bloom との違いは？
+
+KhonsuGraph は独自の組み込みグラフエンジン HawDB を備えたデスクトップアプリなので、データベースサーバーを動かす必要がありません。経路探索、レコード単位の証拠、グラフアルゴリズム、AI エージェント向けの JSON コマンドラインを備えています。Neo4j プラグインを使えば、既存の Neo4j データベース（Cartography が書き込んだものを含む）をローカルのグラフにコピーできます。
+
+## Claude Code などの AI エージェントで使えますか？
+
+はい。khonsu コマンドラインはすべてのコマンドで構造化 JSON を出力するため、シェルコマンドを実行できるエージェントならどれでも利用できます。アプリは Claude Code 用のエージェントスキルもインストールできます。エージェントがスキーマを読み、クエリを実行し、ダッシュボードを書き、あなたがウィンドウで結果を確認します。
 
 [GitHub](https://github.com/JetSquirrel/KhonsuGraph)

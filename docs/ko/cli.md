@@ -1,5 +1,5 @@
 ---
-description: khonsu JSON CLI로 그래프를 확인하고 데이터를 조회하고 대시보드에서 협업합니다.
+description: khonsu 명령줄은 모든 명령에서 JSON을 출력하므로 Claude Code와 기타 AI 에이전트가 그래프를 확인하고, 조회하고, 경로를 추적하고, 대시보드를 작성할 수 있습니다.
 ---
 # CLI 및 AI 에이전트
 
@@ -17,10 +17,17 @@ description: khonsu JSON CLI로 그래프를 확인하고 데이터를 조회하
 | `khonsu query --db DIR --sql "…"` | 읽기 전용 SQL 문 하나를 실행합니다 |
 | `khonsu query --db DIR --file query.cypher` | 쿼리 파일을 실행합니다. `.sql`이면 SQL을 선택합니다 |
 | `khonsu explain --db DIR --cypher "…"` | 쿼리를 설명합니다 |
+| `khonsu explore --db DIR --from NODE [--to NODE]` | [노드에서 바깥으로 걸어가며](./investigations#explore) 경로를 보고합니다 |
+| `khonsu evidence --db DIR --node NODE --rel REL` | [레코드를 뒷받침하는 근거](./investigations#evidence)를 표시합니다 |
+| `khonsu analyze ALGORITHM --db DIR` | [그래프 알고리즘](./analysis)을 실행합니다. PageRank, 커뮤니티, 연결 요소 등 |
+| `khonsu investigation save FILE --db DIR --from NODE` | [조사를 저장합니다](./investigations#saved-investigations). `reopen FILE`은 조사를 다시 실행합니다 |
+| `khonsu snapshot save FILE --db DIR` | 그래프의 레코드를 보관합니다. [`snapshot diff A B`](./investigations#snapshots)는 두 스냅샷을 비교합니다 |
+| `khonsu rebuild --db DIR` | 이전 형식 그래프를 데이터 소스에서 다시 만듭니다 |
 | `khonsu plugin list` | 플러그인과 권한을 나열합니다 |
 | `khonsu plugin describe ID` | 플러그인의 구성 필드와 출력 유형을 표시합니다 |
 | `khonsu plugin install DIR --yes` | 플러그인 디렉터리나 ZIP을 설치하고 권한을 승인합니다 |
-| `khonsu plugin sync --source ID` | 소스를 동기화합니다. `--dry-run`으로 미리 보거나 `--incremental`을 추가합니다 |
+| `khonsu plugin sync --source ID` | 소스를 동기화합니다. `--dry-run`은 미리 보기, `--incremental`과 `--append`는 제거 없이 추가합니다 |
+| `khonsu plugin analyze ID ANALYSIS --db DIR` | AWS `exposure` 같은 [플러그인의 분석](./investigations#plugin-analyses)을 실행합니다 |
 | `khonsu source list` | 구성된 소스를 나열합니다 |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | 소스를 구성합니다. `--test`로 먼저 검사합니다 |
 | `khonsu source remove ID` | 소스를 제거합니다 |
@@ -53,4 +60,4 @@ khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --reso
 khonsu presence overview.dash --doing idle
 ```
 
-앱이 그래프를 점유하고 있는 동안에는 읽기 쿼리와 `check`가 해당 창을 통해 실행되고 `via_window: true`를 반환합니다. 쓰기를 강제하려고 잠금을 제거하지 마십시오. [문제 해결](./troubleshooting)을 참고하십시오.
+앱이 그래프를 점유하고 있는 동안에는 읽기 쿼리, `check`, `plugin sync`가 해당 창을 통해 실행되고 `via_window: true`를 반환합니다. 쿼리 쓰기, `explore`, `investigation`은 그래프가 비어 있어야 합니다. 쓰기를 강제하려고 잠금을 제거하지 마십시오. [문제 해결](./troubleshooting)을 참고하십시오.
