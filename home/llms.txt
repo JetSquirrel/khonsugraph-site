@@ -15,6 +15,12 @@
 - [Русский](https://khonsugraph.com/ru/index.md)
 - [Source](https://github.com/JetSquirrel/KhonsuGraph)
 
+## Use cases
+
+- [Attack path analysis](https://khonsugraph.com/use-cases/attack-path-analysis/index.md): Trace attack paths from the internet to instances and IAM roles on your own machine. Open-source graph investigation with path walks and record-level evidence.
+- [Blast radius analysis](https://khonsugraph.com/use-cases/sre-dependency-analysis/index.md): Map service dependencies and find the blast radius of a failing service in a local graph. Open-source, with Cypher paths, graph algorithms and dashboards.
+- [Neo4j Browser alternative](https://khonsugraph.com/compare/neo4j-browser-alternative/index.md): A free, open-source desktop alternative to Neo4j Browser for investigation: an embedded graph engine, path walks, record-level evidence and an agent CLI.
+
 ## Documentation
 
 ### English
