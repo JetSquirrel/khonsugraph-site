@@ -1,7 +1,7 @@
 ---
 description: Führen Sie PageRank, Betweenness, Louvain-Communities, Zusammenhangskomponenten, k-Core und kürzeste Pfade auf einem lokalen Graphen mit khonsu analyze aus.
 ---
-# Graphenanalyse
+# Graphanalyse
 
 Eine Cypher-Abfrage beantwortet Fragen zu benannten Mustern. `khonsu analyze` beantwortet Fragen zur Gestalt des Graphen: Welcher Knoten ist am zentralsten, welche Gruppen bilden sich, wie hängen zwei Knoten zusammen. Die Berechnung erfolgt im Arbeitsspeicher und folgt den Definitionen von networkx, sodass die Ergebnisse auf demselben Graphen mit networkx übereinstimmen.
 

@@ -1,7 +1,7 @@
 ---
 description: Dokumentation für KhonsuGraph, die quelloffene Desktop-Werkbank für Graphuntersuchungen. Abfragen in Cypher und SQL, Pfade verfolgen, Belege anführen und Dashboards erstellen.
 ---
-# KhonsuGraph-Dokumentation
+# KhonsuGraph Dokumentation
 
 KhonsuGraph ist eine quelloffene, Local-First-Desktop-Werkbank für Graphuntersuchungen, die auf HawDB aufbaut. Bringen Sie Daten über Plugins ein, fragen Sie Beziehungen in Cypher oder Tabellen in SQL im PostgreSQL-Dialekt ab, folgen Sie Pfaden auf einer Zeichenfläche, bewahren Sie die Belege hinter jedem Datensatz auf und verwandeln Sie das Ergebnis in ein Dashboard.
 
@@ -13,7 +13,7 @@ Es ist ein unabhängiges Projekt, das auf HawDB aufbaut und unter Apache-2.0 ver
 - [CSV importieren, AWS verbinden oder eine Neo4j-Datenbank kopieren](./data-sources)
 - [Cypher-Unterstützung und Abfragegrenzen verstehen](./queries)
 - [Einen Pfad verfolgen, Belege anführen und eine Untersuchung speichern](./investigations)
-- [Knoten bewerten und Communities mit der Graphenanalyse finden](./analysis)
+- [Knoten bewerten und Communities mit der Graphanalyse finden](./analysis)
 - [Ein .dash-Dashboard erstellen](./dashboards)
 - [Mit einem KI-Agenten über die CLI arbeiten](./cli)
 - [Die Beispiel-Dashboards erkunden](./examples)

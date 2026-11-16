@@ -9,7 +9,7 @@ for (const file of (await walk(root)).filter(f => f.endsWith('.html'))) {
   const source = await readFile(file,'utf8');
   if (/<meta[^>]+name="robots"[^>]+noindex/.test(source)) continue;
   const canonical = source.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
-  // Language alternates as each page declares them, so search engines pair the English and Chinese versions.
+  // Language alternates as each page declares them, so search engines pair every language version.
   const alternates = [...source.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map(m => [m[1], m[2]]);
   if (canonical?.startsWith(origin + '/')) urls.set(canonical, alternates);
 }

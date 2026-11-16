@@ -1,7 +1,7 @@
 ---
 description: 로컬 그래프를 Cypher로, 테이블을 PostgreSQL SQL로 조회합니다. 지원되는 Cypher 절, 최단 경로, 매개변수, 현재 HawDB 제한을 다룹니다.
 ---
-# Cypher & SQL
+# Cypher 및 SQL
 
 ## 쿼리 전에 확인하기
 

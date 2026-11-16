@@ -1,7 +1,7 @@
 ---
 description: Documentation de KhonsuGraph, l'atelier de bureau open source et local-first pour l'investigation de graphes. Interrogez en Cypher et en SQL, suivez des chemins, citez des preuves et construisez des tableaux de bord.
 ---
-# Documentation de KhonsuGraph
+# Documentation KhonsuGraph
 
 KhonsuGraph est un atelier de bureau open source et local-first pour l'investigation de graphes, construit sur HawDB. Importez des données via des plugins, interrogez les relations en Cypher ou les tables en SQL de dialecte PostgreSQL, suivez des chemins sur un canevas de graphe, conservez la preuve derrière chaque enregistrement et transformez le résultat en tableau de bord.
 

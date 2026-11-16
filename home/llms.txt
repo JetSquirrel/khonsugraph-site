@@ -10,6 +10,9 @@
 - [한국어](https://khonsugraph.com/ko/index.md)
 - [Français](https://khonsugraph.com/fr/index.md)
 - [Deutsch](https://khonsugraph.com/de/index.md)
+- [Español](https://khonsugraph.com/es/index.md)
+- [Português (Brasil)](https://khonsugraph.com/pt/index.md)
+- [Русский](https://khonsugraph.com/ru/index.md)
 - [Source](https://github.com/JetSquirrel/KhonsuGraph)
 
 ## Documentation
@@ -97,3 +100,45 @@
 - [Plugin-Entwicklung](https://khonsugraph.com/docs/de/plugins.md): das JSON-Lines-Protokoll
 - [Beispiele](https://khonsugraph.com/docs/de/examples.md): Dashboards auf öffentlichen Datensätzen
 - [Fehlerbehebung](https://khonsugraph.com/docs/de/troubleshooting.md): Sperren, alte Formate, leere Panels
+
+### Español
+
+- [llms-full.txt](https://khonsugraph.com/docs/es/llms-full.txt)
+- [Primeros pasos](https://khonsugraph.com/docs/es/getting-started.md): instalación, crear un grafo, importar un CSV
+- [Fuentes de datos](https://khonsugraph.com/docs/es/data-sources.md): plugins de CSV, AWS y Neo4j, semántica de sincronización
+- [Cypher y SQL](https://khonsugraph.com/docs/es/queries.md): Cypher compatible, rutas más cortas, límites
+- [Investigaciones](https://khonsugraph.com/docs/es/investigations.md): explorar rutas, evidencia, investigaciones guardadas, instantáneas
+- [Análisis de grafos](https://khonsugraph.com/docs/es/analysis.md): PageRank, intermediación, comunidades, componentes
+- [Paneles](https://khonsugraph.com/docs/es/dashboards.md): el formato .dash
+- [CLI y agentes de IA](https://khonsugraph.com/docs/es/cli.md): el CLI JSON khonsu y la habilidad de agente
+- [Desarrollo de plugins](https://khonsugraph.com/docs/es/plugins.md): el protocolo JSON Lines
+- [Ejemplos](https://khonsugraph.com/docs/es/examples.md): paneles sobre conjuntos de datos públicos
+- [Solución de problemas](https://khonsugraph.com/docs/es/troubleshooting.md): bloqueos, formatos antiguos, paneles vacíos
+
+### Português (Brasil)
+
+- [llms-full.txt](https://khonsugraph.com/docs/pt/llms-full.txt)
+- [Primeiros passos](https://khonsugraph.com/docs/pt/getting-started.md): instalação, criar um grafo, importar um CSV
+- [Fontes de dados](https://khonsugraph.com/docs/pt/data-sources.md): plugins CSV, AWS e Neo4j, semântica de sincronização
+- [Cypher e SQL](https://khonsugraph.com/docs/pt/queries.md): Cypher compatível, caminhos mais curtos, limites
+- [Investigações](https://khonsugraph.com/docs/pt/investigations.md): explorar caminhos, evidências, investigações salvas, snapshots
+- [Análise de grafos](https://khonsugraph.com/docs/pt/analysis.md): PageRank, betweenness, comunidades, componentes
+- [Painéis](https://khonsugraph.com/docs/pt/dashboards.md): o formato .dash
+- [CLI e agentes de IA](https://khonsugraph.com/docs/pt/cli.md): o CLI JSON khonsu e a skill de agente
+- [Desenvolvimento de plugins](https://khonsugraph.com/docs/pt/plugins.md): o protocolo JSON Lines
+- [Exemplos](https://khonsugraph.com/docs/pt/examples.md): painéis sobre conjuntos de dados públicos
+- [Solução de problemas](https://khonsugraph.com/docs/pt/troubleshooting.md): bloqueios, formatos antigos, painéis vazios
+
+### Русский
+
+- [llms-full.txt](https://khonsugraph.com/docs/ru/llms-full.txt)
+- [Начало работы](https://khonsugraph.com/docs/ru/getting-started.md): установка, создание графа, импорт CSV
+- [Источники данных](https://khonsugraph.com/docs/ru/data-sources.md): плагины CSV, AWS и Neo4j, правила синхронизации
+- [Cypher и SQL](https://khonsugraph.com/docs/ru/queries.md): поддерживаемый Cypher, кратчайшие пути, ограничения
+- [Расследования](https://khonsugraph.com/docs/ru/investigations.md): исследование путей, доказательства, сохранённые расследования, снимки
+- [Анализ графов](https://khonsugraph.com/docs/ru/analysis.md): PageRank, посредничество, сообщества, компоненты
+- [Дашборды](https://khonsugraph.com/docs/ru/dashboards.md): формат .dash
+- [CLI и ИИ-агенты](https://khonsugraph.com/docs/ru/cli.md): JSON CLI khonsu и навык для агента
+- [Разработка плагинов](https://khonsugraph.com/docs/ru/plugins.md): протокол JSON Lines
+- [Примеры](https://khonsugraph.com/docs/ru/examples.md): дашборды на публичных наборах данных
+- [Устранение неполадок](https://khonsugraph.com/docs/ru/troubleshooting.md): блокировки, старые форматы, пустые панели

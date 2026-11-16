@@ -1,5 +1,5 @@
 ---
-description: 使用 khonsu JSON CLI 查看图、查询数据，并与 Agent 协作审阅仪表盘。
+description: khonsu 命令行对每条命令都输出 JSON，方便 Claude Code 等 AI Agent 查看图、执行查询、追踪路径并编写仪表盘。
 ---
 # CLI 与 AI Agent
 
@@ -60,4 +60,4 @@ khonsu comments overview.dash --reply c1 --text "已更新关系图面板" --res
 khonsu presence overview.dash --doing idle
 ```
 
-应用打开图时，只读查询和 `check` 通过窗口执行，返回 `via_window: true`。不要删除锁文件强行写入。参阅[常见问题](./troubleshooting)。
+应用打开图时，只读查询、`check` 和 `plugin sync` 通过窗口执行，返回 `via_window: true`。查询写入、`explore` 和 `investigation` 需要图空闲。不要删除锁文件强行写入。参阅[常见问题](./troubleshooting)。

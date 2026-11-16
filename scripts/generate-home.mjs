@@ -9,7 +9,7 @@ if (origin && !origin.startsWith('https://')) throw new Error('SITE_URL must use
 const pagePath = (lang) => lang === 'en' ? '/' : `/${lang}/`;
 const docsPath = (lang) => lang === 'en' ? '/docs/' : `/docs/${lang}/`;
 const languages = Object.entries(translations);
-const ogLocale = { en: 'en_US', 'zh-CN': 'zh_CN', ja: 'ja_JP', ko: 'ko_KR', fr: 'fr_FR', de: 'de_DE' };
+const ogLocale = { en: 'en_US', 'zh-CN': 'zh_CN', ja: 'ja_JP', ko: 'ko_KR', fr: 'fr_FR', de: 'de_DE', es: 'es_ES', 'pt-BR': 'pt_BR', ru: 'ru_RU' };
 const languageLinks = (current) => languages.map(([lang, item]) => `<a href="${pagePath(lang)}" lang="${item.htmlLang}" hreflang="${item.htmlLang}"${lang === current ? ' aria-current="page"' : ''}>${item.label}</a>`).join('');
 
 function languageMenu(current) {

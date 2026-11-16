@@ -125,4 +125,4 @@ Wählen Sie einen Knoten auf einer Zeichenfläche und verwenden Sie **Path Explo
 - Von Hand geschriebene Datensätze haben keine stabile ID. Sie werden gezählt, aber in einem Diff nicht verglichen.
 - Das Fenster hat noch keine Ansicht für Snapshots oder Diffs.
 
-Die [CLI-Referenz](./cli) listet jeden Befehl auf. Für Zentralität, Communities und kürzeste Pfade über den ganzen Graphen siehe [Graphenanalyse](./analysis).
+Die [CLI-Referenz](./cli) listet jeden Befehl auf. Für Zentralität, Communities und kürzeste Pfade über den ganzen Graphen siehe [Graphanalyse](./analysis).

@@ -31,7 +31,7 @@ Erstellen Sie es mit `investigation` anstelle von `sre`.
 
 ## Vertrauensnetzwerk {#trust-network}
 
-Für Prüferinnen und Prüfer. `audit/trust_network.dash` untersucht, wer wen im Bitcoin-OTC-Vertrauensnetzwerk bewertet. Die [Graphenanalyse](./analysis) findet die Konten, auf denen das Netzwerk beruht:
+Für Prüferinnen und Prüfer. `audit/trust_network.dash` untersucht, wer wen im Bitcoin-OTC-Vertrauensnetzwerk bewertet. Die [Graphanalyse](./analysis) findet die Konten, auf denen das Netzwerk beruht:
 
 ```sh
 khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
