@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 `allShortestPaths`, `nodes(p)` und `relationships(p)` funktionieren ebenfalls. Beide Endpunkte müssen durch eine Eigenschaftszuordnung, ein `WHERE` oder eine vorherige Klausel gebunden sein. Wenn Sie `p` zurückgeben, wird der Pfad auf der Zeichenfläche gezeichnet. Ein unbegrenztes `*` endet nach 256 Sprüngen und schlägt fehl, statt zu melden, dass kein Pfad existiert.
 
-Um von einem Knoten mit Obergrenzen für Sprünge und Größe nach außen zu gehen, verwenden Sie [`khonsu explore`](./investigations#explore). Für gewichtete Pfade, Zentralität und Communities siehe [Graphenanalyse](./analysis).
+Um von einem Knoten mit Obergrenzen für Sprünge und Größe nach außen zu gehen, verwenden Sie [`khonsu explore`](./investigations#explore). Für gewichtete Pfade, Zentralität und Communities siehe [Graphanalyse](./analysis).
 
 ## SQL und Parameter
 

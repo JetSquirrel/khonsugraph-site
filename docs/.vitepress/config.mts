@@ -5,18 +5,18 @@ import { dirname, resolve } from 'node:path'
 const repository = 'https://github.com/JetSquirrel/KhonsuGraph'
 const origin = new URL(process.env.SITE_URL || 'https://khonsugraph.com').origin
 const pages = [
-  ['getting-started', 'Getting started', '快速开始', 'はじめに', '시작하기', 'Premiers pas', 'Erste Schritte'],
-  ['data-sources', 'Data sources', '数据源', 'データソース', '데이터 소스', 'Sources de données', 'Datenquellen'],
-  ['queries', 'Cypher & SQL', 'Cypher 与 SQL', 'Cypher と SQL', 'Cypher 및 SQL', 'Cypher et SQL', 'Cypher & SQL'],
-  ['investigations', 'Investigations', '调查', '調査', '조사', 'Investigations', 'Untersuchungen'],
-  ['analysis', 'Graph analysis', '图分析', 'グラフ分析', '그래프 분석', 'Analyse de graphe', 'Graphanalyse'],
-  ['dashboards', 'Dashboards', '仪表盘', 'ダッシュボード', '대시보드', 'Tableaux de bord', 'Dashboards'],
-  ['cli', 'CLI & AI agents', 'CLI 与 AI Agent', 'CLI と AI エージェント', 'CLI 및 AI 에이전트', 'CLI et agents IA', 'CLI & KI-Agenten'],
-  ['plugins', 'Plugin development', '插件开发', 'プラグイン開発', '플러그인 개발', 'Développement de plugins', 'Plugin-Entwicklung'],
-  ['examples', 'Examples', '示例', '例', '예제', 'Exemples', 'Beispiele'],
-  ['troubleshooting', 'Troubleshooting', '常见问题', 'トラブルシューティング', '문제 해결', 'Dépannage', 'Fehlerbehebung'],
+  ['getting-started', 'Getting started', '快速开始', 'はじめに', '시작하기', 'Premiers pas', 'Erste Schritte', 'Primeros pasos', 'Primeiros passos', 'Начало работы'],
+  ['data-sources', 'Data sources', '数据源', 'データソース', '데이터 소스', 'Sources de données', 'Datenquellen', 'Fuentes de datos', 'Fontes de dados', 'Источники данных'],
+  ['queries', 'Cypher & SQL', 'Cypher 与 SQL', 'Cypher と SQL', 'Cypher 및 SQL', 'Cypher et SQL', 'Cypher & SQL', 'Cypher y SQL', 'Cypher e SQL', 'Cypher и SQL'],
+  ['investigations', 'Investigations', '调查', '調査', '조사', 'Investigations', 'Untersuchungen', 'Investigaciones', 'Investigações', 'Расследования'],
+  ['analysis', 'Graph analysis', '图分析', 'グラフ分析', '그래프 분석', 'Analyse de graphe', 'Graphanalyse', 'Análisis de grafos', 'Análise de grafos', 'Анализ графов'],
+  ['dashboards', 'Dashboards', '仪表盘', 'ダッシュボード', '대시보드', 'Tableaux de bord', 'Dashboards', 'Paneles', 'Painéis', 'Дашборды'],
+  ['cli', 'CLI & AI agents', 'CLI 与 AI Agent', 'CLI と AI エージェント', 'CLI 및 AI 에이전트', 'CLI et agents IA', 'CLI & KI-Agenten', 'CLI y agentes de IA', 'CLI e agentes de IA', 'CLI и ИИ-агенты'],
+  ['plugins', 'Plugin development', '插件开发', 'プラグイン開発', '플러그인 개발', 'Développement de plugins', 'Plugin-Entwicklung', 'Desarrollo de plugins', 'Desenvolvimento de plugins', 'Разработка плагинов'],
+  ['examples', 'Examples', '示例', '例', '예제', 'Exemples', 'Beispiele', 'Ejemplos', 'Exemplos', 'Примеры'],
+  ['troubleshooting', 'Troubleshooting', '常见问题', 'トラブルシューティング', '문제 해결', 'Dépannage', 'Fehlerbehebung', 'Solución de problemas', 'Solução de problemas', 'Устранение неполадок'],
 ]
-type LocaleCode = 'en' | 'zh' | 'ja' | 'ko' | 'fr' | 'de'
+type LocaleCode = 'en' | 'zh' | 'ja' | 'ko' | 'fr' | 'de' | 'es' | 'pt' | 'ru'
 type Strings = {
   label: string; lang: string; title: string; download: string; section: string; docs: string; prev: string; next: string
   outline: string; menu: string; top: string; langMenu: string; skip: string; appearance: string; light: string; dark: string; footer: string
@@ -66,6 +66,27 @@ const strings: Record<LocaleCode, Strings> = {
     footer: 'Apache-2.0 · Ein unabhängiges Projekt auf Basis von HawDB', ogLocale: 'de_DE',
     search: { button: 'Dokumentation durchsuchen', details: 'Details anzeigen', reset: 'Suche zurücksetzen', back: 'Suche schließen', noResults: 'Keine Ergebnisse für', select: 'auswählen', navigate: 'navigieren', close: 'schließen' },
   },
+  es: {
+    label: 'Español', lang: 'es', title: 'Documentación de KhonsuGraph', download: 'Descargar', section: 'Usar KhonsuGraph', docs: 'Documentación',
+    prev: 'Página anterior', next: 'Página siguiente', outline: 'En esta página', menu: 'Menú', top: 'Volver arriba',
+    langMenu: 'Cambiar idioma', skip: 'Ir al contenido', appearance: 'Apariencia', light: 'Cambiar al tema claro', dark: 'Cambiar al tema oscuro',
+    footer: 'Apache-2.0 · Un proyecto independiente construido sobre HawDB', ogLocale: 'es_ES',
+    search: { button: 'Buscar en la documentación', details: 'Mostrar lista detallada', reset: 'Restablecer búsqueda', back: 'Cerrar búsqueda', noResults: 'No hay resultados para', select: 'seleccionar', navigate: 'navegar', close: 'cerrar' },
+  },
+  pt: {
+    label: 'Português (Brasil)', lang: 'pt-BR', title: 'Documentação do KhonsuGraph', download: 'Baixar', section: 'Usar o KhonsuGraph', docs: 'Documentação',
+    prev: 'Página anterior', next: 'Próxima página', outline: 'Nesta página', menu: 'Menu', top: 'Voltar ao topo',
+    langMenu: 'Alterar idioma', skip: 'Ir para o conteúdo', appearance: 'Aparência', light: 'Mudar para o tema claro', dark: 'Mudar para o tema escuro',
+    footer: 'Apache-2.0 · Um projeto independente construído sobre o HawDB', ogLocale: 'pt_BR',
+    search: { button: 'Pesquisar na documentação', details: 'Mostrar lista detalhada', reset: 'Limpar pesquisa', back: 'Fechar pesquisa', noResults: 'Nenhum resultado para', select: 'selecionar', navigate: 'navegar', close: 'fechar' },
+  },
+  ru: {
+    label: 'Русский', lang: 'ru', title: 'Документация KhonsuGraph', download: 'Скачать', section: 'Работа с KhonsuGraph', docs: 'Документация',
+    prev: 'Предыдущая страница', next: 'Следующая страница', outline: 'На этой странице', menu: 'Меню', top: 'Наверх',
+    langMenu: 'Сменить язык', skip: 'Перейти к содержимому', appearance: 'Оформление', light: 'Переключить на светлую тему', dark: 'Переключить на тёмную тему',
+    footer: 'Apache-2.0 · Независимый проект на основе HawDB', ogLocale: 'ru_RU',
+    search: { button: 'Поиск по документации', details: 'Показать подробный список', reset: 'Сбросить поиск', back: 'Закрыть поиск', noResults: 'Нет результатов для', select: 'выбрать', navigate: 'перейти', close: 'закрыть' },
+  },
 }
 const localeCodes = Object.keys(strings) as LocaleCode[]
 const pageTitle = (slug: string, code: LocaleCode) => {
@@ -76,8 +97,8 @@ const pageTitle = (slug: string, code: LocaleCode) => {
 
 function locale(code: LocaleCode) {
   const s = strings[code]
-  const zh = code !== 'en'
-  const prefix = zh ? `/${code}/` : '/'
+  const localized = code !== 'en'
+  const prefix = localized ? `/${code}/` : '/'
   return {
     label: s.label, lang: s.lang, title: s.title,
     themeConfig: {
@@ -125,7 +146,7 @@ export default defineConfig({
     if (pageData.isNotFound) return []
     const path = pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')
     const code = (localeCodes.find(code => code !== 'en' && path.startsWith(`${code}/`)) ?? 'en') as LocaleCode
-    const entry = path.replace(/^(zh|ja|ko|fr|de)\//,'')
+    const entry = path.replace(new RegExp(`^(${localeCodes.filter(code => code !== 'en').join('|')})/`), '')
     const prefix = code === 'en' ? '' : `${code}/`
     const url = `${origin}/docs/${path}`, card = `${origin}/assets/og-card.jpg`, s = strings[code]
     const home = `${origin}/${prefix}`

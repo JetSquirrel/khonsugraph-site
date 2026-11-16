@@ -107,5 +107,56 @@ export const stories = {
     product: 'Das ist KhonsuGraph. Für Jäger gebaut.',
     hunters: [['Threat Hunter', 'Angriffspfade und Bedrohungen verfolgen.'], ['SREs', 'Ursachen und Abhängigkeiten nachverfolgen.'], ['Betrugsermittler', 'Auffällige Transaktionen und versteckte Verbindungen verfolgen.'], ['Forschende', 'Muster in komplexen Netzwerken erkunden.']],
     read: 'Der Geschichte folgen',
+  },
+  es: {
+    eyebrow: 'UNA HISTORIA DE EXPLORACIÓN',
+    title: 'Siempre en busca de<br>las conexiones ocultas.',
+    intro: 'La historia de explorar lo desconocido también es la historia de seguir rastros.',
+    labels: ['Huellas', 'Luz de luna', 'Estrellas', 'Conexiones'],
+    chapters: [
+      { motif: 'TRACKS → A PATH', era: 'LA ANTIGUA NATURALEZA SALVAJE', title: 'Los cazadores seguían rastros.', alt: 'Un cazador sigue huellas de animales por la naturaleza salvaje', paragraphs: ['En una naturaleza sin mapas, los cazadores leían las huellas en el suelo, las ramas rotas y los rastros que dejaban los animales.', 'Una huella sola dice poco. Unida a la siguiente, esas huellas revelan un camino: por dónde ha pasado un animal y hacia dónde podría ir.'], insight: 'Conecta los rastros.<br>Una dirección empieza a emerger.' },
+      { motif: 'MOONLIGHT → A WAY', era: 'EL ANTIGUO EGIPTO', title: 'Los viajeros miraban la luna.', alt: 'Khonsu bajo una luna dorada, cuya luz ilumina un río y una ciudad lejana', paragraphs: ['En la mitología del antiguo Egipto, Khonsu es el dios de la luna, los viajes y la protección. Su nombre significa «viajero», y evoca el recorrido de la luna por el cielo nocturno.', 'Cuando cae el sol, la luz de la luna muestra a los viajeros un camino entre la oscuridad.'], insight: 'La oscuridad no significa que no haya camino.<br>Solo que aún está por encontrar.' },
+      { motif: 'STARS → A CHART', era: 'LA ERA DE LAS EXPLORACIONES', title: 'Los exploradores seguían las estrellas.', alt: 'Un navegante usa un sextante y una constelación de estrellas doradas para trazar su rumbo en el mar', paragraphs: ['En busca de especias y rutas marítimas hacia Oriente, los navegantes se adentraban en aguas desconocidas.', 'Leían la posición de las estrellas junto con los vientos, las corrientes y los registros de viaje para orientarse en mar abierto.'], insight: 'Una estrella solitaria es solo un punto de luz.<br>Conectadas, las estrellas se convierten en una carta para navegar.' },
+      { motif: 'SIGNALS → A STORY', era: 'HOY', title: 'Seguimos rastros digitales.', alt: 'Un cazador de amenazas moderno explora en una pantalla una red de nodos dorados conectados', paragraphs: ['Hoy, los cazadores de amenazas siguen rastros por el mundo digital. Su oscuridad se esconde en cantidades ingentes de datos.', 'Los analistas de seguridad reconstruyen ataques a partir de registros. Los SRE trazan dependencias entre servicios para localizar causas raíz y entender su impacto. Los auditores siguen transacciones y relaciones entre entidades para descubrir anomalías y riesgos.'], insight: 'Eventos, activos e identidades en apariencia inconexos<br>revelan su historia a través de sus conexiones.' }
+    ],
+    bridge: 'De las huellas en la naturaleza a las cartas del cielo nocturno y a las redes de relaciones digitales,<br>siempre hemos hecho lo mismo:',
+    conclusion: 'Conectar pistas. Encontrar la verdad.',
+    product: 'Esto es KhonsuGraph. Creado para cazadores.',
+    hunters: [['Cazadores de amenazas', 'Traza rutas de ataque y amenazas.'], ['SRE', 'Traza causas raíz y dependencias.'], ['Investigadores de fraude', 'Traza transacciones anómalas y vínculos ocultos.'], ['Investigadores', 'Explora patrones en redes complejas.']],
+    read: 'Seguir la historia',
+  },
+  pt: {
+    eyebrow: 'UMA HISTÓRIA DE EXPLORAÇÃO',
+    title: 'Sempre em busca<br>das conexões ocultas.',
+    intro: 'A história de explorar o desconhecido também é uma história de seguir rastros.',
+    labels: ['Rastros', 'Luar', 'Estrelas', 'Conexões'],
+    chapters: [
+      { motif: 'TRACKS → A PATH', era: 'A ANTIGA NATUREZA SELVAGEM', title: 'Os caçadores seguiam rastros.', alt: 'Um caçador segue rastros de animais pela natureza selvagem', paragraphs: ['Numa natureza sem mapas, os caçadores liam as pegadas no solo, os galhos quebrados e os rastros deixados pelos animais.', 'Uma pegada sozinha diz pouco. Ligada à seguinte, esses rastros revelam um caminho: por onde um animal passou e para onde pode ir.'], insight: 'Conecte os rastros.<br>Uma direção começa a surgir.' },
+      { motif: 'MOONLIGHT → A WAY', era: 'O ANTIGO EGITO', title: 'Os viajantes olhavam para a lua.', alt: 'Khonsu sob uma lua dourada, cuja luz ilumina um rio e uma cidade distante', paragraphs: ['Na mitologia do antigo Egito, Khonsu é o deus da lua, das viagens e da proteção. Seu nome significa «viajante» e evoca o percurso da lua pelo céu noturno.', 'Quando o sol se põe, o luar mostra aos viajantes um caminho pela escuridão.'], insight: 'A escuridão não significa que não há caminho.<br>Apenas que ele ainda precisa ser encontrado.' },
+      { motif: 'STARS → A CHART', era: 'A ERA DAS GRANDES NAVEGAÇÕES', title: 'Os exploradores seguiam as estrelas.', alt: 'Um navegador usa um sextante e uma constelação de estrelas douradas para traçar o rumo no mar', paragraphs: ['Em busca de especiarias e rotas marítimas para o Oriente, os navegadores partiam para águas desconhecidas.', 'Eles liam a posição das estrelas junto com os ventos, as correntes e os registros de viagem para se orientar em alto-mar.'], insight: 'Uma estrela solitária é apenas um ponto de luz.<br>Conectadas, as estrelas se tornam uma carta para navegar.' },
+      { motif: 'SIGNALS → A STORY', era: 'HOJE', title: 'Seguimos rastros digitais.', alt: 'Um caçador de ameaças moderno explora numa tela uma rede de nós dourados conectados', paragraphs: ['Hoje, os caçadores de ameaças seguem rastros pelo mundo digital. Sua escuridão se esconde em enormes volumes de dados.', 'Analistas de segurança reconstroem ataques a partir de registros. SREs traçam dependências entre serviços para localizar causas raiz e entender seu impacto. Auditores seguem transações e relacionamentos entre entidades para revelar anomalias e riscos.'], insight: 'Eventos, ativos e identidades aparentemente sem ligação<br>revelam sua história por meio de suas conexões.' }
+    ],
+    bridge: 'Dos rastros na natureza às cartas do céu noturno e às redes de relacionamentos digitais,<br>sempre fizemos a mesma coisa:',
+    conclusion: 'Conectar pistas. Encontrar a verdade.',
+    product: 'Este é o KhonsuGraph. Feito para caçadores.',
+    hunters: [['Caçadores de ameaças', 'Traçam caminhos de ataque e ameaças.'], ['SREs', 'Traçam causas raiz e dependências.'], ['Investigadores de fraude', 'Traçam transações anômalas e vínculos ocultos.'], ['Pesquisadores', 'Exploram padrões em redes complexas.']],
+    read: 'Seguir a história',
+  },
+  ru: {
+    eyebrow: 'ИСТОРИЯ ИССЛЕДОВАНИЯ',
+    title: 'Всегда в поиске<br>скрытых связей.',
+    intro: 'История исследования неизвестного — это и история поиска следов.',
+    labels: ['Следы', 'Лунный свет', 'Звёзды', 'Связи'],
+    chapters: [
+      { motif: 'TRACKS → A PATH', era: 'ДРЕВНЯЯ ДИКАЯ ПРИРОДА', title: 'Охотники шли по следам.', alt: 'Охотник идёт по следам животных в дикой природе', paragraphs: ['В дикой природе без карт охотники читали отпечатки на земле, сломанные ветки и следы, оставленные животными.', 'Один отпечаток мало что говорит. Соединённые со следующим, эти следы раскрывают путь: где было животное и куда оно может направиться.'], insight: 'Соедините следы.<br>Начинает проступать направление.' },
+      { motif: 'MOONLIGHT → A WAY', era: 'ДРЕВНИЙ ЕГИПЕТ', title: 'Путники смотрели на луну.', alt: 'Хонсу под золотой луной, свет которой освещает реку и далёкий город', paragraphs: ['В древнеегипетской мифологии Хонсу — бог луны, путешествий и защиты. Его имя означает «путник» и напоминает о пути луны по ночному небу.', 'Когда садится солнце, лунный свет указывает путникам дорогу сквозь темноту.'], insight: 'Темнота не значит, что пути нет.<br>Только что его ещё предстоит найти.' },
+      { motif: 'STARS → A CHART', era: 'ЭПОХА ВЕЛИКИХ ГЕОГРАФИЧЕСКИХ ОТКРЫТИЙ', title: 'Исследователи шли за звёздами.', alt: 'Навигатор с секстантом и созвездием золотых звёзд определяет курс в море', paragraphs: ['В поисках пряностей и морских путей на Восток мореплаватели уходили в неизвестные воды.', 'Они читали положение звёзд вместе с ветрами, течениями и записями о плавании, чтобы найти ориентиры в открытом океане.'], insight: 'Одинокая звезда — всего лишь точка света.<br>Соединённые звёзды становятся картой для навигации.' },
+      { motif: 'SIGNALS → A STORY', era: 'СЕГОДНЯ', title: 'Мы идём по цифровым следам.', alt: 'Современный охотник за угрозами исследует на экране сеть связанных золотых узлов', paragraphs: ['Сегодня охотники за угрозами идут по следам в цифровом мире. Его темнота скрывается в огромных объёмах данных.', 'Аналитики безопасности восстанавливают атаки по журналам. SRE прослеживают зависимости между сервисами, чтобы найти первопричины и понять их влияние. Аудиторы отслеживают транзакции и связи между сущностями, чтобы выявить аномалии и риски.'], insight: 'На первый взгляд несвязанные события, активы и идентичности<br>раскрывают свою историю через связи.' }
+    ],
+    bridge: 'От следов в дикой природе к картам ночного неба и сетям цифровых отношений —<br>мы всегда делали одно и то же:',
+    conclusion: 'Соединять улики. Находить истину.',
+    product: 'Это KhonsuGraph. Создано для охотников.',
+    hunters: [['Охотники за угрозами', 'Прослеживают пути атак и угрозы.'], ['SRE', 'Прослеживают первопричины и зависимости.'], ['Расследователи мошенничества', 'Прослеживают аномальные транзакции и скрытые связи.'], ['Исследователи', 'Изучают закономерности в сложных сетях.']],
+    read: 'Пройти по истории',
   }
 };

@@ -29,7 +29,7 @@ for (const file of html) {
     try { JSON.parse(match[1]); } catch { errors.push(`${file}: invalid structured data`); }
   }
 }
-for (const file of ['index.html','zh/index.html','ja/index.html','ko/index.html','fr/index.html','de/index.html']) {
+for (const file of ['index.html','zh/index.html','ja/index.html','ko/index.html','fr/index.html','de/index.html','es/index.html','pt/index.html','ru/index.html']) {
   const source = await readFile(resolve(root,file),'utf8');
   for (const [tag] of source.matchAll(/<(?:script|link|img)\b[^>]*>/g)) {
     const isResource = !tag.startsWith('<link') || /rel="(?:stylesheet|preload|modulepreload|prefetch)"/.test(tag);

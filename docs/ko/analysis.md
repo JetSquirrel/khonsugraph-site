@@ -57,4 +57,4 @@ khonsu analyze pagerank --db graphs/security \
 
 ## 분석 또는 Cypher?
 
-Cypher에는 바인딩된 두 노드 사이의 `shortestPath`와 `allShortestPaths`가 있습니다. [Cypher & SQL](./queries)을 참고하십시오. 경로가 가중치를 존중해야 할 때는 `khonsu analyze path`를 사용하고, 질문이 하나의 패턴이 아니라 그래프 전체에 대한 것일 때는 다른 알고리즘을 사용하십시오. 홉 수와 크기에 상한을 두고 노드에서 바깥으로 걸어가려면 [`khonsu explore`](./investigations#explore)를 사용하십시오.
+Cypher에는 바인딩된 두 노드 사이의 `shortestPath`와 `allShortestPaths`가 있습니다. [Cypher 및 SQL](./queries)을 참고하십시오. 경로가 가중치를 존중해야 할 때는 `khonsu analyze path`를 사용하고, 질문이 하나의 패턴이 아니라 그래프 전체에 대한 것일 때는 다른 알고리즘을 사용하십시오. 홉 수와 크기에 상한을 두고 노드에서 바깥으로 걸어가려면 [`khonsu explore`](./investigations#explore)를 사용하십시오.
