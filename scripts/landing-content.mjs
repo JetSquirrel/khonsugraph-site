@@ -19,11 +19,12 @@ export const landingPages = [
       ['Cite and re-check', '`khonsu evidence` names the source, plugin and write time behind each record. Save the investigation, re-sync, and reopen it to see whether the path still rests on the same records.', 'Saved investigations', 'investigations#saved-investigations'],
     ],
     walkEye: 'TRY IT WITHOUT A LIVE ACCOUNT', walkTitle: 'Trace exposure in the<br>saved AWS fixture.',
-    walkLead: 'The application repository ships saved AWS CLI responses, so this runs offline. Run it from the root of a repository checkout.',
-    terminal: 'aws-exposure', commands: `# 01 — Import the saved AWS responses
+    walkLead: 'The AWS plugin comes from the marketplace, and its repository ships saved AWS CLI responses, so this runs offline. Run it with a khonsugraph-marketplace checkout beside you.',
+    terminal: 'aws-exposure', commands: `# 01 — Install the plugin and import the saved AWS responses
+$ khonsu plugin install aws --yes
 $ khonsu init graphs/aws
 $ khonsu source add --db graphs/aws --plugin aws --name aws-fixture \\
-    -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+    -c "fixture_dir=$PWD/khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 $ khonsu plugin sync --source aws-fixture
 
 # 02 — Ask the exposure rules
@@ -139,8 +140,9 @@ $ khonsu open examples/sre/blast_radius.dash`,
       ],
     },
     walkEye: 'BRING YOUR NEO4J DATA', walkTitle: 'Copy a Neo4j database<br>into a local graph.',
-    walkLead: 'The Neo4j plugin, added in 0.3.0, copies nodes and relationships over Neo4j\'s HTTP API and sends read queries only.',
+    walkLead: 'The Neo4j plugin, added in 0.3.0 and installed from the marketplace after it, copies nodes and relationships over Neo4j\'s HTTP API and sends read queries only.',
     terminal: 'neo4j-import', commands: `# 01 — Copy the database (HTTP port 7474, not bolt://)
+$ khonsu plugin install neo4j --yes
 $ khonsu init graphs/infra
 $ khonsu source add --db graphs/infra --plugin neo4j --name infra \\
     -c url=http://127.0.0.1:7474 -c password=... --test

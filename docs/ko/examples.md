@@ -62,12 +62,13 @@ fetch 스크립트는 공개 데이터를 내려받습니다. `$PWD`는 CSV 경�
 
 클라우드 보안 엔지니어를 위한 예제입니다. AWS 계정 구성이 인터넷에 무엇을 열어 두는지를 인터넷 CIDR에서 보안 그룹과 로드 밸런서를 거쳐 인스턴스와 그들이 수임하는 역할까지 보여 줍니다.
 
-앱 리포지터리에는 저장된 AWS CLI 응답이 포함되어 있습니다. 리포지터리 루트에서 다음을 실행하십시오.
+AWS 플러그인의 저장된 AWS CLI 응답은 [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) 리포지터리에 있습니다. 앱 리포지터리 옆에 체크아웃한 뒤 앱 리포지터리 루트에서 다음을 실행하십시오.
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

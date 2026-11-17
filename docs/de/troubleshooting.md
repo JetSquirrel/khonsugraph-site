@@ -33,7 +33,7 @@ Wenn ein Lesevorgang sein Budget überschreitet, schränken Sie ihn mit Prädika
 
 ## Eine Quelle kann nicht synchronisiert werden
 
-Führen Sie `khonsu plugin describe ID` aus und prüfen Sie die Konfigurationsfelder. Stellen Sie sicher, dass die mitgelieferten Plugins neben der ausführbaren Datei verbleiben. Pfade für einzelne CSV-Dateien werden beim Hinzufügen der Quelle als absolute Pfade gespeichert. Pfade im JSON von `nodes` und `edges` werden so gespeichert, wie sie angegeben wurden, und müssen absolut sein. AWS erfordert die AWS CLI und ein zugängliches, konfiguriertes Profil, sofern keine Fixtures verwendet werden. Schreiben Sie `regions` als durch Kommas getrennten Text, nicht als JSON-Array.
+Führen Sie `khonsu plugin describe ID` aus und prüfen Sie die Konfigurationsfelder. Stellen Sie sicher, dass die mitgelieferten Plugins neben der ausführbaren Datei verbleiben. Pfade für einzelne CSV-Dateien werden beim Hinzufügen der Quelle als absolute Pfade gespeichert. Pfade im JSON von `nodes` und `edges` werden so gespeichert, wie sie angegeben wurden, und müssen absolut sein. AWS erfordert die AWS CLI und ein zugängliches, konfiguriertes Profil, sofern keine Fixtures verwendet werden. Schreiben Sie `regions` als durch Kommas getrennten Text, nicht als JSON-Array. Wird das AWS- oder Neo4j-Plugin nach einem Update über 0.3.0 hinaus nicht gefunden, installieren Sie es aus dem [Marketplace](./marketplace#install).
 
 Eine fehlgeschlagene Synchronisierung kann bereits geschriebene Datensätze hinterlassen. Beheben Sie die Ursache und synchronisieren Sie dann erneut, um sie abzugleichen. Prüfen Sie `skipped_edges` auf unaufgelöste Endpunkte.
 

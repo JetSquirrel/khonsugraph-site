@@ -20,10 +20,13 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 
 ## AWS
 
+从 0.3.0 之后的版本起，AWS 插件不再随应用附带，而是从[插件市场](./marketplace)安装：`khonsu plugin install aws --yes`。0.3.0 中它仍随应用附带。
+
 AWS 插件通过 AWS CLI 读取 VPC、子网、安全组、实例、负载均衡器与 IAM 角色。先安装和配置 AWS CLI，再使用自己的只读配置。`regions` 使用逗号分隔，例如 `us-east-1,eu-west-1`。
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
   -c profile=readonly -c regions=us-east-1 --test
@@ -31,16 +34,19 @@ khonsu plugin sync --source aws-demo --dry-run
 khonsu plugin sync --source aws-demo
 ```
 
-这会访问配置的 AWS 账户。离线体验可以使用源码仓库中的固定测试数据，参见[示例](./examples)。
+这会访问所配置的 AWS 账户。如需离线演练，请改用 [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) 仓库中保存的响应，见[示例](./examples)。
 
 <a href="/docs/samples/exposure.dash" download>AWS 暴露面仪表盘</a> 使用插件导入的关系，展示 `Cidr → SecurityGroup ← Instance → Role`。
 
 ## Neo4j 与 Cartography {#neo4j}
 
+从 0.3.0 之后的版本起，Neo4j 插件不再随应用附带，而是从[插件市场](./marketplace)安装：`khonsu plugin install neo4j --yes`。0.3.0 中它仍随应用附带。
+
 Neo4j 插件从 0.3.0 开始提供，通过 Neo4j 的 HTTP API 把数据库中的节点和关系复制到本地图，只发送读取查询。它的主要用途是配合 [Cartography](https://github.com/cartography-cncf/cartography)：Cartography 会把 AWS、GCP、Azure、Kubernetes、GitHub、Okta 等资源写入 Neo4j。任何 Neo4j 数据库都可以使用。
 
 ```sh
 khonsu init graphs/infra
+khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test
 khonsu plugin sync --source infra
@@ -48,7 +54,7 @@ khonsu plugin sync --source infra
 
 地址是 Neo4j 的 HTTP 地址，默认端口 7474，不是 `bolt://`。密码保存在系统钥匙串中，只读角色即可。
 
-HawDB 中每个节点只有一个标签，因此节点会取其 Neo4j 标签中的一个（通常是最少见的那个），全部标签保留在 `neo4j_labels` 中。`MATCH (p:AWSPrincipal)` 没有结果时，可以改用 `MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels`。为 Neo4j 编写的查询可能需要调整，见[查询限制](./queries#current-limitations)和[插件 README](https://github.com/JetSquirrel/KhonsuGraph/tree/main/plugins/neo4j)。
+HawDB 中每个节点只有一个标签，因此节点会取其 Neo4j 标签中的一个（通常是最少见的那个），全部标签保留在 `neo4j_labels` 中。`MATCH (p:AWSPrincipal)` 没有结果时，可以改用 `MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels`。为 Neo4j 编写的查询可能需要调整，见[查询限制](./queries#current-limitations)和[插件 README](https://github.com/JetSquirrel/khonsugraph-marketplace/tree/main/plugins/neo4j)。
 
 ## 同步规则 {#sync-semantics}
 

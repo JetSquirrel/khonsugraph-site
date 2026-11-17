@@ -62,12 +62,13 @@ El script de descarga obtiene datos públicos. `$PWD` mantiene absolutas las rut
 
 Para un ingeniero de seguridad en la nube: qué abre a internet la configuración de una cuenta de AWS, desde un CIDR de internet pasando por grupos de seguridad y balanceadores de carga hasta instancias y los roles que asumen.
 
-El repositorio de la aplicación contiene respuestas guardadas de la AWS CLI. Ejecuta desde su raíz:
+Las respuestas guardadas de la AWS CLI del plugin de AWS están en el repositorio [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace). Con una copia junto al repositorio de la aplicación, ejecuta desde la raíz del repositorio de la aplicación:
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

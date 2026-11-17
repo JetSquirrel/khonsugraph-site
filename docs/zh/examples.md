@@ -62,12 +62,13 @@ khonsu open examples/sre/blast_radius.dash
 
 面向云安全工程师：AWS 账户的配置向互联网开放了什么，从互联网 CIDR 经过安全组和负载均衡器，到实例及其可使用的角色。
 
-应用仓库包含已保存的 AWS CLI 响应。在其根目录执行：
+AWS 插件保存的 AWS CLI 响应位于 [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) 仓库。把它检出到应用仓库旁边，然后在应用仓库根目录执行：
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

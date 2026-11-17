@@ -20,10 +20,13 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 
 ## AWS
 
+0.3.0 다음 릴리스부터 AWS 플러그인은 앱에 포함되지 않으며 [마켓플레이스](./marketplace)에서 설치합니다: `khonsu plugin install aws --yes`. 0.3.0에서는 앱에 포함되어 있습니다.
+
 AWS 플러그인은 AWS CLI를 사용해 VPC, 서브넷, 보안 그룹, 인스턴스, 로드 밸런서, IAM 역할을 읽습니다. 먼저 AWS CLI를 설치하고 구성한 뒤, 사용자가 관리하는 읽기 전용 프로파일을 사용하십시오. `regions`는 `us-east-1,eu-west-1`처럼 쉼표로 구분한 목록입니다.
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
   -c profile=readonly -c regions=us-east-1 --test
@@ -31,16 +34,19 @@ khonsu plugin sync --source aws-demo --dry-run
 khonsu plugin sync --source aws-demo
 ```
 
-이 작업은 구성된 AWS 계정에 접속합니다. 오프라인으로 따라 해 보려면 앱 리포지터리에 저장된 픽스처를 대신 사용하십시오. [예제](./examples)를 참고하십시오.
+이 명령은 설정한 AWS 계정에 접근합니다. 오프라인으로 따라 해 보려면 대신 [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) 리포지터리에 저장된 응답을 사용하십시오. [예제](./examples)를 참고하십시오.
 
 <a href="/docs/samples/exposure.dash" download>AWS 노출 대시보드</a>는 이 플러그인이 가져온 관계를 사용해 `Cidr → SecurityGroup ← Instance → Role`을 추적합니다.
 
 ## Neo4j와 Cartography {#neo4j}
 
+0.3.0 다음 릴리스부터 Neo4j 플러그인은 앱에 포함되지 않으며 [마켓플레이스](./marketplace)에서 설치합니다: `khonsu plugin install neo4j --yes`. 0.3.0에서는 앱에 포함되어 있습니다.
+
 0.3.0에서 추가된 Neo4j 플러그인은 Neo4j의 HTTP API를 통해 Neo4j 데이터베이스의 노드와 관계를 로컬 그래프로 복사합니다. 읽기 쿼리만 보냅니다. 주된 용도는 AWS, GCP, Azure, Kubernetes, GitHub, Okta 등을 Neo4j로 가져오는 [Cartography](https://github.com/cartography-cncf/cartography)이며, 어떤 Neo4j 데이터베이스든 사용할 수 있습니다.
 
 ```sh
 khonsu init graphs/infra
+khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test
 khonsu plugin sync --source infra
@@ -48,7 +54,7 @@ khonsu plugin sync --source infra
 
 주소는 `bolt://`가 아니라 Neo4j의 HTTP 주소이며 기본값은 7474입니다. 비밀번호는 시스템 키체인에 보관되며, 읽기 역할만으로 충분합니다.
 
-HawDB는 노드마다 레이블을 하나만 가지므로, 각 노드는 Neo4j 레이블 중 하나(보통 가장 희귀한 것)를 취하고 나머지는 모두 `neo4j_labels`에 보관합니다. `MATCH (p:AWSPrincipal)`이 아무것도 반환하지 않으면 `MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels`를 시도하십시오. Neo4j용으로 작성한 쿼리는 수정이 필요할 수 있습니다. [쿼리 제한 사항](./queries#current-limitations)과 [플러그인의 README](https://github.com/JetSquirrel/KhonsuGraph/tree/main/plugins/neo4j)를 참고하십시오.
+HawDB는 노드마다 레이블을 하나만 가지므로, 각 노드는 Neo4j 레이블 중 하나(보통 가장 희귀한 것)를 취하고 나머지는 모두 `neo4j_labels`에 보관합니다. `MATCH (p:AWSPrincipal)`이 아무것도 반환하지 않으면 `MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels`를 시도하십시오. Neo4j용으로 작성한 쿼리는 수정이 필요할 수 있습니다. [쿼리 제한 사항](./queries#current-limitations)과 [플러그인의 README](https://github.com/JetSquirrel/khonsugraph-marketplace/tree/main/plugins/neo4j)를 참고하십시오.
 
 ## 동기화 방식 {#sync-semantics}
 

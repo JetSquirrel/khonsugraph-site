@@ -51,3 +51,7 @@ khonsu plugin describe folders
 ```
 
 `--yes` genehmigt die deklarierten Berechtigungen. Das Installationsprogramm kopiert das Plugin; installieren Sie es nach Änderungen an der Quelle erneut. Lesen Sie [Semantik der Synchronisierung](./data-sources#sync-semantics), bevor Sie eine vollständige oder inkrementelle Synchronisierung implementieren.
+
+## Ein Plugin teilen {#share}
+
+Damit andere Ihr Plugin per Namen installieren können, veröffentlichen Sie es in einem Marketplace. Siehe [Ein Plugin veröffentlichen](./marketplace#publish).

@@ -25,7 +25,11 @@ Die [Agent-Skill](https://github.com/JetSquirrel/KhonsuGraph/tree/main/skills/kh
 | `khonsu rebuild --db DIR` | Einen Graphen im alten Format aus seinen Datenquellen neu erstellen |
 | `khonsu plugin list` | Plugins und Berechtigungen auflisten |
 | `khonsu plugin describe ID` | Konfigurationsfelder und Ausgabetypen eines Plugins anzeigen |
+| `khonsu plugin search [WORDS]` | Auflisten, was die [Marketplaces](./marketplace) anbieten |
+| `khonsu plugin install ID --yes` | Ein Plugin per Namen aus einem Marketplace installieren und genehmigen |
 | `khonsu plugin install DIR --yes` | Ein Plugin-Verzeichnis oder -ZIP installieren und seine Berechtigungen genehmigen |
+| `khonsu plugin update` | Aus einem Marketplace installierte Plugins aktualisieren; `--dry-run` zeigt nur eine Vorschau |
+| `khonsu marketplace list` | Marketplaces auflisten; `add` und `remove` ändern sie |
 | `khonsu plugin sync --source ID` | Eine Quelle synchronisieren; `--dry-run` zeigt eine Vorschau, `--incremental` und `--append` fügen hinzu, ohne zu entfernen |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | Die [Analyse eines Plugins](./investigations#plugin-analyses) ausführen, etwa AWS `exposure` |
 | `khonsu source list` | Konfigurierte Quellen auflisten |

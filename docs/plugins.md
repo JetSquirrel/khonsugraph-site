@@ -51,3 +51,7 @@ khonsu plugin describe folders
 ```
 
 `--yes` approves declared permissions. The installer copies the plugin; reinstall after changing the source. See [sync semantics](./data-sources#sync-semantics) before implementing full or incremental sync.
+
+## Share a plugin {#share}
+
+To let others install your plugin by name, publish it to a marketplace. See [publishing a plugin](./marketplace#publish).

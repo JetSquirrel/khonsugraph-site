@@ -62,12 +62,13 @@ Le script de récupération télécharge des données publiques. `$PWD` maintien
 
 Pour un ingénieur en sécurité cloud : ce que la configuration d'un compte AWS ouvre à Internet, depuis un CIDR Internet en passant par les groupes de sécurité et les équilibreurs de charge jusqu'aux instances et aux rôles qu'elles assument.
 
-Le dépôt de l'application contient des réponses AWS CLI enregistrées. Exécutez depuis sa racine :
+Les réponses AWS CLI enregistrées du plugin AWS se trouvent dans le dépôt [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace). Clonez-le à côté du dépôt de l'application, puis exécutez depuis la racine du dépôt de l'application :
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

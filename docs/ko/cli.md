@@ -25,7 +25,11 @@ description: khonsu 명령줄은 모든 명령에서 JSON을 출력하므로 Cla
 | `khonsu rebuild --db DIR` | 이전 형식 그래프를 데이터 소스에서 다시 만듭니다 |
 | `khonsu plugin list` | 플러그인과 권한을 나열합니다 |
 | `khonsu plugin describe ID` | 플러그인의 구성 필드와 출력 유형을 표시합니다 |
+| `khonsu plugin search [WORDS]` | [마켓플레이스](./marketplace)에 있는 플러그인을 나열합니다 |
+| `khonsu plugin install ID --yes` | 마켓플레이스에서 이름으로 플러그인을 설치하고 승인합니다 |
 | `khonsu plugin install DIR --yes` | 플러그인 디렉터리나 ZIP을 설치하고 권한을 승인합니다 |
+| `khonsu plugin update` | 마켓플레이스에서 설치한 플러그인을 업데이트합니다. `--dry-run`은 미리 보기만 합니다 |
+| `khonsu marketplace list` | 마켓플레이스를 나열합니다. `add`와 `remove`로 변경합니다 |
 | `khonsu plugin sync --source ID` | 소스를 동기화합니다. `--dry-run`은 미리 보기, `--incremental`과 `--append`는 제거 없이 추가합니다 |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | AWS `exposure` 같은 [플러그인의 분석](./investigations#plugin-analyses)을 실행합니다 |
 | `khonsu source list` | 구성된 소스를 나열합니다 |

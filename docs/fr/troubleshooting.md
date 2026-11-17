@@ -33,7 +33,7 @@ Si une lecture dépasse son budget, restreignez-la à l'aide de prédicats et de
 
 ## Une source ne parvient pas à se synchroniser
 
-Exécutez `khonsu plugin describe ID` et vérifiez les champs de configuration. Assurez-vous que les plugins empaquetés restent à côté de l'exécutable. Les chemins CSV de fichier unique sont stockés comme chemins absolus lorsque la source est ajoutée. Les chemins à l'intérieur du JSON `nodes` et `edges` sont stockés tels quels et doivent être absolus. AWS nécessite l'AWS CLI et un profil configuré accessible, sauf si vous utilisez des fixtures. Écrivez `regions` sous forme de texte séparé par des virgules, et non de tableau JSON.
+Exécutez `khonsu plugin describe ID` et vérifiez les champs de configuration. Assurez-vous que les plugins empaquetés restent à côté de l'exécutable. Les chemins CSV de fichier unique sont stockés comme chemins absolus lorsque la source est ajoutée. Les chemins à l'intérieur du JSON `nodes` et `edges` sont stockés tels quels et doivent être absolus. AWS nécessite l'AWS CLI et un profil configuré accessible, sauf si vous utilisez des fixtures. Écrivez `regions` sous forme de texte séparé par des virgules, et non de tableau JSON. Si le plugin AWS ou Neo4j est introuvable après une mise à jour au-delà de la 0.3.0, installez-le depuis la [marketplace](./marketplace#install).
 
 Une synchronisation échouée peut laisser des enregistrements déjà écrits. Corrigez la cause, puis synchronisez à nouveau pour réconcilier. Inspectez `skipped_edges` pour les extrémités non résolues.
 

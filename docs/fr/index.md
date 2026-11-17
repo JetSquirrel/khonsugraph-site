@@ -11,6 +11,7 @@ C'est un projet indépendant construit sur HawDB, publié sous Apache-2.0.
 
 - [Installez et exécutez votre première requête](./getting-started)
 - [Importez un CSV, connectez AWS ou copiez une base Neo4j](./data-sources)
+- [Installez des plugins par leur nom depuis une marketplace](./marketplace)
 - [Comprenez la prise en charge de Cypher et les limites de requête](./queries)
 - [Suivez un chemin, citez des preuves et enregistrez une investigation](./investigations)
 - [Classez les nœuds et trouvez des communautés avec l'analyse de graphe](./analysis)

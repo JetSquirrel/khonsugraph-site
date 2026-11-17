@@ -20,10 +20,13 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 
 ## AWS
 
+0.3.0 の次のリリースから、AWS プラグインはアプリに同梱されず、[マーケットプレイス](./marketplace)からインストールします: `khonsu plugin install aws --yes`。0.3.0 ではアプリに同梱されています。
+
 AWS プラグインは AWS CLI を使用して、VPC、サブネット、セキュリティグループ、インスタンス、ロードバランサー、IAM ロールを読み取ります。まず AWS CLI をインストールして設定し、その後、自分が管理する読み取り専用のプロファイルを使用してください。`regions` はカンマ区切りのリストで、たとえば `us-east-1,eu-west-1` です。
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
   -c profile=readonly -c regions=us-east-1 --test
@@ -31,16 +34,19 @@ khonsu plugin sync --source aws-demo --dry-run
 khonsu plugin sync --source aws-demo
 ```
 
-これは設定された AWS アカウントにアクセスします。オフラインで一通り試す場合は、代わりにアプリリポジトリに保存されているフィクスチャを使用してください。[例](./examples) を参照してください。
+これは設定した AWS アカウントにアクセスします。オフラインで試すには、代わりに [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) リポジトリにある保存済みのレスポンスを使ってください。[例](./examples) を参照してください。
 
 <a href="/docs/samples/exposure.dash" download>AWS 露出ダッシュボード</a>は、このプラグインがインポートしたリレーションシップを使って `Cidr → SecurityGroup ← Instance → Role` をたどります。
 
 ## Neo4j と Cartography {#neo4j}
 
+0.3.0 の次のリリースから、Neo4j プラグインはアプリに同梱されず、[マーケットプレイス](./marketplace)からインストールします: `khonsu plugin install neo4j --yes`。0.3.0 ではアプリに同梱されています。
+
 Neo4j プラグインは 0.3.0 で追加され、Neo4j データベースのノードとリレーションシップを、Neo4j の HTTP API 経由でローカルのグラフにコピーします。送信するのは読み取りクエリのみです。主な用途は [Cartography](https://github.com/cartography-cncf/cartography) で、これは AWS、GCP、Azure、Kubernetes、GitHub、Okta などを Neo4j に取り込みます。どの Neo4j データベースでも使用できます。
 
 ```sh
 khonsu init graphs/infra
+khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test
 khonsu plugin sync --source infra
@@ -48,7 +54,7 @@ khonsu plugin sync --source infra
 
 アドレスは Neo4j の HTTP 用のもので、既定では 7474 です。`bolt://` ではありません。パスワードはシステムキーチェーンに保存され、reader ロールで十分です。
 
-HawDB はノードごとに 1 つのラベルしか持てないため、各ノードは Neo4j のラベルのうち 1 つ(通常は最も珍しいもの)を取り、すべてのラベルを `neo4j_labels` に保持します。`MATCH (p:AWSPrincipal)` が何も返さない場合は、`MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels` を試してください。Neo4j 向けに書かれたクエリは変更が必要な場合があります。[クエリの制限](./queries#current-limitations) と [プラグインの README](https://github.com/JetSquirrel/KhonsuGraph/tree/main/plugins/neo4j) を参照してください。
+HawDB はノードごとに 1 つのラベルしか持てないため、各ノードは Neo4j のラベルのうち 1 つ(通常は最も珍しいもの)を取り、すべてのラベルを `neo4j_labels` に保持します。`MATCH (p:AWSPrincipal)` が何も返さない場合は、`MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels` を試してください。Neo4j 向けに書かれたクエリは変更が必要な場合があります。[クエリの制限](./queries#current-limitations) と [プラグインの README](https://github.com/JetSquirrel/khonsugraph-marketplace/tree/main/plugins/neo4j) を参照してください。
 
 ## 同期の仕組み {#sync-semantics}
 

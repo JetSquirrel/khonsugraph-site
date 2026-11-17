@@ -11,6 +11,7 @@ KhonsuGraph 是开源、本地优先的图调查桌面工作台，基于 HawDB �
 
 - [安装与第一条查询](./getting-started)
 - [导入 CSV、连接 AWS 或复制 Neo4j 数据库](./data-sources)
+- [从插件市场按名称安装插件](./marketplace)
 - [了解 Cypher 支持范围与查询限制](./queries)
 - [追踪路径、查看证据并保存调查](./investigations)
 - [用图分析为节点排序、发现社区](./analysis)

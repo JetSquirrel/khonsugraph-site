@@ -25,7 +25,11 @@ description: Командная строка khonsu печатает JSON пос
 | `khonsu rebuild --db DIR` | Пересобрать граф старого формата из его источников данных |
 | `khonsu plugin list` | Показать плагины и разрешения |
 | `khonsu plugin describe ID` | Показать поля конфигурации плагина и типы вывода |
+| `khonsu plugin search [WORDS]` | Показать, что предлагают [маркетплейсы](./marketplace) |
+| `khonsu plugin install ID --yes` | Установить плагин по имени из маркетплейса и одобрить его |
 | `khonsu plugin install DIR --yes` | Установить каталог или ZIP с плагином и подтвердить его разрешения |
+| `khonsu plugin update` | Обновить плагины, установленные из маркетплейса; `--dry-run` только показывает изменения |
+| `khonsu marketplace list` | Показать маркетплейсы; `add` и `remove` изменяют список |
 | `khonsu plugin sync --source ID` | Синхронизировать источник; `--dry-run` показывает предварительный результат, `--incremental` и `--append` добавляют без удаления |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | Запустить [анализ плагина](./investigations#plugin-analyses), например `exposure` в AWS |
 | `khonsu source list` | Показать настроенные источники |

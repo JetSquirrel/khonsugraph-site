@@ -62,12 +62,13 @@ Das Fetch-Skript lädt öffentliche Daten herunter. `$PWD` hält die CSV-Pfade a
 
 Für Cloud-Sicherheitsingenieure: Was die Konfiguration eines AWS-Kontos ins Internet öffnet, von einem Internet-CIDR über Sicherheitsgruppen und Load Balancer bis zu Instanzen und den Rollen, die sie übernehmen.
 
-Das App-Repository enthält gespeicherte Antworten der AWS CLI. Führen Sie die Befehle aus seinem Stammverzeichnis aus:
+Die gespeicherten AWS-CLI-Antworten des AWS-Plugins liegen im Repository [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace). Klonen Sie es neben das App-Repository und führen Sie die Befehle aus dem Stammverzeichnis des App-Repositorys aus:
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws
