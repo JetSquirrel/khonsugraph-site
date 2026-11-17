@@ -34,7 +34,7 @@ description: 基于公开数据集的图调查示例：Sysmon 日志中的攻击
 面向审计人员。`audit/trust_network.dash` 探索 Bitcoin OTC 信任网络中谁评价了谁。[图分析](./analysis)可以找出支撑整个网络的账户：
 
 ```sh
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
 ```
 
 构建时把 `sre` 换成 `audit`。
@@ -46,12 +46,12 @@ khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
 ```sh
 sh examples/datasets/fetch.sh scratch/datasets/raw
 node examples/datasets/build.mjs sre scratch/datasets/raw scratch/datasets/sre
-khonsu init graphs/sre
+khonsu graph init graphs/sre
 khonsu source add --db graphs/sre --plugin csv --name sre-data \
   -c 'nodes=[{"path":"'"$PWD"'/scratch/datasets/sre/nodes.csv","label_column":"label","id_column":"id"}]' \
   -c 'edges=[{"path":"'"$PWD"'/scratch/datasets/sre/edges.csv","type_column":"type","source_column":"source","target_column":"target","id_column":"id"}]'
 khonsu plugin sync --source sre-data
-khonsu check examples/sre/blast_radius.dash --db graphs/sre
+khonsu dash check examples/sre/blast_radius.dash --db graphs/sre
 khonsu open graphs/sre
 khonsu open examples/sre/blast_radius.dash
 ```
@@ -65,16 +65,16 @@ khonsu open examples/sre/blast_radius.dash
 AWS 插件保存的 AWS CLI 响应位于 [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) 仓库。把它检出到应用仓库旁边，然后在应用仓库根目录执行：
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
   -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
-khonsu check examples/aws/exposure.dash --db graphs/aws
+khonsu dash check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws
 khonsu open examples/aws/exposure.dash
 ```
 
 也可<a href="/docs/samples/exposure.dash" download>下载暴露面仪表盘</a>，它需要已导入的 AWS 图数据。
 
-从 0.3.0 开始，`khonsu plugin analyze aws exposure --db graphs/aws` 会给出带有规则和依据字段的发现，`khonsu explore` 可以追踪路径。见[调查](./investigations)。
+从 0.3.0 开始，`khonsu plugin analyze aws exposure --db graphs/aws` 会给出带有规则和依据字段的发现，`khonsu graph explore` 可以追踪路径。见[调查](./investigations)。

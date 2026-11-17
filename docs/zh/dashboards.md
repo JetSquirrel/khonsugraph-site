@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check` 只读执行每条查询，验证图表列，并使用真实值测试筛选器。打开或分享仪表盘前，请修复所有报错。
+`dash check` 只读执行每条查询，验证图表列，并使用真实值测试筛选器。打开或分享仪表盘前，请修复所有报错。
 
 ## 图表与布局
 
@@ -50,13 +50,13 @@ filter "service" {
 
 ## 与 Agent 一起审阅
 
-在应用里对具体图表评论。Agent 读取评论、编辑文件、执行 `check` 并回复。评论保存在仪表盘旁的 `FILE.comments.json`。Presence 可以标出 Agent 正在编辑的图表，窗口会在文件变化后重绘。
+在应用里对具体图表评论。Agent 读取评论、编辑文件、执行 `dash check` 并回复。评论保存在仪表盘旁的 `FILE.comments.json`。Presence 可以标出 Agent 正在编辑的图表，窗口会在文件变化后重绘。
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 该格式不支持任意函数、条件语句或数据驱动样式。审阅命令请参阅 [CLI 与 Agent](./cli)。

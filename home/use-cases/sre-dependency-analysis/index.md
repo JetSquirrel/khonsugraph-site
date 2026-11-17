@@ -10,19 +10,19 @@ Import services and calls from CSV with stable IDs, so a repeated sync updates t
 
 ## Ask who depends on it
 
-A bounded variable-length pattern such as [:CALLS*1..4] finds every service that reaches a dependency within four calls. khonsu explore --direction in walks callers from the failing service.
+A bounded variable-length pattern such as [:CALLS*1..4] finds every service that reaches a dependency within four calls. khonsu graph explore --direction in walks callers from the failing service.
 
 [Cypher & SQL](https://khonsugraph.com/docs/queries)
 
 ## Find load-bearing services
 
-khonsu analyze ranks services by betweenness and PageRank, finds components and communities, and computes weighted shortest paths. Results match networkx on the same graph.
+khonsu graph analyze ranks services by betweenness and PageRank, finds components and communities, and computes weighted shortest paths. Results match networkx on the same graph.
 
 [Graph analysis](https://khonsugraph.com/docs/analysis)
 
 ## Share it as a file
 
-A .dash file holds queries, graph panels, tables and shared filters as plain text. khonsu check runs every query read-only before you share it.
+A .dash file holds queries, graph panels, tables and shared filters as plain text. khonsu dash check runs every query read-only before you share it.
 
 [Dashboards](https://khonsugraph.com/docs/dashboards)
 
@@ -34,7 +34,7 @@ The application repository builds a 12-service graph with 16 call paths from Goo
 # 01 — Build the graph from public manifests
 $ sh examples/datasets/fetch.sh scratch/datasets/raw
 $ node examples/datasets/build.mjs sre scratch/datasets/raw scratch/datasets/sre
-$ khonsu init graphs/sre
+$ khonsu graph init graphs/sre
 $ khonsu source add --db graphs/sre --plugin csv --name sre-data \
     -c 'nodes=[{"path":"'"$PWD"'/scratch/datasets/sre/nodes.csv","label_column":"label","id_column":"id"}]' \
     -c 'edges=[{"path":"'"$PWD"'/scratch/datasets/sre/edges.csv","type_column":"type","source_column":"source","target_column":"target","id_column":"id"}]'
@@ -42,10 +42,10 @@ $ khonsu plugin sync --source sre-data
 
 # 02 — Read the schema, then find the services on most paths
 $ khonsu schema --db graphs/sre
-$ khonsu analyze betweenness --db graphs/sre --label Service
+$ khonsu graph analyze betweenness --db graphs/sre --label Service
 
 # 03 — Validate and open the dashboard
-$ khonsu check examples/sre/blast_radius.dash --db graphs/sre
+$ khonsu dash check examples/sre/blast_radius.dash --db graphs/sre
 $ khonsu open graphs/sre
 $ khonsu open examples/sre/blast_radius.dash
 ```
@@ -66,7 +66,7 @@ No. It does not instrument services. You bring the dependency graph in through C
 
 ## How do I find everything that depends on a failing service?
 
-Match callers with a bounded pattern such as MATCH (a:Service)-[:CALLS*1..4]->(b:Service) WHERE b.name = $name RETURN DISTINCT a, or walk against the arrows with khonsu explore --direction in. Adjust the label and type to your schema.
+Match callers with a bounded pattern such as MATCH (a:Service)-[:CALLS*1..4]->(b:Service) WHERE b.name = $name RETURN DISTINCT a, or walk against the arrows with khonsu graph explore --direction in. Adjust the label and type to your schema.
 
 ## Can it weight dependencies?
 
@@ -74,7 +74,7 @@ Yes. --weight PROP reads a numeric relationship property as weight for PageRank,
 
 ## Can I see what changed after a deploy?
 
-Save a snapshot before and after a sync, then run khonsu snapshot diff. A record counts as removed only when the later sync was complete; otherwise it is listed as not seen.
+Save a snapshot before and after a sync, then run khonsu graph snapshot diff. A record counts as removed only when the later sync was complete; otherwise it is listed as not seen.
 
 ## Can an AI agent run this analysis?
 

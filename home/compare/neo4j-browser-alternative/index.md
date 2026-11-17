@@ -16,7 +16,7 @@ Query relationships in HawDB's Cypher and tables in PostgreSQL-dialect SQL in th
 
 ## Evidence for every record
 
-Synced records carry their source, plugin and write time. khonsu evidence reports them, along with whether the source's last sync was complete.
+Synced records carry their source, plugin and write time. khonsu graph evidence reports them, along with whether the source's last sync was complete.
 
 [Evidence](https://khonsugraph.com/docs/investigations#evidence)
 
@@ -32,7 +32,7 @@ A saved investigation keeps the walk, the chosen path, a query and a dashboard. 
 | --- | --- | --- |
 | Where the graph lives | An embedded HawDB directory on your machine | A Neo4j database server it connects to |
 | Query languages | HawDB Cypher and PostgreSQL-dialect SQL | Neo4j Cypher |
-| Bounded path walks | khonsu explore and Path Explorer, with hop and size caps and a complete flag | Written as Cypher queries |
+| Bounded path walks | khonsu graph explore and Path Explorer, with hop and size caps and a complete flag | Written as Cypher queries |
 | Record provenance | Source, plugin, write time and sync coverage per record | Whatever properties your data carries |
 | Re-checking a saved result | Saved investigations report what changed in the graph | Not covered here |
 | Automation | A JSON CLI for scripts and AI agents | Not covered here |
@@ -45,7 +45,7 @@ The Neo4j plugin, added in 0.3.0, copies nodes and relationships over Neo4j's HT
 
 ```sh
 # 01 — Copy the database (HTTP port 7474, not bolt://)
-$ khonsu init graphs/infra
+$ khonsu graph init graphs/infra
 $ khonsu source add --db graphs/infra --plugin neo4j --name infra \
     -c url=http://127.0.0.1:7474 -c password=... --test
 $ khonsu plugin sync --source infra

@@ -19,7 +19,7 @@ Jeweils ein Prozess besitzt ein HawDB-Graphverzeichnis. Lesevorgänge und Dashbo
 
 ## Der Graph meldet old_format {#old-format}
 
-HawDB 0.25 hat sein Speicherformat geändert und liest keinen älteren Graphen, daher lässt sich ein von KhonsuGraph 0.2.0 oder früher geschriebener Graph nicht mit der Art `old_format` öffnen. `khonsu rebuild --db DIR` erstellt ihn aus seinen Datenquellen neu und behält das alte Verzeichnis daneben als `DIR.hawdb-old`. Alles, was von Hand statt durch eine Synchronisierung geschrieben wurde, wird nicht übernommen.
+HawDB 0.25 hat sein Speicherformat geändert und liest keinen älteren Graphen, daher lässt sich ein von KhonsuGraph 0.2.0 oder früher geschriebener Graph nicht mit der Art `old_format` öffnen. `khonsu graph rebuild --db DIR` erstellt ihn aus seinen Datenquellen neu und behält das alte Verzeichnis daneben als `DIR.hawdb-old`. Alles, was von Hand statt durch eine Synchronisierung geschrieben wurde, wird nicht übernommen.
 
 ## Ein Graph-Panel ist leer
 
@@ -27,7 +27,7 @@ Geben Sie ganze Knoten und Beziehungen zurück (`RETURN a, r, b`) statt nur Name
 
 ## Eine Abfrage oder ein Dashboard schlägt fehl
 
-Führen Sie `khonsu check FILE --db DIR` aus und lesen Sie alle gemeldeten Fehler. Ein Diagramm verweist möglicherweise auf eine fehlende Spalte; ein importierter Datensatz verwendet möglicherweise andere Labels. Einige Cypher-Funktionen werden nicht unterstützt: siehe [Abfrageeinschränkungen](./queries#current-limitations).
+Führen Sie `khonsu dash check FILE --db DIR` aus und lesen Sie alle gemeldeten Fehler. Ein Diagramm verweist möglicherweise auf eine fehlende Spalte; ein importierter Datensatz verwendet möglicherweise andere Labels. Einige Cypher-Funktionen werden nicht unterstützt: siehe [Abfrageeinschränkungen](./queries#current-limitations).
 
 Wenn ein Lesevorgang sein Budget überschreitet, schränken Sie ihn mit Prädikaten und `LIMIT` ein. Allein das Verringern von `--max-rows` senkt die Ausführungskosten nicht.
 

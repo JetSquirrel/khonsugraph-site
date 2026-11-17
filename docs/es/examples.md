@@ -34,7 +34,7 @@ Constrúyelo con `investigation` en lugar de `sre`.
 Para un auditor. `audit/trust_network.dash` explora quién valora a quién en la red de confianza de Bitcoin OTC. El [análisis de grafos](./analysis) encuentra las cuentas en las que se apoya la red:
 
 ```sh
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
 ```
 
 Constrúyelo con `audit` en lugar de `sre`.
@@ -46,12 +46,12 @@ Para un SRE: qué servicios llaman a una dependencia que falla, directamente o a
 ```sh
 sh examples/datasets/fetch.sh scratch/datasets/raw
 node examples/datasets/build.mjs sre scratch/datasets/raw scratch/datasets/sre
-khonsu init graphs/sre
+khonsu graph init graphs/sre
 khonsu source add --db graphs/sre --plugin csv --name sre-data \
   -c 'nodes=[{"path":"'"$PWD"'/scratch/datasets/sre/nodes.csv","label_column":"label","id_column":"id"}]' \
   -c 'edges=[{"path":"'"$PWD"'/scratch/datasets/sre/edges.csv","type_column":"type","source_column":"source","target_column":"target","id_column":"id"}]'
 khonsu plugin sync --source sre-data
-khonsu check examples/sre/blast_radius.dash --db graphs/sre
+khonsu dash check examples/sre/blast_radius.dash --db graphs/sre
 khonsu open graphs/sre
 khonsu open examples/sre/blast_radius.dash
 ```
@@ -65,16 +65,16 @@ Para un ingeniero de seguridad en la nube: qué abre a internet la configuració
 Las respuestas guardadas de la AWS CLI del plugin de AWS están en el repositorio [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace). Con una copia junto al repositorio de la aplicación, ejecuta desde la raíz del repositorio de la aplicación:
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
   -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
-khonsu check examples/aws/exposure.dash --db graphs/aws
+khonsu dash check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws
 khonsu open examples/aws/exposure.dash
 ```
 
 También puedes <a href="/docs/samples/exposure.dash" download>descargar el panel de exposición</a>. Requiere el grafo de AWS importado.
 
-Desde 0.3.0, `khonsu plugin analyze aws exposure --db graphs/aws` informa de hallazgos con la regla y los campos detrás de cada uno, y `khonsu explore` traza la ruta. Consulta [investigaciones](./investigations).
+Desde 0.3.0, `khonsu plugin analyze aws exposure --db graphs/aws` informa de hallazgos con la regla y los campos detrás de cada uno, y `khonsu graph explore` traza la ruta. Consulta [investigaciones](./investigations).

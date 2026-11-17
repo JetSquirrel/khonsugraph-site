@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 `allShortestPaths`, `nodes(p)`, `relationships(p)`도 동작합니다. 두 끝점은 속성 맵, `WHERE` 또는 앞선 절에 의해 바인딩되어야 합니다. `p`를 반환하면 캔버스에 경로가 그려집니다. 상한이 없는 `*`는 256홉에서 멈추고 경로가 없다고 보고하는 대신 실패합니다.
 
-홉 수와 크기에 상한을 두고 노드에서 바깥으로 걸어가려면 [`khonsu explore`](./investigations#explore)를 사용하십시오. 가중 경로, 매개 중심성, 커뮤니티는 [그래프 분석](./analysis)을 참고하십시오.
+홉 수와 크기에 상한을 두고 노드에서 바깥으로 걸어가려면 [`khonsu graph explore`](./investigations#explore)를 사용하십시오. 가중 경로, 매개 중심성, 커뮤니티는 [그래프 분석](./analysis)을 참고하십시오.
 
 ## SQL과 매개변수
 

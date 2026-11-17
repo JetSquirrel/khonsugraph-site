@@ -25,7 +25,7 @@ A partir da versão seguinte à 0.3.0, o plugin AWS é instalado pelo [marketpla
 O plugin AWS usa a AWS CLI para ler VPCs, sub-redes, security groups, instâncias, load balancers e roles do IAM. Instale e configure a AWS CLI primeiro e depois use um perfil somente leitura que você controla. `regions` é uma lista separada por vírgulas, como `us-east-1,eu-west-1`.
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
@@ -45,7 +45,7 @@ A partir da versão seguinte à 0.3.0, o plugin Neo4j é instalado pelo [marketp
 O plugin Neo4j, adicionado na 0.3.0, copia os nós e relacionamentos de um banco Neo4j para um grafo local por meio da API HTTP do Neo4j. Ele envia apenas consultas de leitura. Seu uso principal é o [Cartography](https://github.com/cartography-cncf/cartography), que traz AWS, GCP, Azure, Kubernetes, GitHub, Okta e mais para o Neo4j; qualquer banco Neo4j funciona.
 
 ```sh
-khonsu init graphs/infra
+khonsu graph init graphs/infra
 khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test

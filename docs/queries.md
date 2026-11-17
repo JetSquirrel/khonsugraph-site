@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 `allShortestPaths`, `nodes(p)` and `relationships(p)` also work. Both endpoints must be bound by a property map, a `WHERE` or an earlier clause. Returning `p` draws the path on the canvas. An unbounded `*` stops at 256 hops and fails rather than report that no path exists.
 
-To walk outward from a node with caps on hops and size, use [`khonsu explore`](./investigations#explore). For weighted paths, centrality and communities, see [graph analysis](./analysis).
+To walk outward from a node with caps on hops and size, use [`khonsu graph explore`](./investigations#explore). For weighted paths, centrality and communities, see [graph analysis](./analysis).
 
 ## SQL and parameters
 

@@ -1,5 +1,5 @@
 ---
-description: Trace caminhos por um grafo com khonsu explore, cite a evidência por trás de cada registro, salve uma investigação e reverifique-a depois que os dados mudarem.
+description: Trace caminhos por um grafo com khonsu graph explore, cite a evidência por trás de cada registro, salve uma investigação e reverifique-a depois que os dados mudarem.
 ---
 # Investigações
 
@@ -9,10 +9,10 @@ Esses comandos chegaram no KhonsuGraph 0.3.0. Execute `khonsu --version` para ve
 
 ## Siga um caminho {#explore}
 
-`khonsu explore` explora a partir de um ou mais nós sem carregar o grafo inteiro. Na janela, a mesma exploração é o **Path Explorer** em uma tela de grafo.
+`khonsu graph explore` explora a partir de um ou mais nós sem carregar o grafo inteiro. Na janela, a mesma exploração é o **Path Explorer** em uma tela de grafo.
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ Um caminho é um candidato encontrado nos dados. Ele não é prova de que algo p
 
 ## Evidência {#evidence}
 
-`khonsu evidence` informa o que sustenta um nó ou um relacionamento: qual origem e plugin o gravou, quando ele mudou pela última vez e se a última sincronização dessa origem foi completa.
+`khonsu graph evidence` informa o que sustenta um nó ou um relacionamento: qual origem e plugin o gravou, quando ele mudou pela última vez e se a última sincronização dessa origem foi completa.
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | Campo | Significado |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit` (uma origem o informou), `derived` ou `unknown` |
 | `properties`, `redacted` | As próprias propriedades do registro, e os nomes mascarados como possíveis segredos |
 
-Um campo de procedência ou é conhecido com um valor, ou explicitamente desconhecido; nada é estimado. Com `--to`, `khonsu explore` acrescenta `path.evidence`, um registro derivado que lista os IDs de evidência nos quais o caminho se apoia.
+Um campo de procedência ou é conhecido com um valor, ou explicitamente desconhecido; nada é estimado. Com `--to`, `khonsu graph explore` acrescenta `path.evidence`, um registro derivado que lista os IDs de evidência nos quais o caminho se apoia.
 
 O quão fortemente um relacionamento é conhecido é uma convenção nas próprias propriedades. `confidence` é `confirmed`, `inferred` ou `unconfirmed`, e `evidence` diz o que o mostrou. Um caminho é tão forte quanto seu salto mais fraco: um relacionamento `unconfirmed` torna o caminho não confirmado.
 
@@ -64,17 +64,17 @@ Um plugin pode trazer regras para o próprio domínio. `khonsu plugin describe I
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-A análise `exposure` da AWS retorna achados com um veredito `potential_exposure`, `insufficient_data` ou `not_indicated`. Cada achado nomeia sua regra, as condições que verificou com os campos por trás delas, o que não pôde ser avaliado (`unknowns`), o que a regra não lê (`assumptions`) e um `walk` que você pode passar para `khonsu explore`. Um achado descreve configuração. Ele não diz que um recurso é alcançável, ou seguro.
+A análise `exposure` da AWS retorna achados com um veredito `potential_exposure`, `insufficient_data` ou `not_indicated`. Cada achado nomeia sua regra, as condições que verificou com os campos por trás delas, o que não pôde ser avaliado (`unknowns`), o que a regra não lê (`assumptions`) e um `walk` que você pode passar para `khonsu graph explore`. Um achado descreve configuração. Ele não diz que um recurso é alcançável, ou seguro.
 
 ## Investigações salvas {#saved-investigations}
 
 Uma investigação salva guarda, em um arquivo próprio, os pontos de partida e filtros de uma exploração, o caminho que você escolheu, uma consulta e um painel. Salvar não grava nada no grafo.
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 Reabrir executa a exploração de novo no grafo como ele está agora e diz como isso difere de quando foi salvo. Leia `graph_state` primeiro:
@@ -96,11 +96,11 @@ O arquivo é JSON. Ele guarda o caminho do grafo, IDs de fontes de dados, IDs es
 Um snapshot guarda os registros de um grafo em um arquivo, por ID estável, para que você possa perguntar depois o que mudou. Snapshots são tirados manualmente; nada tira um quando uma sincronização roda.
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | Lista | Significado |
@@ -120,7 +120,7 @@ Selecione um nó em uma tela de grafo e use o **Path Explorer** para explorar a 
 
 ## Limites
 
-- `khonsu explore` e `khonsu investigation` precisam do grafo livre. Eles falham com o tipo `locked` enquanto a janela o tem aberto; use o Path Explorer na janela em vez disso.
+- `khonsu graph explore` e `khonsu investigate` precisam do grafo livre. Eles falham com o tipo `locked` enquanto a janela o tem aberto; use o Path Explorer na janela em vez disso.
 - Um grafo com mais de 200.000 nós ou relacionamentos não pode receber snapshot e falha com o tipo `too_large`.
 - Registros gravados à mão não têm ID estável. Eles são contados, mas não entram na comparação de diferenças.
 - A janela ainda não tem uma visão de snapshot ou de diferenças.

@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check` выполняет каждый запрос только на чтение, проверяет столбцы графиков и пробует фильтры с реальными значениями. Исправьте все найденные ошибки, прежде чем открывать дашборд или делиться им.
+`dash check` выполняет каждый запрос только на чтение, проверяет столбцы графиков и пробует фильтры с реальными значениями. Исправьте все найденные ошибки, прежде чем открывать дашборд или делиться им.
 
 ## Графики и компоновка
 
@@ -50,13 +50,13 @@ filter "service" {
 
 ## Проверка с помощью агента
 
-Оставьте комментарий к графику в приложении. Агент читает комментарии, правит файл, запускает `check` и отвечает. Комментарии хранятся рядом с дашбордом в `FILE.comments.json`. Presence позволяет показать, какие графики редактирует агент, а окно перерисовывается при изменении файла.
+Оставьте комментарий к графику в приложении. Агент читает комментарии, правит файл, запускает `dash check` и отвечает. Комментарии хранятся рядом с дашбордом в `FILE.comments.json`. Presence позволяет показать, какие графики редактирует агент, а окно перерисовывается при изменении файла.
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 В формате нет произвольных функций, условий и стилей, зависящих от данных. Команды для проверки см. в разделе [CLI и ИИ-агенты](./cli).

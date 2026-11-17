@@ -70,7 +70,7 @@ for (const [lang, t] of languages) {
                RETURN a, r, b LIMIT 20"</span>
 
 <span class="comment"># 03 — Validate & review</span>
-<span class="prompt">$</span> khonsu check overview.dash --db graphs/demo
+<span class="prompt">$</span> khonsu dash check overview.dash --db graphs/demo
 <span class="prompt">$</span> khonsu open overview.dash</pre><div class="terminal-bottom"><span class="status-dot"></span>${t.terminalNote}</div></div></div></section>
 <section class="wrap section" id="use-cases"><div class="section-head"><div><p class="eyebrow">${t.casesEye}</p><h2>${t.casesTitle}</h2></div><p class="section-lead">${t.casesLead}</p></div><div class="case-grid">${t.cases.map(([tag, title, body, dir], i) => `<article class="case"><div class="case-art" aria-hidden="true">${caseArt[i]}</div><p class="eyebrow">${tag}</p><h3>${title}</h3><p>${body}</p><a href="${docs}examples#${dir}">${t.caseLink} ↗</a></article>`).join('')}</div></section>
 <section class="wrap section faq-section" id="faq"><div><p class="eyebrow">${t.faqEye}</p><h2>${t.faqTitle}</h2><a class="text-link" href="${docs}queries">${t.readDocs} ↗</a></div><div class="faq-list">${t.faq.map(([q, a]) => `<details><summary>${q}<span aria-hidden="true">+</span></summary><p>${a}</p></details>`).join('')}</div></section>

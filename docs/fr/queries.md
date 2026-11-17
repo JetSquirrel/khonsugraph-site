@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 `allShortestPaths`, `nodes(p)` et `relationships(p)` fonctionnent également. Les deux extrémités doivent être liées par un ensemble de propriétés, un `WHERE` ou une clause antérieure. Renvoyer `p` dessine le chemin sur le canevas. Un `*` non borné s'arrête à 256 sauts et échoue au lieu de signaler qu'aucun chemin n'existe.
 
-Pour partir d'un nœud vers l'extérieur avec des plafonds sur les sauts et la taille, utilisez [`khonsu explore`](./investigations#explore). Pour les chemins pondérés, la centralité et les communautés, voir [analyse de graphe](./analysis).
+Pour partir d'un nœud vers l'extérieur avec des plafonds sur les sauts et la taille, utilisez [`khonsu graph explore`](./investigations#explore). Pour les chemins pondérés, la centralité et les communautés, voir [analyse de graphe](./analysis).
 
 ## SQL et paramètres
 

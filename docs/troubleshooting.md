@@ -19,7 +19,7 @@ One process owns a HawDB graph directory. Reads and dashboard checks route throu
 
 ## The graph reports old_format {#old-format}
 
-HawDB 0.25 changed its storage format and reads no older graph, so a graph written by KhonsuGraph 0.2.0 or earlier fails to open with kind `old_format`. `khonsu rebuild --db DIR` makes it again from its data sources and keeps the old directory beside it as `DIR.hawdb-old`. Anything written by hand rather than synced is not carried over.
+HawDB 0.25 changed its storage format and reads no older graph, so a graph written by KhonsuGraph 0.2.0 or earlier fails to open with kind `old_format`. `khonsu graph rebuild --db DIR` makes it again from its data sources and keeps the old directory beside it as `DIR.hawdb-old`. Anything written by hand rather than synced is not carried over.
 
 ## A graph panel is empty
 
@@ -27,7 +27,7 @@ Return whole nodes and relationships (`RETURN a, r, b`) instead of only names. C
 
 ## A query or dashboard fails
 
-Run `khonsu check FILE --db DIR` and read all reported errors. A plot may reference a missing column; an imported dataset may use different labels. Some Cypher features are unsupported: see [query limitations](./queries#current-limitations).
+Run `khonsu dash check FILE --db DIR` and read all reported errors. A plot may reference a missing column; an imported dataset may use different labels. Some Cypher features are unsupported: see [query limitations](./queries#current-limitations).
 
 If a read exceeds its budget, narrow it using predicates and `LIMIT`. Lowering `--max-rows` alone does not reduce execution cost.
 

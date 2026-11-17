@@ -1,14 +1,14 @@
 ---
-description: khonsu analyze로 로컬 그래프에서 PageRank, 매개 중심성, Louvain 커뮤니티, 연결 요소, k-core, 최단 경로를 실행합니다.
+description: khonsu graph analyze로 로컬 그래프에서 PageRank, 매개 중심성, Louvain 커뮤니티, 연결 요소, k-core, 최단 경로를 실행합니다.
 ---
 # 그래프 분석
 
-Cypher 쿼리는 이름 붙인 패턴에 관한 질문에 답합니다. `khonsu analyze`는 그래프의 형태에 대한 질문에 답합니다. 어떤 노드가 가장 중심에 있는지, 어떤 그룹이 형성되는지, 두 노드가 어떻게 연결되는지입니다. 메모리에서 계산하고 networkx의 정의를 따르므로, 같은 그래프에서 networkx와 결과가 일치합니다.
+Cypher 쿼리는 이름 붙인 패턴에 관한 질문에 답합니다. `khonsu graph analyze`는 그래프의 형태에 대한 질문에 답합니다. 어떤 노드가 가장 중심에 있는지, 어떤 그룹이 형성되는지, 두 노드가 어떻게 연결되는지입니다. 메모리에서 계산하고 networkx의 정의를 따르므로, 같은 그래프에서 networkx와 결과가 일치합니다.
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 익숙하지 않은 그래프에서는 `summary`로 시작하십시오.
@@ -35,9 +35,9 @@ khonsu analyze communities --db graphs/investigation
 기본적으로 알고리즘은 그래프 전체를 읽습니다. 세 가지 방법으로 범위를 좁힐 수 있습니다.
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ khonsu analyze pagerank --db graphs/security \
 
 ## 분석 또는 Cypher?
 
-Cypher에는 바인딩된 두 노드 사이의 `shortestPath`와 `allShortestPaths`가 있습니다. [Cypher 및 SQL](./queries)을 참고하십시오. 경로가 가중치를 존중해야 할 때는 `khonsu analyze path`를 사용하고, 질문이 하나의 패턴이 아니라 그래프 전체에 대한 것일 때는 다른 알고리즘을 사용하십시오. 홉 수와 크기에 상한을 두고 노드에서 바깥으로 걸어가려면 [`khonsu explore`](./investigations#explore)를 사용하십시오.
+Cypher에는 바인딩된 두 노드 사이의 `shortestPath`와 `allShortestPaths`가 있습니다. [Cypher 및 SQL](./queries)을 참고하십시오. 경로가 가중치를 존중해야 할 때는 `khonsu graph analyze path`를 사용하고, 질문이 하나의 패턴이 아니라 그래프 전체에 대한 것일 때는 다른 알고리즘을 사용하십시오. 홉 수와 크기에 상한을 두고 노드에서 바깥으로 걸어가려면 [`khonsu graph explore`](./investigations#explore)를 사용하십시오.

@@ -1,14 +1,14 @@
 ---
-description: khonsu analyze で、ローカルのグラフに対して PageRank、媒介中心性、Louvain コミュニティ、連結成分、k-core、最短経路を実行します。
+description: khonsu graph analyze で、ローカルのグラフに対して PageRank、媒介中心性、Louvain コミュニティ、連結成分、k-core、最短経路を実行します。
 ---
 # グラフ分析
 
-Cypher クエリは、名前を付けたパターンについて尋ねたことに答えます。`khonsu analyze` は、グラフの形についての問いに答えます。どのノードが最も中心的か、どのグループが形成されるか、2 つのノードがどうつながるか。計算はメモリ内で行い、networkx の定義に従うため、同じグラフであれば結果は networkx と一致します。
+Cypher クエリは、名前を付けたパターンについて尋ねたことに答えます。`khonsu graph analyze` は、グラフの形についての問いに答えます。どのノードが最も中心的か、どのグループが形成されるか、2 つのノードがどうつながるか。計算はメモリ内で行い、networkx の定義に従うため、同じグラフであれば結果は networkx と一致します。
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 慣れていないグラフでは、まず `summary` から始めてください。
@@ -35,9 +35,9 @@ khonsu analyze communities --db graphs/investigation
 既定では、アルゴリズムはグラフ全体を読み取ります。3 つの方法で絞り込めます:
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ khonsu analyze pagerank --db graphs/security \
 
 ## 分析か Cypher か
 
-Cypher には、バインドされた 2 つのノード間の `shortestPath` と `allShortestPaths` があります。[Cypher と SQL](./queries) を参照してください。経路が重みを尊重すべき場合は `khonsu analyze path` を使用し、問いが 1 つのパターンではなくグラフ全体に関するものである場合は他のアルゴリズムを使用してください。ホップ数とサイズに上限を設けてノードから外側へたどるには、[`khonsu explore`](./investigations#explore) を使用してください。
+Cypher には、バインドされた 2 つのノード間の `shortestPath` と `allShortestPaths` があります。[Cypher と SQL](./queries) を参照してください。経路が重みを尊重すべき場合は `khonsu graph analyze path` を使用し、問いが 1 つのパターンではなくグラフ全体に関するものである場合は他のアルゴリズムを使用してください。ホップ数とサイズに上限を設けてノードから外側へたどるには、[`khonsu graph explore`](./investigations#explore) を使用してください。

@@ -25,7 +25,7 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 AWS 插件通过 AWS CLI 读取 VPC、子网、安全组、实例、负载均衡器与 IAM 角色。先安装和配置 AWS CLI，再使用自己的只读配置。`regions` 使用逗号分隔，例如 `us-east-1,eu-west-1`。
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
@@ -45,7 +45,7 @@ khonsu plugin sync --source aws-demo
 Neo4j 插件从 0.3.0 开始提供，通过 Neo4j 的 HTTP API 把数据库中的节点和关系复制到本地图，只发送读取查询。它的主要用途是配合 [Cartography](https://github.com/cartography-cncf/cartography)：Cartography 会把 AWS、GCP、Azure、Kubernetes、GitHub、Okta 等资源写入 Neo4j。任何 Neo4j 数据库都可以使用。
 
 ```sh
-khonsu init graphs/infra
+khonsu graph init graphs/infra
 khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test

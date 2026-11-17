@@ -1,14 +1,14 @@
 ---
-description: Ejecuta PageRank, intermediación, comunidades de Louvain, componentes conexas, k-core y rutas más cortas en un grafo local con khonsu analyze.
+description: Ejecuta PageRank, intermediación, comunidades de Louvain, componentes conexas, k-core y rutas más cortas en un grafo local con khonsu graph analyze.
 ---
 # Análisis de grafos
 
-Una consulta Cypher responde a lo que preguntas sobre patrones con nombre. `khonsu analyze` responde a preguntas sobre la forma del grafo: qué nodo es más central, qué grupos se forman, cómo se conectan dos nodos. Calcula en memoria y sigue las definiciones de networkx, así que los resultados coinciden con networkx en el mismo grafo.
+Una consulta Cypher responde a lo que preguntas sobre patrones con nombre. `khonsu graph analyze` responde a preguntas sobre la forma del grafo: qué nodo es más central, qué grupos se forman, cómo se conectan dos nodos. Calcula en memoria y sigue las definiciones de networkx, así que los resultados coinciden con networkx en el mismo grafo.
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 Empieza con `summary` en un grafo que no conozcas.
@@ -35,9 +35,9 @@ Empieza con `summary` en un grafo que no conozcas.
 Por defecto, un algoritmo lee todo el grafo. Redúcelo de tres formas:
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ La intermediación es exacta hasta 5.000 nodos y se muestrea desde 500 fuentes p
 
 ## ¿Análisis o Cypher?
 
-Cypher tiene `shortestPath` y `allShortestPaths` entre dos nodos ligados; consulta [Cypher y SQL](./queries). Usa `khonsu analyze path` cuando la ruta deba respetar un peso, y los demás algoritmos cuando la pregunta sea sobre todo el grafo y no sobre un patrón. Para recorrer hacia fuera desde un nodo con límites de saltos y tamaño, usa [`khonsu explore`](./investigations#explore).
+Cypher tiene `shortestPath` y `allShortestPaths` entre dos nodos ligados; consulta [Cypher y SQL](./queries). Usa `khonsu graph analyze path` cuando la ruta deba respetar un peso, y los demás algoritmos cuando la pregunta sea sobre todo el grafo y no sobre un patrón. Para recorrer hacia fuera desde un nodo con límites de saltos y tamaño, usa [`khonsu graph explore`](./investigations#explore).

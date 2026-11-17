@@ -1,5 +1,5 @@
 ---
-description: Прослеживайте пути по графу с помощью khonsu explore, приводите доказательства для каждой записи, сохраняйте расследование и перепроверяйте его после изменения данных.
+description: Прослеживайте пути по графу с помощью khonsu graph explore, приводите доказательства для каждой записи, сохраняйте расследование и перепроверяйте его после изменения данных.
 ---
 # Расследования
 
@@ -9,10 +9,10 @@ description: Прослеживайте пути по графу с помощь
 
 ## Пройти по пути {#explore}
 
-`khonsu explore` обходит граф наружу от одного или нескольких узлов, не загружая граф целиком. В окне тот же обход выполняет **Path Explorer** на графовом холсте.
+`khonsu graph explore` обходит граф наружу от одного или нескольких узлов, не загружая граф целиком. В окне тот же обход выполняет **Path Explorer** на графовом холсте.
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ khonsu explore --db graphs/aws \
 
 ## Доказательства {#evidence}
 
-`khonsu evidence` показывает, что подтверждает узел или связь: какой источник и плагин записали её, когда она последний раз менялась и была ли последняя синхронизация этого источника полной.
+`khonsu graph evidence` показывает, что подтверждает узел или связь: какой источник и плагин записали её, когда она последний раз менялась и была ли последняя синхронизация этого источника полной.
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | Поле | Значение |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit` (сообщено источником), `derived` или `unknown` |
 | `properties`, `redacted` | Собственные свойства записи и имена, скрытые как возможные секреты |
 
-Поле происхождения либо известно и имеет значение, либо явно помечено как неизвестное; ничего не оценивается приблизительно. С `--to` команда `khonsu explore` добавляет `path.evidence` — производную запись со списком ID доказательств, на которых держится путь.
+Поле происхождения либо известно и имеет значение, либо явно помечено как неизвестное; ничего не оценивается приблизительно. С `--to` команда `khonsu graph explore` добавляет `path.evidence` — производную запись со списком ID доказательств, на которых держится путь.
 
 Насколько связь подтверждена, определяется соглашением в её собственных свойствах. `confidence` принимает значения `confirmed`, `inferred` или `unconfirmed`, а `evidence` говорит, что её показало. Путь прочен настолько, насколько прочен его слабейший переход: одна связь со значением `unconfirmed` делает путь неподтверждённым.
 
@@ -64,17 +64,17 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-Анализ `exposure` в AWS возвращает находки с вердиктом `potential_exposure`, `insufficient_data` или `not_indicated`. Каждая находка называет своё правило, проверенные условия и поля за ними, то, что оценить не удалось (`unknowns`), то, что правило не читает (`assumptions`), и `walk`, который можно передать в `khonsu explore`. Находка описывает конфигурацию. Она не говорит, что ресурс доступен или безопасен.
+Анализ `exposure` в AWS возвращает находки с вердиктом `potential_exposure`, `insufficient_data` или `not_indicated`. Каждая находка называет своё правило, проверенные условия и поля за ними, то, что оценить не удалось (`unknowns`), то, что правило не читает (`assumptions`), и `walk`, который можно передать в `khonsu graph explore`. Находка описывает конфигурацию. Она не говорит, что ресурс доступен или безопасен.
 
 ## Сохранённые расследования {#saved-investigations}
 
 Сохранённое расследование хранит в отдельном файле начальные точки и фильтры обхода, выбранный путь, запрос и дашборд. Сохранение ничего не пишет в граф.
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 При повторном открытии обход выполняется заново на текущем графе и сообщается, чем результат отличается от состояния на момент сохранения. Сначала прочитайте `graph_state`:
@@ -96,11 +96,11 @@ khonsu investigation reopen web.investigation
 Снимок сохраняет записи графа в файл по стабильным ID, чтобы позже можно было узнать, что изменилось. Снимки делаются вручную; при синхронизации они не создаются.
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | Список | Значение |
@@ -120,7 +120,7 @@ khonsu snapshot check monday.snapshot.json --db graphs/aws
 
 ## Ограничения
 
-- `khonsu explore` и `khonsu investigation` требуют, чтобы граф был свободен. Пока окно держит его открытым, они завершаются с типом ошибки `locked`; в этом случае используйте Path Explorer в окне.
+- `khonsu graph explore` и `khonsu investigate` требуют, чтобы граф был свободен. Пока окно держит его открытым, они завершаются с типом ошибки `locked`; в этом случае используйте Path Explorer в окне.
 - Граф с более чем 200 000 узлов или связей нельзя сохранить в снимок: команда завершается с типом ошибки `too_large`.
 - У записей, записанных вручную, нет стабильного ID. Они учитываются в различиях, но не сравниваются.
 - В окне пока нет представления снимков и различий.

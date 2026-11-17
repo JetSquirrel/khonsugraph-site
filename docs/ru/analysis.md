@@ -1,14 +1,14 @@
 ---
-description: Запускайте PageRank, посредничество, сообщества Louvain, компоненты связности, k-core и кратчайшие пути на локальном графе с помощью khonsu analyze.
+description: Запускайте PageRank, посредничество, сообщества Louvain, компоненты связности, k-core и кратчайшие пути на локальном графе с помощью khonsu graph analyze.
 ---
 # Анализ графов
 
-Запрос Cypher отвечает на вопрос о заданных шаблонах. `khonsu analyze` отвечает на вопросы о форме графа: какой узел самый центральный, какие группы образуются, как связаны два узла. Вычисления идут в памяти и следуют определениям networkx, поэтому на одном и том же графе результаты совпадают с networkx.
+Запрос Cypher отвечает на вопрос о заданных шаблонах. `khonsu graph analyze` отвечает на вопросы о форме графа: какой узел самый центральный, какие группы образуются, как связаны два узла. Вычисления идут в памяти и следуют определениям networkx, поэтому на одном и том же графе результаты совпадают с networkx.
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 На незнакомом графе начните с `summary`.
@@ -35,9 +35,9 @@ khonsu analyze communities --db graphs/investigation
 По умолчанию алгоритм читает весь граф. Сузить его можно тремя способами:
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ khonsu analyze pagerank --db graphs/security \
 
 ## Анализ или Cypher?
 
-В Cypher есть `shortestPath` и `allShortestPaths` между двумя заданными узлами; см. [Cypher и SQL](./queries). Используйте `khonsu analyze path`, когда путь должен учитывать вес, а остальные алгоритмы — когда вопрос касается всего графа, а не одного шаблона. Чтобы обойти граф от узла с ограничениями по числу переходов и размеру, используйте [`khonsu explore`](./investigations#explore).
+В Cypher есть `shortestPath` и `allShortestPaths` между двумя заданными узлами; см. [Cypher и SQL](./queries). Используйте `khonsu graph analyze path`, когда путь должен учитывать вес, а остальные алгоритмы — когда вопрос касается всего графа, а не одного шаблона. Чтобы обойти граф от узла с ограничениями по числу переходов и размеру, используйте [`khonsu graph explore`](./investigations#explore).

@@ -43,14 +43,14 @@ A marketplace says where a package is and what its hash is. It does not make the
 ## Add a marketplace {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # owner/repo on GitHub
-khonsu marketplace add https://plugins.example.com  # any HTTPS address
-khonsu marketplace add ~/work/team-plugins          # a folder
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # owner/repo on GitHub
+khonsu plugin marketplace add https://plugins.example.com  # any HTTPS address
+khonsu plugin marketplace add ~/work/team-plugins   # a folder
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official` turns the official marketplace off, and `khonsu marketplace restore` brings it back.
+`khonsu plugin marketplace remove official` turns the official marketplace off, and `khonsu plugin marketplace restore` brings it back.
 
 ## Publish a plugin {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-This packs the plugin into the folder and lists it in that folder's `marketplace.json`. Commit and push the folder, or upload it to a static host. Others add it once with `khonsu marketplace add` and then install by name. Publishing the same version again replaces that platform's package, so each platform can publish its own build. See the [full marketplace reference](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).
+This packs the plugin into the folder and lists it in that folder's `marketplace.json`. Commit and push the folder, or upload it to a static host. Others add it once with `khonsu plugin marketplace add` and then install by name. Publishing the same version again replaces that platform's package, so each platform can publish its own build. See the [full marketplace reference](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).

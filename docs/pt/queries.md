@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 `allShortestPaths`, `nodes(p)` e `relationships(p)` também funcionam. As duas extremidades precisam estar vinculadas por um mapa de propriedades, um `WHERE` ou uma cláusula anterior. Retornar `p` desenha o caminho na tela. Um `*` sem limite para em 256 saltos e falha, em vez de informar que não existe caminho.
 
-Para explorar a partir de um nó com limites de saltos e tamanho, use [`khonsu explore`](./investigations#explore). Para caminhos ponderados, centralidade e comunidades, veja [análise de grafos](./analysis).
+Para explorar a partir de um nó com limites de saltos e tamanho, use [`khonsu graph explore`](./investigations#explore). Para caminhos ponderados, centralidade e comunidades, veja [análise de grafos](./analysis).
 
 ## SQL e parâmetros
 

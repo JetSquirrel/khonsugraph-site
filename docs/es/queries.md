@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 `allShortestPaths`, `nodes(p)` y `relationships(p)` también funcionan. Ambos extremos deben estar ligados por un mapa de propiedades, un `WHERE` o una cláusula anterior. Devolver `p` dibuja la ruta en el lienzo. Un `*` sin límite se detiene a los 256 saltos y falla en lugar de informar de que no existe ninguna ruta.
 
-Para recorrer hacia fuera desde un nodo con límites de saltos y tamaño, usa [`khonsu explore`](./investigations#explore). Para rutas ponderadas, centralidad y comunidades, consulta [análisis de grafos](./analysis).
+Para recorrer hacia fuera desde un nodo con límites de saltos y tamaño, usa [`khonsu graph explore`](./investigations#explore). Para rutas ponderadas, centralidad y comunidades, consulta [análisis de grafos](./analysis).
 
 ## SQL y parámetros
 

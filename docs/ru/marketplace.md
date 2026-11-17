@@ -43,14 +43,14 @@ khonsu plugin update              # обновить установленные 
 ## Добавление маркетплейса {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # owner/repo на GitHub
-khonsu marketplace add https://plugins.example.com  # любой адрес HTTPS
-khonsu marketplace add ~/work/team-plugins          # папка
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # owner/repo на GitHub
+khonsu plugin marketplace add https://plugins.example.com  # любой адрес HTTPS
+khonsu plugin marketplace add ~/work/team-plugins   # папка
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official` отключает официальный маркетплейс, а `khonsu marketplace restore` возвращает его.
+`khonsu plugin marketplace remove official` отключает официальный маркетплейс, а `khonsu plugin marketplace restore` возвращает его.
 
 ## Публикация плагина {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-Команда упаковывает плагин в папку и вносит его в `marketplace.json` этой папки. Закоммитьте и отправьте папку или загрузите её на статический хостинг. Другие добавляют её один раз через `khonsu marketplace add`, а затем устанавливают по имени. Повторная публикация той же версии заменяет пакет этой платформы, так что каждая платформа может публиковать свою сборку. См. [полный справочник по маркетплейсу](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).
+Команда упаковывает плагин в папку и вносит его в `marketplace.json` этой папки. Закоммитьте и отправьте папку или загрузите её на статический хостинг. Другие добавляют её один раз через `khonsu plugin marketplace add`, а затем устанавливают по имени. Повторная публикация той же версии заменяет пакет этой платформы, так что каждая платформа может публиковать свою сборку. См. [полный справочник по маркетплейсу](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).

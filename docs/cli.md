@@ -11,33 +11,33 @@ The [agent skill](https://github.com/JetSquirrel/KhonsuGraph/tree/main/skills/kh
 
 | Command | Purpose |
 | --- | --- |
-| `khonsu init DIR` | Create an empty graph |
+| `khonsu graph init DIR` | Create an empty graph |
 | `khonsu schema --db DIR` | Inspect labels, relationships, properties and tables |
 | `khonsu query --db DIR --cypher "…"` | Execute one read-only Cypher statement |
 | `khonsu query --db DIR --sql "…"` | Execute one read-only SQL statement |
 | `khonsu query --db DIR --file query.cypher` | Run a query file; `.sql` selects SQL |
-| `khonsu explain --db DIR --cypher "…"` | Explain a query |
-| `khonsu explore --db DIR --from NODE [--to NODE]` | [Walk outward from a node](./investigations#explore) and report a path |
-| `khonsu evidence --db DIR --node NODE --rel REL` | Show [what supports a record](./investigations#evidence) |
-| `khonsu analyze ALGORITHM --db DIR` | Run a [graph algorithm](./analysis): PageRank, communities, components and more |
-| `khonsu investigation save FILE --db DIR --from NODE` | [Save an investigation](./investigations#saved-investigations); `reopen FILE` runs it again |
-| `khonsu snapshot save FILE --db DIR` | Keep the graph's records; [`snapshot diff A B`](./investigations#snapshots) compares two |
-| `khonsu rebuild --db DIR` | Rebuild an old-format graph from its data sources |
+| `khonsu graph explain --db DIR --cypher "…"` | Explain a query |
+| `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Walk outward from a node](./investigations#explore) and report a path |
+| `khonsu graph evidence --db DIR --node NODE --rel REL` | Show [what supports a record](./investigations#evidence) |
+| `khonsu graph analyze ALGORITHM --db DIR` | Run a [graph algorithm](./analysis): PageRank, communities, components and more |
+| `khonsu investigate save FILE --db DIR --from NODE` | [Save an investigation](./investigations#saved-investigations); `reopen FILE` runs it again |
+| `khonsu graph snapshot save FILE --db DIR` | Keep the graph's records; [`snapshot diff A B`](./investigations#snapshots) compares two |
+| `khonsu graph rebuild --db DIR` | Rebuild an old-format graph from its data sources |
 | `khonsu plugin list` | List plugins and permissions |
 | `khonsu plugin describe ID` | Show a plugin's configuration fields and output types |
 | `khonsu plugin search [WORDS]` | List what the [marketplaces](./marketplace) offer |
 | `khonsu plugin install ID --yes` | Install a plugin by name from a marketplace and approve it |
 | `khonsu plugin install DIR --yes` | Install a plugin directory or ZIP and approve its permissions |
 | `khonsu plugin update` | Update plugins installed from a marketplace; `--dry-run` previews |
-| `khonsu marketplace list` | List marketplaces; `add` and `remove` change them |
+| `khonsu plugin marketplace list` | List marketplaces; `add` and `remove` change them |
 | `khonsu plugin sync --source ID` | Sync a source; `--dry-run` previews, `--incremental` and `--append` add without removing |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | Run a [plugin's analysis](./investigations#plugin-analyses), such as AWS `exposure` |
 | `khonsu source list` | List configured sources |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | Configure a source; `--test` checks it first |
 | `khonsu source remove ID` | Remove a source |
-| `khonsu check FILE --db DIR` | Validate a dashboard against a graph |
-| `khonsu comments FILE` | List, reply to and resolve plot comments |
-| `khonsu presence FILE --doing editing --plot NAME` | Show the window which plots you are editing |
+| `khonsu dash check FILE --db DIR` | Validate a dashboard against a graph |
+| `khonsu dash comments FILE` | List, reply to and resolve plot comments |
+| `khonsu dash presence FILE --doing editing --plot NAME` | Show the window which plots you are editing |
 | `khonsu open DIR` | Open a graph in the desktop app |
 | `khonsu open FILE.dash` | Open a dashboard |
 | `khonsu open --state` | Read the running window's graph and tabs |
@@ -55,13 +55,13 @@ Failures have an `error` object with `kind` and `message`, and optional `detail`
 ## A review loop
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
 # Edit the .dash file, then validate it.
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 # Use an actual comment ID returned by the first command.
-khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
+khonsu dash presence overview.dash --doing idle
 ```
 
-While the app holds a graph, read queries, `check` and `plugin sync` run through the window and return `via_window: true`. Query writes, `explore` and `investigation` need the graph free. Do not remove locks to force a write. See [troubleshooting](./troubleshooting).
+While the app holds a graph, read queries, `dash check` and `plugin sync` run through the window and return `via_window: true`. Query writes, `graph explore` and `investigate` need the graph free. Do not remove locks to force a write. See [troubleshooting](./troubleshooting).

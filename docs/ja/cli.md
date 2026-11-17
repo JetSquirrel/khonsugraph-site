@@ -11,33 +11,33 @@ description: khonsu コマンドラインはすべてのコマンドで JSON を
 
 | コマンド | 目的 |
 | --- | --- |
-| `khonsu init DIR` | 空のグラフを作成する |
+| `khonsu graph init DIR` | 空のグラフを作成する |
 | `khonsu schema --db DIR` | ラベル、リレーションシップ、プロパティ、テーブルを調査する |
 | `khonsu query --db DIR --cypher "…"` | 読み取り専用の Cypher 文を 1 つ実行する |
 | `khonsu query --db DIR --sql "…"` | 読み取り専用の SQL 文を 1 つ実行する |
 | `khonsu query --db DIR --file query.cypher` | クエリファイルを実行する。`.sql` を指定すると SQL が選択される |
-| `khonsu explain --db DIR --cypher "…"` | クエリを説明する |
-| `khonsu explore --db DIR --from NODE [--to NODE]` | [ノードから外側へたどり](./investigations#explore)、経路を報告する |
-| `khonsu evidence --db DIR --node NODE --rel REL` | [レコードを支えるもの](./investigations#evidence)を表示する |
-| `khonsu analyze ALGORITHM --db DIR` | [グラフアルゴリズム](./analysis)(PageRank、コミュニティ、連結成分など)を実行する |
-| `khonsu investigation save FILE --db DIR --from NODE` | [調査を保存する](./investigations#saved-investigations)。`reopen FILE` で再実行する |
-| `khonsu snapshot save FILE --db DIR` | グラフのレコードを保存する。[`snapshot diff A B`](./investigations#snapshots) は 2 つを比較する |
-| `khonsu rebuild --db DIR` | 古い形式のグラフをデータソースから再構築する |
+| `khonsu graph explain --db DIR --cypher "…"` | クエリを説明する |
+| `khonsu graph explore --db DIR --from NODE [--to NODE]` | [ノードから外側へたどり](./investigations#explore)、経路を報告する |
+| `khonsu graph evidence --db DIR --node NODE --rel REL` | [レコードを支えるもの](./investigations#evidence)を表示する |
+| `khonsu graph analyze ALGORITHM --db DIR` | [グラフアルゴリズム](./analysis)(PageRank、コミュニティ、連結成分など)を実行する |
+| `khonsu investigate save FILE --db DIR --from NODE` | [調査を保存する](./investigations#saved-investigations)。`reopen FILE` で再実行する |
+| `khonsu graph snapshot save FILE --db DIR` | グラフのレコードを保存する。[`snapshot diff A B`](./investigations#snapshots) は 2 つを比較する |
+| `khonsu graph rebuild --db DIR` | 古い形式のグラフをデータソースから再構築する |
 | `khonsu plugin list` | プラグインと権限を一覧表示する |
 | `khonsu plugin describe ID` | プラグインの設定フィールドと出力型を表示する |
 | `khonsu plugin search [WORDS]` | [マーケットプレイス](./marketplace)にあるプラグインを一覧表示する |
 | `khonsu plugin install ID --yes` | マーケットプレイスからプラグインを名前でインストールして承認する |
 | `khonsu plugin install DIR --yes` | プラグインディレクトリまたは ZIP をインストールし、その権限を承認する |
 | `khonsu plugin update` | マーケットプレイスからインストールしたプラグインを更新する。`--dry-run` でプレビュー |
-| `khonsu marketplace list` | マーケットプレイスを一覧表示する。`add` と `remove` で変更 |
+| `khonsu plugin marketplace list` | マーケットプレイスを一覧表示する。`add` と `remove` で変更 |
 | `khonsu plugin sync --source ID` | ソースを同期する。`--dry-run` はプレビュー、`--incremental` と `--append` は削除を行わずに追加する |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | [プラグインの分析](./investigations#plugin-analyses)(たとえば AWS の `exposure`)を実行する |
 | `khonsu source list` | 設定済みのソースを一覧表示する |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | ソースを設定する。`--test` を付けると最初にチェックする |
 | `khonsu source remove ID` | ソースを削除する |
-| `khonsu check FILE --db DIR` | グラフに対してダッシュボードを検証する |
-| `khonsu comments FILE` | プロットのコメントを一覧表示し、返信し、解決する |
-| `khonsu presence FILE --doing editing --plot NAME` | どのプロットを編集中かをウィンドウに表示する |
+| `khonsu dash check FILE --db DIR` | グラフに対してダッシュボードを検証する |
+| `khonsu dash comments FILE` | プロットのコメントを一覧表示し、返信し、解決する |
+| `khonsu dash presence FILE --doing editing --plot NAME` | どのプロットを編集中かをウィンドウに表示する |
 | `khonsu open DIR` | デスクトップアプリでグラフを開く |
 | `khonsu open FILE.dash` | ダッシュボードを開く |
 | `khonsu open --state` | 実行中のウィンドウのグラフとタブを読み取る |
@@ -55,13 +55,13 @@ description: khonsu コマンドラインはすべてのコマンドで JSON を
 ## レビューループ
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
 # .dash ファイルを編集し、その後検証します。
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 # 最初のコマンドが返した実際のコメント ID を使用します。
-khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
+khonsu dash presence overview.dash --doing idle
 ```
 
-アプリがグラフを保持している間、読み取りクエリ、`check`、`plugin sync` はそのウィンドウ経由で実行され、`via_window: true` を返します。クエリによる書き込み、`explore`、`investigation` にはグラフが空いている必要があります。書き込みを強制するためにロックを削除しないでください。[トラブルシューティング](./troubleshooting) を参照してください。
+アプリがグラフを保持している間、読み取りクエリ、`dash check`、`plugin sync` はそのウィンドウ経由で実行され、`via_window: true` を返します。クエリによる書き込み、`graph explore`、`investigate` にはグラフが空いている必要があります。書き込みを強制するためにロックを削除しないでください。[トラブルシューティング](./troubleshooting) を参照してください。

@@ -19,7 +19,7 @@ Un seul processus possède un répertoire de graphe HawDB. Les lectures et les v
 
 ## Le graphe signale old_format {#old-format}
 
-HawDB 0.25 a changé son format de stockage et ne lit aucun graphe plus ancien, de sorte qu'un graphe écrit par KhonsuGraph 0.2.0 ou une version antérieure échoue à l'ouverture avec le type `old_format`. `khonsu rebuild --db DIR` le reconstruit à partir de ses sources de données et conserve l'ancien répertoire à côté sous le nom `DIR.hawdb-old`. Tout ce qui a été écrit à la main plutôt que synchronisé n'est pas reporté.
+HawDB 0.25 a changé son format de stockage et ne lit aucun graphe plus ancien, de sorte qu'un graphe écrit par KhonsuGraph 0.2.0 ou une version antérieure échoue à l'ouverture avec le type `old_format`. `khonsu graph rebuild --db DIR` le reconstruit à partir de ses sources de données et conserve l'ancien répertoire à côté sous le nom `DIR.hawdb-old`. Tout ce qui a été écrit à la main plutôt que synchronisé n'est pas reporté.
 
 ## Un panneau de graphe est vide
 
@@ -27,7 +27,7 @@ Renvoyez des nœuds et des relations complets (`RETURN a, r, b`) au lieu de seul
 
 ## Une requête ou un tableau de bord échoue
 
-Exécutez `khonsu check FILE --db DIR` et lisez toutes les erreurs signalées. Un graphique peut référencer une colonne manquante ; un jeu de données importé peut utiliser des libellés différents. Certaines fonctionnalités de Cypher ne sont pas prises en charge : voir [limitations des requêtes](./queries#current-limitations).
+Exécutez `khonsu dash check FILE --db DIR` et lisez toutes les erreurs signalées. Un graphique peut référencer une colonne manquante ; un jeu de données importé peut utiliser des libellés différents. Certaines fonctionnalités de Cypher ne sont pas prises en charge : voir [limitations des requêtes](./queries#current-limitations).
 
 Si une lecture dépasse son budget, restreignez-la à l'aide de prédicats et de `LIMIT`. Réduire seulement `--max-rows` ne diminue pas le coût d'exécution.
 

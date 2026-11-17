@@ -22,7 +22,7 @@ Laden Sie [hosts.csv](/samples/hosts.csv) und [dependencies.csv](/samples/depend
 Führen Sie diese Befehle in diesem Ordner aus. Halten Sie den Graphen während des Imports in der Desktop-App geschlossen.
 
 ```sh
-khonsu init graphs/demo
+khonsu graph init graphs/demo
 khonsu source add --db graphs/demo --plugin csv --name demo \
   -c node_file=hosts.csv -c node_label=Host -c node_id_column=id \
   -c edge_file=dependencies.csv -c edge_type=DEPENDS_ON \

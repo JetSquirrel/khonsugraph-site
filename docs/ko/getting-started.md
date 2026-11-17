@@ -22,7 +22,7 @@ khonsu --version
 그 폴더에서 다음 명령을 실행하십시오. 가져오는 동안 데스크톱 앱에서는 그래프를 닫아 두십시오.
 
 ```sh
-khonsu init graphs/demo
+khonsu graph init graphs/demo
 khonsu source add --db graphs/demo --plugin csv --name demo \
   -c node_file=hosts.csv -c node_label=Host -c node_id_column=id \
   -c edge_file=dependencies.csv -c edge_type=DEPENDS_ON \

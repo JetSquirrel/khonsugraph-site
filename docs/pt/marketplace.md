@@ -43,14 +43,14 @@ Um marketplace diz onde está um pacote e qual é o seu hash. Ele não torna o p
 ## Adicionar um marketplace {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # owner/repo no GitHub
-khonsu marketplace add https://plugins.example.com  # qualquer endereço HTTPS
-khonsu marketplace add ~/work/team-plugins          # uma pasta
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # owner/repo no GitHub
+khonsu plugin marketplace add https://plugins.example.com  # qualquer endereço HTTPS
+khonsu plugin marketplace add ~/work/team-plugins   # uma pasta
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official` desativa o marketplace oficial, e `khonsu marketplace restore` o traz de volta.
+`khonsu plugin marketplace remove official` desativa o marketplace oficial, e `khonsu plugin marketplace restore` o traz de volta.
 
 ## Publicar um plugin {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-Isso empacota o plugin na pasta e o lista no `marketplace.json` dela. Faça commit e push da pasta, ou envie-a para uma hospedagem estática. Outras pessoas a adicionam uma vez com `khonsu marketplace add` e depois instalam pelo nome. Publicar a mesma versão de novo substitui o pacote daquela plataforma, então cada plataforma pode publicar a própria build. Veja a [referência completa do marketplace](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).
+Isso empacota o plugin na pasta e o lista no `marketplace.json` dela. Faça commit e push da pasta, ou envie-a para uma hospedagem estática. Outras pessoas a adicionam uma vez com `khonsu plugin marketplace add` e depois instalam pelo nome. Publicar a mesma versão de novo substitui o pacote daquela plataforma, então cada plataforma pode publicar a própria build. Veja a [referência completa do marketplace](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).

@@ -43,14 +43,14 @@ Ein Marketplace sagt, wo ein Paket liegt und welchen Hash es hat. Er macht das P
 ## Einen Marketplace hinzufügen {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # owner/repo auf GitHub
-khonsu marketplace add https://plugins.example.com  # beliebige HTTPS-Adresse
-khonsu marketplace add ~/work/team-plugins          # ein Ordner
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # owner/repo auf GitHub
+khonsu plugin marketplace add https://plugins.example.com  # beliebige HTTPS-Adresse
+khonsu plugin marketplace add ~/work/team-plugins   # ein Ordner
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official` schaltet den offiziellen Marketplace ab, `khonsu marketplace restore` stellt ihn wieder her.
+`khonsu plugin marketplace remove official` schaltet den offiziellen Marketplace ab, `khonsu plugin marketplace restore` stellt ihn wieder her.
 
 ## Ein Plugin veröffentlichen {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-Das packt das Plugin in den Ordner und trägt es in dessen `marketplace.json` ein. Committen und pushen Sie den Ordner oder laden Sie ihn auf einen statischen Host. Andere fügen ihn einmal mit `khonsu marketplace add` hinzu und installieren dann per Namen. Wird dieselbe Version erneut veröffentlicht, ersetzt das das Paket dieser Plattform, sodass jede Plattform ihren eigenen Build veröffentlichen kann. Siehe die [vollständige Marketplace-Referenz](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).
+Das packt das Plugin in den Ordner und trägt es in dessen `marketplace.json` ein. Committen und pushen Sie den Ordner oder laden Sie ihn auf einen statischen Host. Andere fügen ihn einmal mit `khonsu plugin marketplace add` hinzu und installieren dann per Namen. Wird dieselbe Version erneut veröffentlicht, ersetzt das das Paket dieser Plattform, sodass jede Plattform ihren eigenen Build veröffentlichen kann. Siehe die [vollständige Marketplace-Referenz](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).

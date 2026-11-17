@@ -1,5 +1,5 @@
 ---
-description: Trace paths through a graph with khonsu explore, cite the evidence behind each record, save an investigation and re-check it after the data changes.
+description: Trace paths through a graph with khonsu graph explore, cite the evidence behind each record, save an investigation and re-check it after the data changes.
 ---
 # Investigations
 
@@ -9,10 +9,10 @@ These commands arrived in KhonsuGraph 0.3.0. Run `khonsu --version` to see what 
 
 ## Follow a path {#explore}
 
-`khonsu explore` walks outward from one or more nodes without loading the whole graph. In the window, the same walk is **Path Explorer** on a graph canvas.
+`khonsu graph explore` walks outward from one or more nodes without loading the whole graph. In the window, the same walk is **Path Explorer** on a graph canvas.
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ A path is a candidate found in the data. It is not proof that anything can be re
 
 ## Evidence {#evidence}
 
-`khonsu evidence` says what supports a node or a relationship: which source and plugin wrote it, when it last changed, and whether that source's last sync was complete.
+`khonsu graph evidence` says what supports a node or a relationship: which source and plugin wrote it, when it last changed, and whether that source's last sync was complete.
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | Field | Meaning |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit` (a source reported it), `derived` or `unknown` |
 | `properties`, `redacted` | The record's own properties, and the names masked as possible secrets |
 
-A provenance field is either known with a value or explicitly unknown; nothing is estimated. With `--to`, `khonsu explore` adds `path.evidence`, a derived record that lists the evidence IDs the path rests on.
+A provenance field is either known with a value or explicitly unknown; nothing is estimated. With `--to`, `khonsu graph explore` adds `path.evidence`, a derived record that lists the evidence IDs the path rests on.
 
 How strongly a relationship is known is a convention in its own properties. `confidence` is `confirmed`, `inferred` or `unconfirmed`, and `evidence` says what showed it. A path is as strong as its weakest hop: one `unconfirmed` relationship makes the path unconfirmed.
 
@@ -64,17 +64,17 @@ A plugin can ship rules for its own domain. `khonsu plugin describe ID` lists th
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-The AWS `exposure` analysis returns findings with a verdict of `potential_exposure`, `insufficient_data` or `not_indicated`. Each finding names its rule, the conditions it checked with the fields behind them, what it could not evaluate (`unknowns`), what the rule does not read (`assumptions`), and a `walk` you can pass to `khonsu explore`. A finding describes configuration. It does not say a resource is reachable, or safe.
+The AWS `exposure` analysis returns findings with a verdict of `potential_exposure`, `insufficient_data` or `not_indicated`. Each finding names its rule, the conditions it checked with the fields behind them, what it could not evaluate (`unknowns`), what the rule does not read (`assumptions`), and a `walk` you can pass to `khonsu graph explore`. A finding describes configuration. It does not say a resource is reachable, or safe.
 
 ## Saved investigations {#saved-investigations}
 
 A saved investigation keeps a walk's starting points and filters, the path you chose, a query and a dashboard in a file of its own. Saving writes nothing to the graph.
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 Reopening runs the walk again on the graph as it is now and says how that differs from when it was saved. Read `graph_state` first:
@@ -96,11 +96,11 @@ The file is JSON. It holds the graph's path, data source IDs, stable record IDs 
 A snapshot keeps a graph's records in a file, by stable ID, so you can ask later what changed. Snapshots are taken by hand; nothing takes one when a sync runs.
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | List | Meaning |
@@ -120,7 +120,7 @@ Select a node on a graph canvas and use **Path Explorer** to walk from it. **Sav
 
 ## Limits
 
-- `khonsu explore` and `khonsu investigation` need the graph free. They fail with kind `locked` while the window has it open; use Path Explorer in the window instead.
+- `khonsu graph explore` and `khonsu investigate` need the graph free. They fail with kind `locked` while the window has it open; use Path Explorer in the window instead.
 - A graph over 200,000 nodes or relationships cannot be snapshotted and fails with kind `too_large`.
 - Records written by hand have no stable ID. They are counted but not compared in a diff.
 - The window has no snapshot or diff view yet.

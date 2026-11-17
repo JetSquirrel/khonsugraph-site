@@ -1,5 +1,5 @@
 ---
-description: khonsu explore でグラフ内の経路をたどり、各レコードの背後にある証拠を引用し、調査を保存して、データ変更後に再確認します。
+description: khonsu graph explore でグラフ内の経路をたどり、各レコードの背後にある証拠を引用し、調査を保存して、データ変更後に再確認します。
 ---
 # 調査
 
@@ -9,10 +9,10 @@ description: khonsu explore でグラフ内の経路をたどり、各レコー�
 
 ## 経路をたどる {#explore}
 
-`khonsu explore` は、グラフ全体を読み込まずに、1 つ以上のノードから外側へたどります。ウィンドウでは、同じたどり方がグラフキャンバス上の **Path Explorer** です。
+`khonsu graph explore` は、グラフ全体を読み込まずに、1 つ以上のノードから外側へたどります。ウィンドウでは、同じたどり方がグラフキャンバス上の **Path Explorer** です。
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ khonsu explore --db graphs/aws \
 
 ## 証拠 {#evidence}
 
-`khonsu evidence` は、ノードまたはリレーションシップを何が支えているかを示します。どのソースとプラグインがそれを書き込んだか、最後にいつ変更されたか、そのソースの最後の同期が完全だったかどうかです。
+`khonsu graph evidence` は、ノードまたはリレーションシップを何が支えているかを示します。どのソースとプラグインがそれを書き込んだか、最後にいつ変更されたか、そのソースの最後の同期が完全だったかどうかです。
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | フィールド | 意味 |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit`(ソースが報告した)、`derived`、`unknown` |
 | `properties`、`redacted` | レコード自身のプロパティと、秘密の可能性があるとしてマスクされた名前 |
 
-来歴のフィールドは、値がわかっているか、明示的に不明であるかのどちらかです。推定されることはありません。`--to` を付けると、`khonsu explore` は `path.evidence` を追加します。これは経路が依存している証拠 ID を一覧にした派生レコードです。
+来歴のフィールドは、値がわかっているか、明示的に不明であるかのどちらかです。推定されることはありません。`--to` を付けると、`khonsu graph explore` は `path.evidence` を追加します。これは経路が依存している証拠 ID を一覧にした派生レコードです。
 
 リレーションシップがどの程度強く知られているかは、そのプロパティにおける慣習です。`confidence` は `confirmed`、`inferred`、`unconfirmed` のいずれかで、`evidence` は何がそれを示したかを表します。経路の強さは最も弱いホップと同じです。1 つの `unconfirmed` リレーションシップがあれば、経路は未確認になります。
 
@@ -64,17 +64,17 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-AWS の `exposure` 分析は、`potential_exposure`、`insufficient_data`、`not_indicated` のいずれかの判定を持つ検出結果を返します。各検出結果は、そのルール、チェックした条件とその背後のフィールド、評価できなかったもの(`unknowns`)、ルールが読まないもの(`assumptions`)、および `khonsu explore` に渡せる `walk` を明示します。検出結果は設定を説明するものです。リソースに到達可能であることや、安全であることを述べるものではありません。
+AWS の `exposure` 分析は、`potential_exposure`、`insufficient_data`、`not_indicated` のいずれかの判定を持つ検出結果を返します。各検出結果は、そのルール、チェックした条件とその背後のフィールド、評価できなかったもの(`unknowns`)、ルールが読まないもの(`assumptions`)、および `khonsu graph explore` に渡せる `walk` を明示します。検出結果は設定を説明するものです。リソースに到達可能であることや、安全であることを述べるものではありません。
 
 ## 保存された調査 {#saved-investigations}
 
 保存された調査は、たどり方の開始点とフィルター、選択した経路、クエリ、ダッシュボードを、専用のファイルに保持します。保存してもグラフには何も書き込まれません。
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 再び開くと、現在のグラフに対してたどり方を再実行し、保存時との違いを報告します。まず `graph_state` を読んでください:
@@ -96,11 +96,11 @@ khonsu investigation reopen web.investigation
 スナップショットは、後から何が変わったかを尋ねられるように、グラフのレコードを安定した ID ごとにファイルへ保持します。スナップショットは手動で取得します。同期の実行時に自動で取得されることはありません。
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | リスト | 意味 |
@@ -120,7 +120,7 @@ khonsu snapshot check monday.snapshot.json --db graphs/aws
 
 ## 制限
 
-- `khonsu explore` と `khonsu investigation` には、グラフが空いている必要があります。ウィンドウがグラフを開いている間は、kind `locked` で失敗します。代わりにウィンドウの Path Explorer を使用してください。
+- `khonsu graph explore` と `khonsu investigate` には、グラフが空いている必要があります。ウィンドウがグラフを開いている間は、kind `locked` で失敗します。代わりにウィンドウの Path Explorer を使用してください。
 - 200,000 を超えるノードまたはリレーションシップを持つグラフはスナップショットを取得できず、kind `too_large` で失敗します。
 - 手作業で書き込まれたレコードには安定した ID がありません。差分では件数に数えられますが、比較はされません。
 - ウィンドウにはまだスナップショットや差分のビューがありません。

@@ -1,5 +1,5 @@
 ---
-description: Verfolgen Sie Pfade durch einen Graphen mit khonsu explore, führen Sie die Belege hinter jedem Datensatz an, speichern Sie eine Untersuchung und prüfen Sie sie nach Datenänderungen erneut.
+description: Verfolgen Sie Pfade durch einen Graphen mit khonsu graph explore, führen Sie die Belege hinter jedem Datensatz an, speichern Sie eine Untersuchung und prüfen Sie sie nach Datenänderungen erneut.
 ---
 # Untersuchungen
 
@@ -9,10 +9,10 @@ Diese Befehle sind in KhonsuGraph 0.3.0 hinzugekommen. Führen Sie `khonsu --ver
 
 ## Einem Pfad folgen {#explore}
 
-`khonsu explore` geht von einem oder mehreren Knoten nach außen, ohne den ganzen Graphen zu laden. Im Fenster heißt derselbe Durchlauf **Path Explorer** und läuft auf einer Zeichenfläche.
+`khonsu graph explore` geht von einem oder mehreren Knoten nach außen, ohne den ganzen Graphen zu laden. Im Fenster heißt derselbe Durchlauf **Path Explorer** und läuft auf einer Zeichenfläche.
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ Ein Pfad ist ein Kandidat, der in den Daten gefunden wurde. Er ist kein Beweis d
 
 ## Belege {#evidence}
 
-`khonsu evidence` sagt, was einen Knoten oder eine Beziehung stützt: welche Quelle und welches Plugin den Datensatz geschrieben haben, wann er sich zuletzt geändert hat und ob die letzte Synchronisierung dieser Quelle vollständig war.
+`khonsu graph evidence` sagt, was einen Knoten oder eine Beziehung stützt: welche Quelle und welches Plugin den Datensatz geschrieben haben, wann er sich zuletzt geändert hat und ob die letzte Synchronisierung dieser Quelle vollständig war.
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | Feld | Bedeutung |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit` (eine Quelle hat es gemeldet), `derived` oder `unknown` |
 | `properties`, `redacted` | Die eigenen Eigenschaften des Datensatzes und die als mögliche Geheimnisse maskierten Namen |
 
-Ein Herkunftsfeld ist entweder mit einem Wert bekannt oder ausdrücklich unbekannt; nichts wird geschätzt. Mit `--to` ergänzt `khonsu explore` `path.evidence`, einen abgeleiteten Datensatz, der die Beleg-IDs auflistet, auf denen der Pfad beruht.
+Ein Herkunftsfeld ist entweder mit einem Wert bekannt oder ausdrücklich unbekannt; nichts wird geschätzt. Mit `--to` ergänzt `khonsu graph explore` `path.evidence`, einen abgeleiteten Datensatz, der die Beleg-IDs auflistet, auf denen der Pfad beruht.
 
 Wie stark eine Beziehung bekannt ist, ist eine Konvention in ihren eigenen Eigenschaften. `confidence` ist `confirmed`, `inferred` oder `unconfirmed`, und `evidence` sagt, was sie gezeigt hat. Ein Pfad ist so stark wie sein schwächster Sprung: Eine `unconfirmed`-Beziehung macht den Pfad unbestätigt.
 
@@ -64,17 +64,17 @@ Ein Plugin kann Regeln für seine eigene Domäne mitbringen. `khonsu plugin desc
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-Die AWS-Analyse `exposure` gibt Befunde mit einem Urteil `potential_exposure`, `insufficient_data` oder `not_indicated` zurück. Jeder Befund nennt seine Regel, die geprüften Bedingungen mit den dahinterliegenden Feldern, was er nicht bewerten konnte (`unknowns`), was die Regel nicht liest (`assumptions`) und einen `walk`, den Sie an `khonsu explore` übergeben können. Ein Befund beschreibt eine Konfiguration. Er sagt nicht, dass eine Ressource erreichbar oder sicher ist.
+Die AWS-Analyse `exposure` gibt Befunde mit einem Urteil `potential_exposure`, `insufficient_data` oder `not_indicated` zurück. Jeder Befund nennt seine Regel, die geprüften Bedingungen mit den dahinterliegenden Feldern, was er nicht bewerten konnte (`unknowns`), was die Regel nicht liest (`assumptions`) und einen `walk`, den Sie an `khonsu graph explore` übergeben können. Ein Befund beschreibt eine Konfiguration. Er sagt nicht, dass eine Ressource erreichbar oder sicher ist.
 
 ## Gespeicherte Untersuchungen {#saved-investigations}
 
 Eine gespeicherte Untersuchung bewahrt die Startpunkte und Filter eines Durchlaufs, den gewählten Pfad, eine Abfrage und ein Dashboard in einer eigenen Datei auf. Das Speichern schreibt nichts in den Graphen.
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 Erneutes Öffnen führt den Durchlauf auf dem Graphen in seinem jetzigen Zustand erneut aus und sagt, wie sich das vom Zeitpunkt des Speicherns unterscheidet. Lesen Sie zuerst `graph_state`:
@@ -96,11 +96,11 @@ Die Datei ist JSON. Sie enthält den Pfad des Graphen, IDs der Datenquellen, sta
 Ein Snapshot bewahrt die Datensätze eines Graphen nach stabiler ID in einer Datei auf, sodass Sie später fragen können, was sich geändert hat. Snapshots werden von Hand erstellt; beim Ausführen einer Synchronisierung wird keiner erstellt.
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | Liste | Bedeutung |
@@ -120,7 +120,7 @@ Wählen Sie einen Knoten auf einer Zeichenfläche und verwenden Sie **Path Explo
 
 ## Grenzen
 
-- `khonsu explore` und `khonsu investigation` benötigen den Graphen frei. Sie schlagen mit der Art `locked` fehl, solange das Fenster ihn geöffnet hat; verwenden Sie stattdessen Path Explorer im Fenster.
+- `khonsu graph explore` und `khonsu investigate` benötigen den Graphen frei. Sie schlagen mit der Art `locked` fehl, solange das Fenster ihn geöffnet hat; verwenden Sie stattdessen Path Explorer im Fenster.
 - Ein Graph mit über 200.000 Knoten oder Beziehungen kann nicht als Snapshot gespeichert werden und schlägt mit der Art `too_large` fehl.
 - Von Hand geschriebene Datensätze haben keine stabile ID. Sie werden gezählt, aber in einem Diff nicht verglichen.
 - Das Fenster hat noch keine Ansicht für Snapshots oder Diffs.

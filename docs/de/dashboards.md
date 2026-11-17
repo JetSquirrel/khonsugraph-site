@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check` führt jede Abfrage schreibgeschützt aus, validiert die Spalten der Diagramme und probiert Filter mit tatsächlichen Werten aus. Beheben Sie jeden gemeldeten Fehler, bevor Sie das Dashboard öffnen oder teilen.
+`dash check` führt jede Abfrage schreibgeschützt aus, validiert die Spalten der Diagramme und probiert Filter mit tatsächlichen Werten aus. Beheben Sie jeden gemeldeten Fehler, bevor Sie das Dashboard öffnen oder teilen.
 
 ## Diagramme und Layout
 
@@ -50,13 +50,13 @@ Der Platzhalter muss eine vollständige `WHERE`-Bedingung sein, optional durch `
 
 ## Mit einem Agenten überprüfen
 
-Kommentieren Sie ein Diagramm in der App. Ein Agent liest die Kommentare, bearbeitet die Datei, führt `check` aus und antwortet. Kommentare liegen neben dem Dashboard in `FILE.comments.json`. Mithilfe der Präsenz lässt sich erkennen, welche Diagramme der Agent gerade bearbeitet, und das Fenster zeichnet neu, wenn sich die Datei ändert.
+Kommentieren Sie ein Diagramm in der App. Ein Agent liest die Kommentare, bearbeitet die Datei, führt `dash check` aus und antwortet. Kommentare liegen neben dem Dashboard in `FILE.comments.json`. Mithilfe der Präsenz lässt sich erkennen, welche Diagramme der Agent gerade bearbeitet, und das Fenster zeichnet neu, wenn sich die Datei ändert.
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 Das Format kennt keine beliebigen Funktionen, Bedingungen oder datenabhängige Gestaltung. Die Befehle für die Überprüfung finden Sie unter [CLI & Agenten](./cli).
