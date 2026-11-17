@@ -25,7 +25,11 @@ description: khonsu コマンドラインはすべてのコマンドで JSON を
 | `khonsu rebuild --db DIR` | 古い形式のグラフをデータソースから再構築する |
 | `khonsu plugin list` | プラグインと権限を一覧表示する |
 | `khonsu plugin describe ID` | プラグインの設定フィールドと出力型を表示する |
+| `khonsu plugin search [WORDS]` | [マーケットプレイス](./marketplace)にあるプラグインを一覧表示する |
+| `khonsu plugin install ID --yes` | マーケットプレイスからプラグインを名前でインストールして承認する |
 | `khonsu plugin install DIR --yes` | プラグインディレクトリまたは ZIP をインストールし、その権限を承認する |
+| `khonsu plugin update` | マーケットプレイスからインストールしたプラグインを更新する。`--dry-run` でプレビュー |
+| `khonsu marketplace list` | マーケットプレイスを一覧表示する。`add` と `remove` で変更 |
 | `khonsu plugin sync --source ID` | ソースを同期する。`--dry-run` はプレビュー、`--incremental` と `--append` は削除を行わずに追加する |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | [プラグインの分析](./investigations#plugin-analyses)(たとえば AWS の `exposure`)を実行する |
 | `khonsu source list` | 設定済みのソースを一覧表示する |

@@ -7,6 +7,7 @@ const origin = new URL(process.env.SITE_URL || 'https://khonsugraph.com').origin
 const pages = [
   ['getting-started', 'Getting started', '快速开始', 'はじめに', '시작하기', 'Premiers pas', 'Erste Schritte', 'Primeros pasos', 'Primeiros passos', 'Начало работы'],
   ['data-sources', 'Data sources', '数据源', 'データソース', '데이터 소스', 'Sources de données', 'Datenquellen', 'Fuentes de datos', 'Fontes de dados', 'Источники данных'],
+  ['marketplace', 'Marketplace', '插件市场', 'マーケットプレイス', '마켓플레이스', 'Marketplace', 'Marketplace', 'Marketplace', 'Marketplace', 'Маркетплейс'],
   ['queries', 'Cypher & SQL', 'Cypher 与 SQL', 'Cypher と SQL', 'Cypher 및 SQL', 'Cypher et SQL', 'Cypher & SQL', 'Cypher y SQL', 'Cypher e SQL', 'Cypher и SQL'],
   ['investigations', 'Investigations', '调查', '調査', '조사', 'Investigations', 'Untersuchungen', 'Investigaciones', 'Investigações', 'Расследования'],
   ['analysis', 'Graph analysis', '图分析', 'グラフ分析', '그래프 분석', 'Analyse de graphe', 'Graphanalyse', 'Análisis de grafos', 'Análise de grafos', 'Анализ графов'],

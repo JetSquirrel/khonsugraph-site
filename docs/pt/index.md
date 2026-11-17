@@ -11,6 +11,7 @@ KhonsuGraph é uma bancada de trabalho desktop local-first e de código aberto p
 
 - [Instale e execute sua primeira consulta](./getting-started)
 - [Importe CSV, conecte a AWS ou copie um banco Neo4j](./data-sources)
+- [Instale plugins pelo nome a partir de um marketplace](./marketplace)
 - [Entenda o suporte a Cypher e os limites de consulta](./queries)
 - [Percorra um caminho, cite evidências e salve uma investigação](./investigations)
 - [Ranqueie os nós e encontre comunidades com a análise de grafos](./analysis)

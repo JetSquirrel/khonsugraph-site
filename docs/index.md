@@ -11,6 +11,7 @@ It is an independent project built on HawDB, released under Apache-2.0.
 
 - [Install and run your first query](./getting-started)
 - [Import CSV, connect AWS or copy a Neo4j database](./data-sources)
+- [Install plugins by name from a marketplace](./marketplace)
 - [Understand Cypher support and query limits](./queries)
 - [Trace a path, cite evidence and save an investigation](./investigations)
 - [Rank nodes and find communities with graph analysis](./analysis)

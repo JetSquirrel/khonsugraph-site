@@ -62,12 +62,13 @@ The fetch script downloads public data. `$PWD` keeps the CSV paths absolute, whi
 
 For a cloud security engineer: what an AWS account's configuration opens to the internet, from an internet CIDR through security groups and load balancers to instances and the roles they assume.
 
-The app repository contains saved AWS CLI responses. Run from its root:
+The AWS plugin's saved AWS CLI responses are in the [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) repository. With a checkout of it beside the app repository, run from the app repository's root:
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

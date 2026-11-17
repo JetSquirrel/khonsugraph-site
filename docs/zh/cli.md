@@ -25,7 +25,11 @@ description: khonsu 命令行对每条命令都输出 JSON，方便 Claude Code 
 | `khonsu rebuild --db DIR` | 用数据源重建旧格式的图 |
 | `khonsu plugin list` | 列出插件与权限 |
 | `khonsu plugin describe ID` | 查看插件的配置字段与输出类型 |
+| `khonsu plugin search [WORDS]` | 列出[插件市场](./marketplace)提供的插件 |
+| `khonsu plugin install ID --yes` | 按名称从插件市场安装插件并批准 |
 | `khonsu plugin install DIR --yes` | 安装插件目录或 ZIP，并批准其权限 |
+| `khonsu plugin update` | 更新从插件市场安装的插件；`--dry-run` 只预览 |
+| `khonsu marketplace list` | 列出插件市场；用 `add` 和 `remove` 修改 |
 | `khonsu plugin sync --source ID` | 同步数据源；`--dry-run` 预览，`--incremental` 和 `--append` 只新增和更新、不删除 |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | 运行[插件自带的分析](./investigations#plugin-analyses)，例如 AWS `exposure` |
 | `khonsu source list` | 列出已配置数据源 |

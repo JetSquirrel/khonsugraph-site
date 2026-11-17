@@ -62,12 +62,13 @@ khonsu open examples/sre/blast_radius.dash
 
 Для инженера по облачной безопасности: что конфигурация аккаунта AWS открывает в интернет — от CIDR интернета через группы безопасности и балансировщики нагрузки до инстансов и ролей, которые они принимают.
 
-В репозитории приложения есть сохранённые ответы AWS CLI. Выполняйте команды из его корня:
+Сохранённые ответы AWS CLI для плагина AWS лежат в репозитории [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace). Склонируйте его рядом с репозиторием приложения и выполняйте команды из корня репозитория приложения:
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

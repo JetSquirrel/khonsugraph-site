@@ -62,12 +62,13 @@ fetch スクリプトは公開データをダウンロードします。`$PWD` �
 
 クラウドセキュリティエンジニア向けです。AWS アカウントの設定がインターネットに何を開いているかを、インターネット CIDR からセキュリティグループ、ロードバランサーを経て、インスタンスとそれらが引き受けるロールまで示します。
 
-アプリリポジトリには、保存された AWS CLI のレスポンスが含まれています。そのルートから実行します:
+AWS プラグインの保存済み AWS CLI レスポンスは [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) リポジトリにあります。アプリリポジトリの隣にチェックアウトし、アプリリポジトリのルートから実行します:
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

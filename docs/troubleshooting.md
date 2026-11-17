@@ -33,7 +33,7 @@ If a read exceeds its budget, narrow it using predicates and `LIMIT`. Lowering `
 
 ## A source cannot sync
 
-Run `khonsu plugin describe ID` and check configuration fields. Ensure the packaged plugins remain beside the executable. Single-file CSV paths are stored as absolute paths when the source is added. Paths inside `nodes` and `edges` JSON are stored as given and must be absolute. AWS requires the AWS CLI and an accessible configured profile, unless using fixtures. Write `regions` as comma-separated text, not a JSON array.
+Run `khonsu plugin describe ID` and check configuration fields. Ensure the packaged plugins remain beside the executable. Single-file CSV paths are stored as absolute paths when the source is added. Paths inside `nodes` and `edges` JSON are stored as given and must be absolute. AWS requires the AWS CLI and an accessible configured profile, unless using fixtures. Write `regions` as comma-separated text, not a JSON array. If the AWS or Neo4j plugin is not found after updating past 0.3.0, install it from the [marketplace](./marketplace#install).
 
 A failed sync may leave already written records. Correct the cause, then sync again to reconcile. Inspect `skipped_edges` for unresolved endpoints.
 

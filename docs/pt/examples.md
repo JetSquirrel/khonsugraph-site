@@ -62,12 +62,13 @@ O script de download baixa dados públicos. `$PWD` mantém os caminhos dos CSV a
 
 Para um engenheiro de segurança de nuvem: o que a configuração de uma conta AWS abre para a internet, de um CIDR de internet passando por security groups e load balancers até instâncias e as roles que elas assumem.
 
-O repositório do app contém respostas salvas da AWS CLI. Execute a partir da raiz dele:
+As respostas salvas da AWS CLI do plugin AWS ficam no repositório [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace). Com um clone dele ao lado do repositório do app, execute a partir da raiz do repositório do app:
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
-  -c "fixture_dir=$PWD/plugins/aws/tests/fixture" -c regions=us-east-1
+  -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
 khonsu check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws

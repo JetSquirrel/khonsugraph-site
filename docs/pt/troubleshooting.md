@@ -33,7 +33,7 @@ Se uma leitura excede seu orçamento, restrinja-a usando predicados e `LIMIT`. R
 
 ## Uma origem não consegue sincronizar
 
-Execute `khonsu plugin describe ID` e verifique os campos de configuração. Garanta que os plugins empacotados permaneçam ao lado do executável. Caminhos de CSV de arquivo único são armazenados como caminhos absolutos quando a origem é adicionada. Caminhos dentro do JSON `nodes` e `edges` são armazenados como fornecidos e precisam ser absolutos. A AWS exige a AWS CLI e um perfil configurado acessível, a menos que você use fixtures. Escreva `regions` como texto separado por vírgulas, não como um array JSON.
+Execute `khonsu plugin describe ID` e verifique os campos de configuração. Garanta que os plugins empacotados permaneçam ao lado do executável. Caminhos de CSV de arquivo único são armazenados como caminhos absolutos quando a origem é adicionada. Caminhos dentro do JSON `nodes` e `edges` são armazenados como fornecidos e precisam ser absolutos. A AWS exige a AWS CLI e um perfil configurado acessível, a menos que você use fixtures. Escreva `regions` como texto separado por vírgulas, não como um array JSON. Se o plugin AWS ou Neo4j não for encontrado depois de atualizar para além da 0.3.0, instale-o pelo [marketplace](./marketplace#install).
 
 Uma sincronização com falha pode deixar registros já gravados. Corrija a causa e sincronize de novo para reconciliar. Inspecione `skipped_edges` para extremidades não resolvidas.
 

@@ -51,3 +51,7 @@ khonsu plugin describe folders
 ```
 
 `--yes` 表示批准声明的权限。安装操作会复制插件，修改源码后需要重新安装。实现全量或增量同步前，请阅读[同步规则](./data-sources#sync-semantics)。
+
+## 分享插件 {#share}
+
+要让其他人按名称安装你的插件，请把它发布到插件市场，见[发布插件](./marketplace#publish)。

@@ -11,6 +11,7 @@ Es ist ein unabhängiges Projekt, das auf HawDB aufbaut und unter Apache-2.0 ver
 
 - [Installieren und die erste Abfrage ausführen](./getting-started)
 - [CSV importieren, AWS verbinden oder eine Neo4j-Datenbank kopieren](./data-sources)
+- [Plugins per Namen aus einem Marketplace installieren](./marketplace)
 - [Cypher-Unterstützung und Abfragegrenzen verstehen](./queries)
 - [Einen Pfad verfolgen, Belege anführen und eine Untersuchung speichern](./investigations)
 - [Knoten bewerten und Communities mit der Graphanalyse finden](./analysis)

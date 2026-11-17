@@ -33,7 +33,7 @@ HawDB 0.25 更改了存储格式，不再读取更早的图，因此由 KhonsuGr
 
 ## 数据源无法同步
 
-执行 `khonsu plugin describe ID` 核对配置字段，确认内置插件仍在可执行文件旁。单文件 CSV 路径会在添加数据源时保存为绝对路径；`nodes` 和 `edges` JSON 中的路径按原样保存，必须写成绝对路径。除固定测试数据模式外，AWS 需要已安装的 AWS CLI 和可访问的配置。`regions` 请写成逗号分隔的文本，不要写成 JSON 数组。
+执行 `khonsu plugin describe ID` 核对配置字段，确认内置插件仍在可执行文件旁。单文件 CSV 路径会在添加数据源时保存为绝对路径；`nodes` 和 `edges` JSON 中的路径按原样保存，必须写成绝对路径。除固定测试数据模式外，AWS 需要已安装的 AWS CLI 和可访问的配置。`regions` 请写成逗号分隔的文本，不要写成 JSON 数组。 升级到 0.3.0 之后的版本后如果找不到 AWS 或 Neo4j 插件，请从[插件市场](./marketplace#install)安装。
 
 失败的同步可能保留已写入记录。解决原因后再次同步以重新对齐。通过 `skipped_edges` 查看是否存在找不到端点的关系。
 

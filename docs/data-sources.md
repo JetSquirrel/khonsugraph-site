@@ -20,10 +20,13 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 
 ## AWS
 
+From the release after 0.3.0, the AWS plugin is installed from the [marketplace](./marketplace) rather than shipped with the app: `khonsu plugin install aws --yes`. In 0.3.0 it ships with the app.
+
 The AWS plugin uses the AWS CLI to read VPCs, subnets, security groups, instances, load balancers and IAM roles. Install and configure the AWS CLI first, then use a read-only profile you control. `regions` is a comma-separated list, such as `us-east-1,eu-west-1`.
 
 ```sh
 khonsu init graphs/aws
+khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
   -c profile=readonly -c regions=us-east-1 --test
@@ -31,16 +34,19 @@ khonsu plugin sync --source aws-demo --dry-run
 khonsu plugin sync --source aws-demo
 ```
 
-This accesses the configured AWS account. For an offline walkthrough, use the saved fixtures in the app repository instead; see [examples](./examples).
+This accesses the configured AWS account. For an offline walkthrough, use the saved responses in the [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) repository instead; see [examples](./examples).
 
 The <a href="/docs/samples/exposure.dash" download>AWS exposure dashboard</a> traces `Cidr → SecurityGroup ← Instance → Role` using the relationships imported by this plugin.
 
 ## Neo4j and Cartography {#neo4j}
 
+From the release after 0.3.0, the Neo4j plugin is installed from the [marketplace](./marketplace) rather than shipped with the app: `khonsu plugin install neo4j --yes`. In 0.3.0 it ships with the app.
+
 The Neo4j plugin, added in 0.3.0, copies the nodes and relationships of a Neo4j database into a local graph over Neo4j's HTTP API. It sends read queries only. Its main use is [Cartography](https://github.com/cartography-cncf/cartography), which pulls AWS, GCP, Azure, Kubernetes, GitHub, Okta and more into Neo4j; any Neo4j database works.
 
 ```sh
 khonsu init graphs/infra
+khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test
 khonsu plugin sync --source infra
@@ -48,7 +54,7 @@ khonsu plugin sync --source infra
 
 The address is Neo4j's HTTP one, 7474 by default, not `bolt://`. The password is kept in the system keychain, and a reader role is enough.
 
-HawDB has one label per node, so each node takes one of its Neo4j labels, usually the rarest, and keeps all of them in `neo4j_labels`. When `MATCH (p:AWSPrincipal)` returns nothing, try `MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels`. Queries written for Neo4j may need changes; see [query limitations](./queries#current-limitations) and the [plugin's README](https://github.com/JetSquirrel/KhonsuGraph/tree/main/plugins/neo4j).
+HawDB has one label per node, so each node takes one of its Neo4j labels, usually the rarest, and keeps all of them in `neo4j_labels`. When `MATCH (p:AWSPrincipal)` returns nothing, try `MATCH (p) WHERE 'AWSPrincipal' IN p.neo4j_labels`. Queries written for Neo4j may need changes; see [query limitations](./queries#current-limitations) and the [plugin's README](https://github.com/JetSquirrel/khonsugraph-marketplace/tree/main/plugins/neo4j).
 
 ## Sync semantics
 

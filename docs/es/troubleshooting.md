@@ -33,7 +33,7 @@ Si una lectura supera su presupuesto, redúcela con predicados y `LIMIT`. Bajar 
 
 ## Una fuente no se puede sincronizar
 
-Ejecuta `khonsu plugin describe ID` y comprueba los campos de configuración. Asegúrate de que los plugins empaquetados permanecen junto al ejecutable. Las rutas de los CSV de archivo único se guardan como rutas absolutas al añadir la fuente. Las rutas dentro del JSON de `nodes` y `edges` se guardan tal como se dan y deben ser absolutas. AWS requiere la AWS CLI y un perfil configurado y accesible, salvo que uses fixtures. Escribe `regions` como texto separado por comas, no como un array JSON.
+Ejecuta `khonsu plugin describe ID` y comprueba los campos de configuración. Asegúrate de que los plugins empaquetados permanecen junto al ejecutable. Las rutas de los CSV de archivo único se guardan como rutas absolutas al añadir la fuente. Las rutas dentro del JSON de `nodes` y `edges` se guardan tal como se dan y deben ser absolutas. AWS requiere la AWS CLI y un perfil configurado y accesible, salvo que uses fixtures. Escribe `regions` como texto separado por comas, no como un array JSON. Si no se encuentra el plugin de AWS o de Neo4j tras actualizar a una versión posterior a 0.3.0, instálalo desde el [marketplace](./marketplace#install).
 
 Una sincronización fallida puede dejar registros ya escritos. Corrige la causa y vuelve a sincronizar para reconciliarlos. Inspecciona `skipped_edges` para ver los extremos sin resolver.
 

@@ -51,3 +51,7 @@ khonsu plugin describe folders
 ```
 
 `--yes` aprueba los permisos declarados. El instalador copia el plugin; reinstálalo después de cambiar el código fuente. Consulta [semántica de sincronización](./data-sources#sync-semantics) antes de implementar la sincronización completa o incremental.
+
+## Compartir un plugin {#share}
+
+Para que otros instalen tu plugin por su nombre, publícalo en un marketplace. Consulta [publicar un plugin](./marketplace#publish).
