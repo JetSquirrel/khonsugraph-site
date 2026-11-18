@@ -1,14 +1,14 @@
 ---
-description: 用 khonsu analyze 在本地图上运行 PageRank、介数中心性、Louvain 社区发现、连通分量、k-core 和最短路径。
+description: 用 khonsu graph analyze 在本地图上运行 PageRank、介数中心性、Louvain 社区发现、连通分量、k-core 和最短路径。
 ---
 # 图分析
 
-Cypher 查询回答的是关于具体模式的问题。`khonsu analyze` 回答的是关于图整体结构的问题：哪个节点最核心，形成了哪些群体，两个节点如何相连。计算在内存中完成，算法定义与 networkx 一致，因此在同一张图上结果与 networkx 相同。
+Cypher 查询回答的是关于具体模式的问题。`khonsu graph analyze` 回答的是关于图整体结构的问题：哪个节点最核心，形成了哪些群体，两个节点如何相连。计算在内存中完成，算法定义与 networkx 一致，因此在同一张图上结果与 networkx 相同。
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 面对一张不熟悉的图，先运行 `summary`。
@@ -35,9 +35,9 @@ khonsu analyze communities --db graphs/investigation
 默认情况下，算法读取整张图。可以用三种方式缩小范围：
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ khonsu analyze pagerank --db graphs/security \
 
 ## 用图分析还是 Cypher？
 
-Cypher 支持在两个已确定的节点之间使用 `shortestPath` 和 `allShortestPaths`，见 [Cypher 与 SQL](./queries)。路径需要考虑权重时使用 `khonsu analyze path`；问题针对整张图而不是某个模式时，使用其他算法。需要从一个节点向外探索并限制跳数和规模时，使用 [`khonsu explore`](./investigations#explore)。
+Cypher 支持在两个已确定的节点之间使用 `shortestPath` 和 `allShortestPaths`，见 [Cypher 与 SQL](./queries)。路径需要考虑权重时使用 `khonsu graph analyze path`；问题针对整张图而不是某个模式时，使用其他算法。需要从一个节点向外探索并限制跳数和规模时，使用 [`khonsu graph explore`](./investigations#explore)。

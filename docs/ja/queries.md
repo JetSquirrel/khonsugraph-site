@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 `allShortestPaths`、`nodes(p)`、`relationships(p)` も動作します。両方の端点は、プロパティマップ、`WHERE`、またはそれより前の句によってバインドされている必要があります。`p` を返すと、キャンバス上に経路が描画されます。上限のない `*` は 256 ホップで停止し、経路が存在しないと報告する代わりに失敗します。
 
-ホップ数とサイズに上限を設けてノードから外側へたどるには、[`khonsu explore`](./investigations#explore) を使用してください。重み付き経路、中心性、コミュニティについては、[グラフ分析](./analysis) を参照してください。
+ホップ数とサイズに上限を設けてノードから外側へたどるには、[`khonsu graph explore`](./investigations#explore) を使用してください。重み付き経路、中心性、コミュニティについては、[グラフ分析](./analysis) を参照してください。
 
 ## SQL とパラメーター
 

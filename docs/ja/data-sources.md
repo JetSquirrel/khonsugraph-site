@@ -25,7 +25,7 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 AWS プラグインは AWS CLI を使用して、VPC、サブネット、セキュリティグループ、インスタンス、ロードバランサー、IAM ロールを読み取ります。まず AWS CLI をインストールして設定し、その後、自分が管理する読み取り専用のプロファイルを使用してください。`regions` はカンマ区切りのリストで、たとえば `us-east-1,eu-west-1` です。
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
@@ -45,7 +45,7 @@ khonsu plugin sync --source aws-demo
 Neo4j プラグインは 0.3.0 で追加され、Neo4j データベースのノードとリレーションシップを、Neo4j の HTTP API 経由でローカルのグラフにコピーします。送信するのは読み取りクエリのみです。主な用途は [Cartography](https://github.com/cartography-cncf/cartography) で、これは AWS、GCP、Azure、Kubernetes、GitHub、Okta などを Neo4j に取り込みます。どの Neo4j データベースでも使用できます。
 
 ```sh
-khonsu init graphs/infra
+khonsu graph init graphs/infra
 khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test

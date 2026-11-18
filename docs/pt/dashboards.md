@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check` executa cada consulta em modo somente leitura, valida as colunas dos gráficos e testa filtros com valores reais. Corrija todo erro relatado antes de abrir ou compartilhar o painel.
+`dash check` executa cada consulta em modo somente leitura, valida as colunas dos gráficos e testa filtros com valores reais. Corrija todo erro relatado antes de abrir ou compartilhar o painel.
 
 ## Gráficos e layout
 
@@ -50,13 +50,13 @@ O placeholder precisa ser uma condição `WHERE` inteira, opcionalmente combinad
 
 ## Revise com um agente
 
-Comente em um gráfico no app. Um agente lê os comentários, edita o arquivo, executa `check` e responde. Os comentários ficam ao lado do painel, em `FILE.comments.json`. A presença pode identificar os gráficos que o agente está editando, e a janela é redesenhada quando o arquivo muda.
+Comente em um gráfico no app. Um agente lê os comentários, edita o arquivo, executa `dash check` e responde. Os comentários ficam ao lado do painel, em `FILE.comments.json`. A presença pode identificar os gráficos que o agente está editando, e a janela é redesenhada quando o arquivo muda.
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 O formato não tem funções arbitrárias, condicionais ou estilo dependente de dados. Veja [CLI e agentes](./cli) para os comandos de revisão.

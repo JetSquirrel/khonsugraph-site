@@ -1,14 +1,14 @@
 ---
-description: Run PageRank, betweenness, Louvain communities, connected components, k-core and shortest paths on a local graph with khonsu analyze.
+description: Run PageRank, betweenness, Louvain communities, connected components, k-core and shortest paths on a local graph with khonsu graph analyze.
 ---
 # Graph analysis
 
-A Cypher query answers what you ask about named patterns. `khonsu analyze` answers questions about the shape of the graph: which node is most central, which groups form, how two nodes connect. It computes in memory and follows networkx's definitions, so results match networkx on the same graph.
+A Cypher query answers what you ask about named patterns. `khonsu graph analyze` answers questions about the shape of the graph: which node is most central, which groups form, how two nodes connect. It computes in memory and follows networkx's definitions, so results match networkx on the same graph.
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 Start with `summary` on an unfamiliar graph.
@@ -35,9 +35,9 @@ Start with `summary` on an unfamiliar graph.
 By default an algorithm reads the whole graph. Narrow it three ways:
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ Betweenness is exact up to 5,000 nodes and sampled from 500 sources above that. 
 
 ## Analysis or Cypher?
 
-Cypher has `shortestPath` and `allShortestPaths` between two bound nodes; see [Cypher & SQL](./queries). Use `khonsu analyze path` when the path should respect a weight, and the other algorithms when the question is about the whole graph rather than one pattern. To walk outward from a node with caps on hops and size, use [`khonsu explore`](./investigations#explore).
+Cypher has `shortestPath` and `allShortestPaths` between two bound nodes; see [Cypher & SQL](./queries). Use `khonsu graph analyze path` when the path should respect a weight, and the other algorithms when the question is about the whole graph rather than one pattern. To walk outward from a node with caps on hops and size, use [`khonsu graph explore`](./investigations#explore).

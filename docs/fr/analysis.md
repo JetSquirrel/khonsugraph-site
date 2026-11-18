@@ -1,14 +1,14 @@
 ---
-description: Exécutez PageRank, betweenness, les communautés Louvain, les composantes connexes, le k-core et les chemins les plus courts sur un graphe local avec khonsu analyze.
+description: Exécutez PageRank, betweenness, les communautés Louvain, les composantes connexes, le k-core et les chemins les plus courts sur un graphe local avec khonsu graph analyze.
 ---
 # Analyse de graphe
 
-Une requête Cypher répond à ce que vous demandez sur des motifs nommés. `khonsu analyze` répond à des questions sur la forme du graphe : quel nœud est le plus central, quels groupes se forment, comment deux nœuds se connectent. Il calcule en mémoire et suit les définitions de networkx, de sorte que les résultats correspondent à networkx sur le même graphe.
+Une requête Cypher répond à ce que vous demandez sur des motifs nommés. `khonsu graph analyze` répond à des questions sur la forme du graphe : quel nœud est le plus central, quels groupes se forment, comment deux nœuds se connectent. Il calcule en mémoire et suit les définitions de networkx, de sorte que les résultats correspondent à networkx sur le même graphe.
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 Commencez par `summary` sur un graphe que vous ne connaissez pas.
@@ -35,9 +35,9 @@ Commencez par `summary` sur un graphe que vous ne connaissez pas.
 Par défaut, un algorithme lit tout le graphe. Restreignez-le de trois manières :
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ Betweenness est exact jusqu'à 5 000 nœuds et échantillonné à partir de 500 
 
 ## Analyse ou Cypher ?
 
-Cypher dispose de `shortestPath` et `allShortestPaths` entre deux nœuds liés ; voir [Cypher et SQL](./queries). Utilisez `khonsu analyze path` lorsque le chemin doit respecter un poids, et les autres algorithmes lorsque la question porte sur l'ensemble du graphe plutôt que sur un motif. Pour partir d'un nœud vers l'extérieur avec des plafonds sur les sauts et la taille, utilisez [`khonsu explore`](./investigations#explore).
+Cypher dispose de `shortestPath` et `allShortestPaths` entre deux nœuds liés ; voir [Cypher et SQL](./queries). Utilisez `khonsu graph analyze path` lorsque le chemin doit respecter un poids, et les autres algorithmes lorsque la question porte sur l'ensemble du graphe plutôt que sur un motif. Pour partir d'un nœud vers l'extérieur avec des plafonds sur les sauts et la taille, utilisez [`khonsu graph explore`](./investigations#explore).

@@ -22,7 +22,7 @@ khonsu --version
 Выполните эти команды в этой папке. На время импорта граф должен быть закрыт в настольном приложении.
 
 ```sh
-khonsu init graphs/demo
+khonsu graph init graphs/demo
 khonsu source add --db graphs/demo --plugin csv --name demo \
   -c node_file=hosts.csv -c node_label=Host -c node_id_column=id \
   -c edge_file=dependencies.csv -c edge_type=DEPENDS_ON \

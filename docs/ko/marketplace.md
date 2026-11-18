@@ -43,14 +43,14 @@ khonsu plugin update              # 설치된 플러그인을 최신으로 유�
 ## 마켓플레이스 추가 {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # GitHub의 owner/repo
-khonsu marketplace add https://plugins.example.com  # 임의의 HTTPS 주소
-khonsu marketplace add ~/work/team-plugins          # 폴더
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # GitHub의 owner/repo
+khonsu plugin marketplace add https://plugins.example.com  # 임의의 HTTPS 주소
+khonsu plugin marketplace add ~/work/team-plugins   # 폴더
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official`은 공식 마켓플레이스를 끄고, `khonsu marketplace restore`는 다시 켭니다.
+`khonsu plugin marketplace remove official`은 공식 마켓플레이스를 끄고, `khonsu plugin marketplace restore`는 다시 켭니다.
 
 ## 플러그인 게시 {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-플러그인을 그 폴더에 패키징하고 폴더의 `marketplace.json`에 등록합니다. 폴더를 커밋해 푸시하거나 정적 호스팅에 업로드하십시오. 다른 사람은 `khonsu marketplace add`로 한 번 추가한 뒤 이름으로 설치할 수 있습니다. 같은 버전을 다시 게시하면 해당 플랫폼의 패키지가 교체되므로, 플랫폼마다 자체 빌드를 게시할 수 있습니다. [전체 마켓플레이스 참조](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md)를 참고하십시오.
+플러그인을 그 폴더에 패키징하고 폴더의 `marketplace.json`에 등록합니다. 폴더를 커밋해 푸시하거나 정적 호스팅에 업로드하십시오. 다른 사람은 `khonsu plugin marketplace add`로 한 번 추가한 뒤 이름으로 설치할 수 있습니다. 같은 버전을 다시 게시하면 해당 플랫폼의 패키지가 교체되므로, 플랫폼마다 자체 빌드를 게시할 수 있습니다. [전체 마켓플레이스 참조](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md)를 참고하십시오.

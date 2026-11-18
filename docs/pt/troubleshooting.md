@@ -19,7 +19,7 @@ Um processo é dono de um diretório de grafo do HawDB. Leituras e verificaçõe
 
 ## O grafo informa old_format {#old-format}
 
-O HawDB 0.25 mudou seu formato de armazenamento e não lê grafos mais antigos, então um grafo gravado pelo KhonsuGraph 0.2.0 ou anterior falha ao abrir com o tipo `old_format`. `khonsu rebuild --db DIR` o refaz a partir de suas fontes de dados e mantém o diretório antigo ao lado como `DIR.hawdb-old`. Tudo que foi gravado à mão em vez de sincronizado não é transportado.
+O HawDB 0.25 mudou seu formato de armazenamento e não lê grafos mais antigos, então um grafo gravado pelo KhonsuGraph 0.2.0 ou anterior falha ao abrir com o tipo `old_format`. `khonsu graph rebuild --db DIR` o refaz a partir de suas fontes de dados e mantém o diretório antigo ao lado como `DIR.hawdb-old`. Tudo que foi gravado à mão em vez de sincronizado não é transportado.
 
 ## Um painel de grafo está vazio
 
@@ -27,7 +27,7 @@ Retorne nós e relacionamentos inteiros (`RETURN a, r, b`) em vez de apenas nome
 
 ## Uma consulta ou painel falha
 
-Execute `khonsu check FILE --db DIR` e leia todos os erros relatados. Um gráfico pode referenciar uma coluna ausente; um conjunto de dados importado pode usar rótulos diferentes. Alguns recursos do Cypher não são suportados: veja [limitações de consulta](./queries#current-limitations).
+Execute `khonsu dash check FILE --db DIR` e leia todos os erros relatados. Um gráfico pode referenciar uma coluna ausente; um conjunto de dados importado pode usar rótulos diferentes. Alguns recursos do Cypher não são suportados: veja [limitações de consulta](./queries#current-limitations).
 
 Se uma leitura excede seu orçamento, restrinja-a usando predicados e `LIMIT`. Reduzir apenas `--max-rows` não diminui o custo de execução.
 

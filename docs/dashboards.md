@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check` executes each query read-only, validates plot columns and tries filters with actual values. Fix every reported error before opening or sharing the dashboard.
+`dash check` executes each query read-only, validates plot columns and tries filters with actual values. Fix every reported error before opening or sharing the dashboard.
 
 ## Plots and layout
 
@@ -50,13 +50,13 @@ The placeholder must be a whole `WHERE` condition, optionally joined by `AND`. I
 
 ## Review with an agent
 
-Comment on a plot in the app. An agent reads the comments, edits the file, runs `check` and replies. Comments live beside the dashboard in `FILE.comments.json`. Presence can identify the plots the agent is editing, and the window redraws when the file changes.
+Comment on a plot in the app. An agent reads the comments, edits the file, runs `dash check` and replies. Comments live beside the dashboard in `FILE.comments.json`. Presence can identify the plots the agent is editing, and the window redraws when the file changes.
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 The format has no arbitrary functions, conditionals or data-dependent styling. See [CLI & agents](./cli) for the review commands.

@@ -1,5 +1,5 @@
 ---
-description: khonsu explore로 그래프의 경로를 추적하고, 각 레코드의 근거가 되는 증거를 인용하고, 조사를 저장하고, 데이터가 바뀐 뒤 다시 확인합니다.
+description: khonsu graph explore로 그래프의 경로를 추적하고, 각 레코드의 근거가 되는 증거를 인용하고, 조사를 저장하고, 데이터가 바뀐 뒤 다시 확인합니다.
 ---
 # 조사
 
@@ -9,10 +9,10 @@ description: khonsu explore로 그래프의 경로를 추적하고, 각 레코�
 
 ## 경로 따라가기 {#explore}
 
-`khonsu explore`는 그래프 전체를 로드하지 않고 하나 이상의 노드에서 바깥으로 걸어갑니다. 창에서는 같은 탐색이 그래프 캔버스의 **경로 탐색기**(Path Explorer)입니다.
+`khonsu graph explore`는 그래프 전체를 로드하지 않고 하나 이상의 노드에서 바깥으로 걸어갑니다. 창에서는 같은 탐색이 그래프 캔버스의 **경로 탐색기**(Path Explorer)입니다.
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ khonsu explore --db graphs/aws \
 
 ## 증거 {#evidence}
 
-`khonsu evidence`는 노드나 관계를 무엇이 뒷받침하는지 알려 줍니다. 어떤 소스와 플러그인이 기록했는지, 마지막으로 언제 바뀌었는지, 그 소스의 마지막 동기화가 완전했는지입니다.
+`khonsu graph evidence`는 노드나 관계를 무엇이 뒷받침하는지 알려 줍니다. 어떤 소스와 플러그인이 기록했는지, 마지막으로 언제 바뀌었는지, 그 소스의 마지막 동기화가 완전했는지입니다.
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | 필드 | 의미 |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit`(소스가 보고함), `derived`, `unknown` |
 | `properties`, `redacted` | 레코드 자체의 속성과 비밀로 의심되어 마스킹된 이름 |
 
-출처 필드는 값을 아는 상태이거나 명시적으로 알 수 없음 상태이며, 추정하지 않습니다. `--to`를 사용하면 `khonsu explore`가 경로가 기대는 증거 ID를 나열하는 파생 레코드 `path.evidence`를 추가합니다.
+출처 필드는 값을 아는 상태이거나 명시적으로 알 수 없음 상태이며, 추정하지 않습니다. `--to`를 사용하면 `khonsu graph explore`가 경로가 기대는 증거 ID를 나열하는 파생 레코드 `path.evidence`를 추가합니다.
 
 관계가 얼마나 강하게 알려져 있는지는 그 속성에 담긴 관례입니다. `confidence`는 `confirmed`, `inferred`, `unconfirmed` 중 하나이며, `evidence`는 무엇이 그것을 보여 주었는지 나타냅니다. 경로는 가장 약한 홉만큼만 강합니다. `unconfirmed` 관계가 하나라도 있으면 그 경로 역시 확인되지 않은 것으로 취급됩니다.
 
@@ -64,17 +64,17 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-AWS `exposure` 분석은 `potential_exposure`, `insufficient_data`, `not_indicated` 중 하나의 판정과 함께 발견을 반환합니다. 각 발견은 자신의 규칙, 검사한 조건과 그 근거 필드, 평가할 수 없었던 것(`unknowns`), 규칙이 읽지 않는 것(`assumptions`), 그리고 `khonsu explore`에 넘길 수 있는 `walk`를 알려 줍니다. 발견은 구성을 설명합니다. 리소스에 도달할 수 있는지 또는 안전한지는 말하지 않습니다.
+AWS `exposure` 분석은 `potential_exposure`, `insufficient_data`, `not_indicated` 중 하나의 판정과 함께 발견을 반환합니다. 각 발견은 자신의 규칙, 검사한 조건과 그 근거 필드, 평가할 수 없었던 것(`unknowns`), 규칙이 읽지 않는 것(`assumptions`), 그리고 `khonsu graph explore`에 넘길 수 있는 `walk`를 알려 줍니다. 발견은 구성을 설명합니다. 리소스에 도달할 수 있는지 또는 안전한지는 말하지 않습니다.
 
 ## 저장된 조사 {#saved-investigations}
 
 저장된 조사는 탐색의 시작점과 필터, 선택한 경로, 쿼리, 대시보드를 자체 파일에 보관합니다. 저장해도 그래프에는 아무것도 기록되지 않습니다.
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 다시 열면 현재 그래프에서 탐색을 다시 실행하고 저장했을 때와 무엇이 다른지 알려 줍니다. `graph_state`를 먼저 읽으십시오.
@@ -96,11 +96,11 @@ khonsu investigation reopen web.investigation
 스냅샷은 그래프의 레코드를 안정적인 ID 기준으로 파일에 보관하므로, 나중에 무엇이 바뀌었는지 물을 수 있습니다. 스냅샷은 직접 만들어야 하며, 동기화가 실행될 때 자동으로 만들어지는 것은 없습니다.
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | 목록 | 의미 |
@@ -120,7 +120,7 @@ khonsu snapshot check monday.snapshot.json --db graphs/aws
 
 ## 제한
 
-- `khonsu explore`와 `khonsu investigation`은 그래프가 비어 있어야 합니다. 창이 그래프를 열고 있으면 종류 `locked`로 실패하므로, 대신 창에서 경로 탐색기를 사용하십시오.
+- `khonsu graph explore`와 `khonsu investigate`은 그래프가 비어 있어야 합니다. 창이 그래프를 열고 있으면 종류 `locked`로 실패하므로, 대신 창에서 경로 탐색기를 사용하십시오.
 - 200,000개를 넘는 노드나 관계가 있는 그래프는 스냅샷을 만들 수 없고 종류 `too_large`로 실패합니다.
 - 직접 작성한 레코드에는 안정적인 ID가 없습니다. 개수에는 포함되지만 diff에서 비교되지는 않습니다.
 - 창에는 아직 스냅샷이나 diff 보기가 없습니다.

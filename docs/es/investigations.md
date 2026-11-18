@@ -1,5 +1,5 @@
 ---
-description: Traza rutas por un grafo con khonsu explore, cita la evidencia detrás de cada registro, guarda una investigación y vuelve a comprobarla cuando cambien los datos.
+description: Traza rutas por un grafo con khonsu graph explore, cita la evidencia detrás de cada registro, guarda una investigación y vuelve a comprobarla cuando cambien los datos.
 ---
 # Investigaciones
 
@@ -9,10 +9,10 @@ Estos comandos llegaron en KhonsuGraph 0.3.0. Ejecuta `khonsu --version` para ve
 
 ## Sigue una ruta {#explore}
 
-`khonsu explore` recorre hacia fuera desde uno o varios nodos sin cargar el grafo entero. En la ventana, el mismo recorrido es **Path Explorer** sobre un lienzo de grafo.
+`khonsu graph explore` recorre hacia fuera desde uno o varios nodos sin cargar el grafo entero. En la ventana, el mismo recorrido es **Path Explorer** sobre un lienzo de grafo.
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ Una ruta es un candidato encontrado en los datos. No es prueba de que se pueda a
 
 ## Evidencia {#evidence}
 
-`khonsu evidence` dice qué respalda un nodo o una relación: qué fuente y plugin lo escribieron, cuándo cambió por última vez y si la última sincronización de esa fuente fue completa.
+`khonsu graph evidence` dice qué respalda un nodo o una relación: qué fuente y plugin lo escribieron, cuándo cambió por última vez y si la última sincronización de esa fuente fue completa.
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | Campo | Significado |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit` (una fuente lo informó), `derived` o `unknown` |
 | `properties`, `redacted` | Las propiedades del propio registro, y los nombres enmascarados por ser posibles secretos |
 
-Un campo de procedencia o se conoce con un valor o es explícitamente desconocido; nada se estima. Con `--to`, `khonsu explore` añade `path.evidence`, un registro derivado que enumera los ID de evidencia en los que se apoya la ruta.
+Un campo de procedencia o se conoce con un valor o es explícitamente desconocido; nada se estima. Con `--to`, `khonsu graph explore` añade `path.evidence`, un registro derivado que enumera los ID de evidencia en los que se apoya la ruta.
 
 La fuerza con la que se conoce una relación es una convención en sus propias propiedades. `confidence` es `confirmed`, `inferred` o `unconfirmed`, y `evidence` dice qué la mostró. Una ruta es tan fuerte como su salto más débil: una relación `unconfirmed` hace que la ruta no esté confirmada.
 
@@ -64,17 +64,17 @@ Un plugin puede incluir reglas para su propio dominio. `khonsu plugin describe I
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-El análisis `exposure` de AWS devuelve hallazgos con un veredicto `potential_exposure`, `insufficient_data` o `not_indicated`. Cada hallazgo nombra su regla, las condiciones que comprobó con los campos que las respaldan, lo que no pudo evaluar (`unknowns`), lo que la regla no lee (`assumptions`) y un `walk` que puedes pasar a `khonsu explore`. Un hallazgo describe configuración. No dice que un recurso sea alcanzable, ni seguro.
+El análisis `exposure` de AWS devuelve hallazgos con un veredicto `potential_exposure`, `insufficient_data` o `not_indicated`. Cada hallazgo nombra su regla, las condiciones que comprobó con los campos que las respaldan, lo que no pudo evaluar (`unknowns`), lo que la regla no lee (`assumptions`) y un `walk` que puedes pasar a `khonsu graph explore`. Un hallazgo describe configuración. No dice que un recurso sea alcanzable, ni seguro.
 
 ## Investigaciones guardadas {#saved-investigations}
 
 Una investigación guardada conserva los puntos de partida y los filtros de un recorrido, la ruta que elegiste, una consulta y un panel en un archivo propio. Guardar no escribe nada en el grafo.
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 Volver a abrirla ejecuta el recorrido de nuevo sobre el grafo tal como está ahora y dice en qué difiere de cuando se guardó. Lee primero `graph_state`:
@@ -96,11 +96,11 @@ El archivo es JSON. Contiene la ruta del grafo, los ID de las fuentes de datos, 
 Una instantánea guarda los registros de un grafo en un archivo, por ID estable, para que puedas preguntar más adelante qué cambió. Las instantáneas se toman a mano; nada toma una cuando se ejecuta una sincronización.
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | Lista | Significado |
@@ -120,7 +120,7 @@ Selecciona un nodo en un lienzo de grafo y usa **Path Explorer** para recorrer d
 
 ## Límites
 
-- `khonsu explore` y `khonsu investigation` necesitan el grafo libre. Fallan con el tipo `locked` mientras la ventana lo tiene abierto; usa Path Explorer en la ventana en su lugar.
+- `khonsu graph explore` y `khonsu investigate` necesitan el grafo libre. Fallan con el tipo `locked` mientras la ventana lo tiene abierto; usa Path Explorer en la ventana en su lugar.
 - Un grafo de más de 200.000 nodos o relaciones no admite instantáneas y falla con el tipo `too_large`.
 - Los registros escritos a mano no tienen ID estable. Se cuentan, pero no se comparan en una diferencia.
 - La ventana aún no tiene vista de instantáneas ni de diferencias.

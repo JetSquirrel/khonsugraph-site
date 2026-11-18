@@ -25,7 +25,7 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 AWS 플러그인은 AWS CLI를 사용해 VPC, 서브넷, 보안 그룹, 인스턴스, 로드 밸런서, IAM 역할을 읽습니다. 먼저 AWS CLI를 설치하고 구성한 뒤, 사용자가 관리하는 읽기 전용 프로파일을 사용하십시오. `regions`는 `us-east-1,eu-west-1`처럼 쉼표로 구분한 목록입니다.
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
@@ -45,7 +45,7 @@ khonsu plugin sync --source aws-demo
 0.3.0에서 추가된 Neo4j 플러그인은 Neo4j의 HTTP API를 통해 Neo4j 데이터베이스의 노드와 관계를 로컬 그래프로 복사합니다. 읽기 쿼리만 보냅니다. 주된 용도는 AWS, GCP, Azure, Kubernetes, GitHub, Okta 등을 Neo4j로 가져오는 [Cartography](https://github.com/cartography-cncf/cartography)이며, 어떤 Neo4j 데이터베이스든 사용할 수 있습니다.
 
 ```sh
-khonsu init graphs/infra
+khonsu graph init graphs/infra
 khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test

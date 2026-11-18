@@ -34,7 +34,7 @@ description: 공개 데이터셋을 사용한 예제 그래프 조사입니다. 
 감사자를 위한 예제입니다. `audit/trust_network.dash`는 Bitcoin OTC 신뢰 네트워크에서 누가 누구를 평가하는지 탐색합니다. [그래프 분석](./analysis)은 네트워크가 의존하는 계정을 찾아냅니다.
 
 ```sh
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
 ```
 
 `sre` 대신 `audit`을 사용해 만드십시오.
@@ -46,12 +46,12 @@ SRE를 위한 예제입니다. 어떤 서비스가 실패한 의존성을 직접
 ```sh
 sh examples/datasets/fetch.sh scratch/datasets/raw
 node examples/datasets/build.mjs sre scratch/datasets/raw scratch/datasets/sre
-khonsu init graphs/sre
+khonsu graph init graphs/sre
 khonsu source add --db graphs/sre --plugin csv --name sre-data \
   -c 'nodes=[{"path":"'"$PWD"'/scratch/datasets/sre/nodes.csv","label_column":"label","id_column":"id"}]' \
   -c 'edges=[{"path":"'"$PWD"'/scratch/datasets/sre/edges.csv","type_column":"type","source_column":"source","target_column":"target","id_column":"id"}]'
 khonsu plugin sync --source sre-data
-khonsu check examples/sre/blast_radius.dash --db graphs/sre
+khonsu dash check examples/sre/blast_radius.dash --db graphs/sre
 khonsu open graphs/sre
 khonsu open examples/sre/blast_radius.dash
 ```
@@ -65,16 +65,16 @@ fetch 스크립트는 공개 데이터를 내려받습니다. `$PWD`는 CSV 경�
 AWS 플러그인의 저장된 AWS CLI 응답은 [khonsugraph-marketplace](https://github.com/JetSquirrel/khonsugraph-marketplace) 리포지터리에 있습니다. 앱 리포지터리 옆에 체크아웃한 뒤 앱 리포지터리 루트에서 다음을 실행하십시오.
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu source add --db graphs/aws --plugin aws --name aws-fixture \
   -c "fixture_dir=$PWD/../khonsugraph-marketplace/plugins/aws/tests/fixture" -c regions=us-east-1
 khonsu plugin sync --source aws-fixture
-khonsu check examples/aws/exposure.dash --db graphs/aws
+khonsu dash check examples/aws/exposure.dash --db graphs/aws
 khonsu open graphs/aws
 khonsu open examples/aws/exposure.dash
 ```
 
 <a href="/docs/samples/exposure.dash" download>노출 대시보드</a>를 내려받을 수도 있습니다. 이 대시보드는 가져온 AWS 그래프를 필요로 합니다.
 
-0.3.0부터 `khonsu plugin analyze aws exposure --db graphs/aws`는 각 발견의 근거가 되는 규칙과 필드를 함께 보고하고, `khonsu explore`는 경로를 추적합니다. [조사](./investigations)를 참고하십시오.
+0.3.0부터 `khonsu plugin analyze aws exposure --db graphs/aws`는 각 발견의 근거가 되는 규칙과 필드를 함께 보고하고, `khonsu graph explore`는 경로를 추적합니다. [조사](./investigations)를 참고하십시오.

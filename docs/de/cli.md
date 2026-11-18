@@ -11,33 +11,33 @@ Die [Agent-Skill](https://github.com/JetSquirrel/KhonsuGraph/tree/main/skills/kh
 
 | Befehl | Zweck |
 | --- | --- |
-| `khonsu init DIR` | Einen leeren Graphen erstellen |
+| `khonsu graph init DIR` | Einen leeren Graphen erstellen |
 | `khonsu schema --db DIR` | Labels, Beziehungen, Eigenschaften und Tabellen prüfen |
 | `khonsu query --db DIR --cypher "…"` | Eine schreibgeschützte Cypher-Anweisung ausführen |
 | `khonsu query --db DIR --sql "…"` | Eine schreibgeschützte SQL-Anweisung ausführen |
 | `khonsu query --db DIR --file query.cypher` | Eine Abfragedatei ausführen; `.sql` wählt SQL |
-| `khonsu explain --db DIR --cypher "…"` | Eine Abfrage erklären |
-| `khonsu explore --db DIR --from NODE [--to NODE]` | [Von einem Knoten nach außen gehen](./investigations#explore) und einen Pfad melden |
-| `khonsu evidence --db DIR --node NODE --rel REL` | [Was einen Datensatz stützt](./investigations#evidence) anzeigen |
-| `khonsu analyze ALGORITHM --db DIR` | Einen [Graphalgorithmus](./analysis) ausführen: PageRank, Communities, Komponenten und mehr |
-| `khonsu investigation save FILE --db DIR --from NODE` | [Eine Untersuchung speichern](./investigations#saved-investigations); `reopen FILE` führt sie erneut aus |
-| `khonsu snapshot save FILE --db DIR` | Die Datensätze des Graphen aufbewahren; [`snapshot diff A B`](./investigations#snapshots) vergleicht zwei |
-| `khonsu rebuild --db DIR` | Einen Graphen im alten Format aus seinen Datenquellen neu erstellen |
+| `khonsu graph explain --db DIR --cypher "…"` | Eine Abfrage erklären |
+| `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Von einem Knoten nach außen gehen](./investigations#explore) und einen Pfad melden |
+| `khonsu graph evidence --db DIR --node NODE --rel REL` | [Was einen Datensatz stützt](./investigations#evidence) anzeigen |
+| `khonsu graph analyze ALGORITHM --db DIR` | Einen [Graphalgorithmus](./analysis) ausführen: PageRank, Communities, Komponenten und mehr |
+| `khonsu investigate save FILE --db DIR --from NODE` | [Eine Untersuchung speichern](./investigations#saved-investigations); `reopen FILE` führt sie erneut aus |
+| `khonsu graph snapshot save FILE --db DIR` | Die Datensätze des Graphen aufbewahren; [`snapshot diff A B`](./investigations#snapshots) vergleicht zwei |
+| `khonsu graph rebuild --db DIR` | Einen Graphen im alten Format aus seinen Datenquellen neu erstellen |
 | `khonsu plugin list` | Plugins und Berechtigungen auflisten |
 | `khonsu plugin describe ID` | Konfigurationsfelder und Ausgabetypen eines Plugins anzeigen |
 | `khonsu plugin search [WORDS]` | Auflisten, was die [Marketplaces](./marketplace) anbieten |
 | `khonsu plugin install ID --yes` | Ein Plugin per Namen aus einem Marketplace installieren und genehmigen |
 | `khonsu plugin install DIR --yes` | Ein Plugin-Verzeichnis oder -ZIP installieren und seine Berechtigungen genehmigen |
 | `khonsu plugin update` | Aus einem Marketplace installierte Plugins aktualisieren; `--dry-run` zeigt nur eine Vorschau |
-| `khonsu marketplace list` | Marketplaces auflisten; `add` und `remove` ändern sie |
+| `khonsu plugin marketplace list` | Marketplaces auflisten; `add` und `remove` ändern sie |
 | `khonsu plugin sync --source ID` | Eine Quelle synchronisieren; `--dry-run` zeigt eine Vorschau, `--incremental` und `--append` fügen hinzu, ohne zu entfernen |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | Die [Analyse eines Plugins](./investigations#plugin-analyses) ausführen, etwa AWS `exposure` |
 | `khonsu source list` | Konfigurierte Quellen auflisten |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | Eine Quelle konfigurieren; `--test` prüft sie zuerst |
 | `khonsu source remove ID` | Eine Quelle entfernen |
-| `khonsu check FILE --db DIR` | Ein Dashboard gegen einen Graphen validieren |
-| `khonsu comments FILE` | Diagramm-Kommentare auflisten, beantworten und erledigen |
-| `khonsu presence FILE --doing editing --plot NAME` | Dem Fenster zeigen, welche Diagramme Sie bearbeiten |
+| `khonsu dash check FILE --db DIR` | Ein Dashboard gegen einen Graphen validieren |
+| `khonsu dash comments FILE` | Diagramm-Kommentare auflisten, beantworten und erledigen |
+| `khonsu dash presence FILE --doing editing --plot NAME` | Dem Fenster zeigen, welche Diagramme Sie bearbeiten |
 | `khonsu open DIR` | Einen Graphen in der Desktop-App öffnen |
 | `khonsu open FILE.dash` | Ein Dashboard öffnen |
 | `khonsu open --state` | Den Graphen und die Tabs des laufenden Fensters lesen |
@@ -55,13 +55,13 @@ Fehlschläge enthalten ein `error`-Objekt mit `kind` und `message` sowie optiona
 ## Ein Überprüfungszyklus
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
 # Die .dash-Datei bearbeiten und anschließend validieren.
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 # Eine tatsächliche Kommentar-ID verwenden, die der erste Befehl zurückgegeben hat.
-khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
+khonsu dash presence overview.dash --doing idle
 ```
 
-Solange die App einen Graphen hält, laufen Leseabfragen, `check` und `plugin sync` über das Fenster und geben `via_window: true` zurück. Schreibende Abfragen, `explore` und `investigation` benötigen den Graphen frei. Entfernen Sie keine Sperren, um einen Schreibvorgang zu erzwingen. Siehe [Fehlerbehebung](./troubleshooting).
+Solange die App einen Graphen hält, laufen Leseabfragen, `dash check` und `plugin sync` über das Fenster und geben `via_window: true` zurück. Schreibende Abfragen, `graph explore` und `investigate` benötigen den Graphen frei. Entfernen Sie keine Sperren, um einen Schreibvorgang zu erzwingen. Siehe [Fehlerbehebung](./troubleshooting).

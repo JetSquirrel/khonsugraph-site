@@ -40,7 +40,7 @@ RETURN p, length(p) AS hops
 
 同样支持 `allShortestPaths`、`nodes(p)` 和 `relationships(p)`。两个端点都必须通过属性、`WHERE` 或前面的子句确定。返回 `p` 会在画布上画出这条路径。不设上限的 `*` 在 256 跳处停止并报错，而不是报告没有路径。
 
-需要从一个节点向外探索并限制跳数和规模时，使用 [`khonsu explore`](./investigations#explore)。带权路径、中心性和社区发现见[图分析](./analysis)。
+需要从一个节点向外探索并限制跳数和规模时，使用 [`khonsu graph explore`](./investigations#explore)。带权路径、中心性和社区发现见[图分析](./analysis)。
 
 ## SQL 与参数
 

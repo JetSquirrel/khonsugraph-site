@@ -1,14 +1,14 @@
 ---
-description: Execute PageRank, betweenness, comunidades de Louvain, componentes conectados, k-core e caminhos mais curtos em um grafo local com khonsu analyze.
+description: Execute PageRank, betweenness, comunidades de Louvain, componentes conectados, k-core e caminhos mais curtos em um grafo local com khonsu graph analyze.
 ---
 # Análise de grafos
 
-Uma consulta Cypher responde ao que você pergunta sobre padrões nomeados. `khonsu analyze` responde a perguntas sobre a forma do grafo: qual nó é mais central, que grupos se formam, como dois nós se conectam. Ele calcula em memória e segue as definições do networkx, então os resultados coincidem com o networkx no mesmo grafo.
+Uma consulta Cypher responde ao que você pergunta sobre padrões nomeados. `khonsu graph analyze` responde a perguntas sobre a forma do grafo: qual nó é mais central, que grupos se formam, como dois nós se conectam. Ele calcula em memória e segue as definições do networkx, então os resultados coincidem com o networkx no mesmo grafo.
 
 ```sh
-khonsu analyze summary --db graphs/audit
-khonsu analyze pagerank --db graphs/audit --type TRUSTS --top 10
-khonsu analyze communities --db graphs/investigation
+khonsu graph analyze summary --db graphs/audit
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS --top 10
+khonsu graph analyze communities --db graphs/investigation
 ```
 
 Comece com `summary` em um grafo desconhecido.
@@ -35,9 +35,9 @@ Comece com `summary` em um grafo desconhecido.
 Por padrão, um algoritmo lê o grafo inteiro. Restrinja-o de três maneiras:
 
 ```sh
-khonsu analyze betweenness --db graphs/sre --label Service
-khonsu analyze pagerank --db graphs/audit --type TRUSTS
-khonsu analyze pagerank --db graphs/security \
+khonsu graph analyze betweenness --db graphs/sre --label Service
+khonsu graph analyze pagerank --db graphs/audit --type TRUSTS
+khonsu graph analyze pagerank --db graphs/security \
   --cypher "MATCH (a:Process)-[r:SPAWNED]->(b:Process) RETURN a, r, b"
 ```
 
@@ -57,4 +57,4 @@ O betweenness é exato até 5.000 nós e amostrado a partir de 500 origens acima
 
 ## Análise ou Cypher?
 
-O Cypher tem `shortestPath` e `allShortestPaths` entre dois nós vinculados; veja [Cypher e SQL](./queries). Use `khonsu analyze path` quando o caminho precisar respeitar um peso, e os outros algoritmos quando a pergunta for sobre o grafo inteiro e não sobre um padrão. Para explorar a partir de um nó com limites de saltos e tamanho, use [`khonsu explore`](./investigations#explore).
+O Cypher tem `shortestPath` e `allShortestPaths` entre dois nós vinculados; veja [Cypher e SQL](./queries). Use `khonsu graph analyze path` quando o caminho precisar respeitar um peso, e os outros algoritmos quando a pergunta for sobre o grafo inteiro e não sobre um padrão. Para explorar a partir de um nó com limites de saltos e tamanho, use [`khonsu graph explore`](./investigations#explore).

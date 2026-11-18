@@ -1,5 +1,5 @@
 ---
-description: Suivez des chemins dans un graphe avec khonsu explore, citez la preuve derrière chaque enregistrement, enregistrez une investigation et vérifiez-la à nouveau après l'évolution des données.
+description: Suivez des chemins dans un graphe avec khonsu graph explore, citez la preuve derrière chaque enregistrement, enregistrez une investigation et vérifiez-la à nouveau après l'évolution des données.
 ---
 # Investigations
 
@@ -9,10 +9,10 @@ Ces commandes sont apparues dans KhonsuGraph 0.3.0. Exécutez `khonsu --version`
 
 ## Suivre un chemin {#explore}
 
-`khonsu explore` part d'un ou plusieurs nœuds vers l'extérieur sans charger tout le graphe. Dans la fenêtre, la même exploration s'appelle **Path Explorer** et s'effectue sur un canevas de graphe.
+`khonsu graph explore` part d'un ou plusieurs nœuds vers l'extérieur sans charger tout le graphe. Dans la fenêtre, la même exploration s'appelle **Path Explorer** et s'effectue sur un canevas de graphe.
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ Un chemin est un candidat trouvé dans les données. Ce n'est pas la preuve que 
 
 ## Preuves {#evidence}
 
-`khonsu evidence` indique ce qui soutient un nœud ou une relation : quelle source et quel plugin l'ont écrit, quand il a changé pour la dernière fois, et si la dernière synchronisation de cette source était complète.
+`khonsu graph evidence` indique ce qui soutient un nœud ou une relation : quelle source et quel plugin l'ont écrit, quand il a changé pour la dernière fois, et si la dernière synchronisation de cette source était complète.
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | Champ | Signification |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit` (une source l'a rapporté), `derived` ou `unknown` |
 | `properties`, `redacted` | Les propriétés de l'enregistrement lui-même, et les noms masqués comme secrets possibles |
 
-Un champ de provenance est soit connu avec une valeur, soit explicitement inconnu ; rien n'est estimé. Avec `--to`, `khonsu explore` ajoute `path.evidence`, un enregistrement dérivé qui liste les ID de preuve sur lesquels repose le chemin.
+Un champ de provenance est soit connu avec une valeur, soit explicitement inconnu ; rien n'est estimé. Avec `--to`, `khonsu graph explore` ajoute `path.evidence`, un enregistrement dérivé qui liste les ID de preuve sur lesquels repose le chemin.
 
 La force avec laquelle une relation est connue est une convention portée par ses propres propriétés. `confidence` vaut `confirmed`, `inferred` ou `unconfirmed`, et `evidence` indique ce qui l'a montré. Un chemin est aussi solide que son saut le plus faible : une seule relation `unconfirmed` rend le chemin non confirmé.
 
@@ -64,17 +64,17 @@ Un plugin peut fournir des règles propres à son domaine. `khonsu plugin descri
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-L'analyse `exposure` d'AWS renvoie des constats avec un verdict `potential_exposure`, `insufficient_data` ou `not_indicated`. Chaque constat nomme sa règle, les conditions vérifiées avec les champs qui les sous-tendent, ce qu'il n'a pas pu évaluer (`unknowns`), ce que la règle ne lit pas (`assumptions`), et une `walk` que vous pouvez passer à `khonsu explore`. Un constat décrit une configuration. Il ne dit pas qu'une ressource est accessible, ni qu'elle est sûre.
+L'analyse `exposure` d'AWS renvoie des constats avec un verdict `potential_exposure`, `insufficient_data` ou `not_indicated`. Chaque constat nomme sa règle, les conditions vérifiées avec les champs qui les sous-tendent, ce qu'il n'a pas pu évaluer (`unknowns`), ce que la règle ne lit pas (`assumptions`), et une `walk` que vous pouvez passer à `khonsu graph explore`. Un constat décrit une configuration. Il ne dit pas qu'une ressource est accessible, ni qu'elle est sûre.
 
 ## Investigations enregistrées {#saved-investigations}
 
 Une investigation enregistrée conserve les points de départ et les filtres d'une exploration, le chemin que vous avez choisi, une requête et un tableau de bord dans un fichier qui lui est propre. L'enregistrement n'écrit rien dans le graphe.
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 La réouverture exécute à nouveau l'exploration sur le graphe tel qu'il est maintenant et indique en quoi cela diffère de l'état au moment de l'enregistrement. Lisez d'abord `graph_state` :
@@ -96,11 +96,11 @@ Le fichier est du JSON. Il contient le chemin du graphe, les ID des sources de d
 Un instantané conserve les enregistrements d'un graphe dans un fichier, par ID stable, afin que vous puissiez demander plus tard ce qui a changé. Les instantanés sont pris manuellement ; rien n'en prend lors d'une synchronisation.
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | Liste | Signification |
@@ -120,7 +120,7 @@ Sélectionnez un nœud sur un canevas de graphe et utilisez **Path Explorer** po
 
 ## Limites
 
-- `khonsu explore` et `khonsu investigation` ont besoin du graphe libre. Ils échouent avec le type `locked` tant que la fenêtre le garde ouvert ; utilisez plutôt Path Explorer dans la fenêtre.
+- `khonsu graph explore` et `khonsu investigate` ont besoin du graphe libre. Ils échouent avec le type `locked` tant que la fenêtre le garde ouvert ; utilisez plutôt Path Explorer dans la fenêtre.
 - Un graphe de plus de 200 000 nœuds ou relations ne peut pas être instantané et échoue avec le type `too_large`.
 - Les enregistrements écrits à la main n'ont pas d'ID stable. Ils sont comptés mais non comparés dans un diff.
 - La fenêtre n'a pas encore de vue d'instantané ni de diff.

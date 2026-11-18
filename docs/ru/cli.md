@@ -11,33 +11,33 @@ description: Командная строка khonsu печатает JSON пос
 
 | Команда | Назначение |
 | --- | --- |
-| `khonsu init DIR` | Создать пустой граф |
+| `khonsu graph init DIR` | Создать пустой граф |
 | `khonsu schema --db DIR` | Показать метки, связи, свойства и таблицы |
 | `khonsu query --db DIR --cypher "…"` | Выполнить одну инструкцию Cypher только на чтение |
 | `khonsu query --db DIR --sql "…"` | Выполнить одну инструкцию SQL только на чтение |
 | `khonsu query --db DIR --file query.cypher` | Выполнить файл запроса; расширение `.sql` выбирает SQL |
-| `khonsu explain --db DIR --cypher "…"` | Объяснить запрос |
-| `khonsu explore --db DIR --from NODE [--to NODE]` | [Обойти граф от узла](./investigations#explore) и сообщить путь |
-| `khonsu evidence --db DIR --node NODE --rel REL` | Показать, [что подтверждает запись](./investigations#evidence) |
-| `khonsu analyze ALGORITHM --db DIR` | Запустить [графовый алгоритм](./analysis): PageRank, сообщества, компоненты и другое |
-| `khonsu investigation save FILE --db DIR --from NODE` | [Сохранить расследование](./investigations#saved-investigations); `reopen FILE` запускает его снова |
-| `khonsu snapshot save FILE --db DIR` | Сохранить записи графа; [`snapshot diff A B`](./investigations#snapshots) сравнивает два снимка |
-| `khonsu rebuild --db DIR` | Пересобрать граф старого формата из его источников данных |
+| `khonsu graph explain --db DIR --cypher "…"` | Объяснить запрос |
+| `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Обойти граф от узла](./investigations#explore) и сообщить путь |
+| `khonsu graph evidence --db DIR --node NODE --rel REL` | Показать, [что подтверждает запись](./investigations#evidence) |
+| `khonsu graph analyze ALGORITHM --db DIR` | Запустить [графовый алгоритм](./analysis): PageRank, сообщества, компоненты и другое |
+| `khonsu investigate save FILE --db DIR --from NODE` | [Сохранить расследование](./investigations#saved-investigations); `reopen FILE` запускает его снова |
+| `khonsu graph snapshot save FILE --db DIR` | Сохранить записи графа; [`snapshot diff A B`](./investigations#snapshots) сравнивает два снимка |
+| `khonsu graph rebuild --db DIR` | Пересобрать граф старого формата из его источников данных |
 | `khonsu plugin list` | Показать плагины и разрешения |
 | `khonsu plugin describe ID` | Показать поля конфигурации плагина и типы вывода |
 | `khonsu plugin search [WORDS]` | Показать, что предлагают [маркетплейсы](./marketplace) |
 | `khonsu plugin install ID --yes` | Установить плагин по имени из маркетплейса и одобрить его |
 | `khonsu plugin install DIR --yes` | Установить каталог или ZIP с плагином и подтвердить его разрешения |
 | `khonsu plugin update` | Обновить плагины, установленные из маркетплейса; `--dry-run` только показывает изменения |
-| `khonsu marketplace list` | Показать маркетплейсы; `add` и `remove` изменяют список |
+| `khonsu plugin marketplace list` | Показать маркетплейсы; `add` и `remove` изменяют список |
 | `khonsu plugin sync --source ID` | Синхронизировать источник; `--dry-run` показывает предварительный результат, `--incremental` и `--append` добавляют без удаления |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | Запустить [анализ плагина](./investigations#plugin-analyses), например `exposure` в AWS |
 | `khonsu source list` | Показать настроенные источники |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | Настроить источник; `--test` сначала проверяет его |
 | `khonsu source remove ID` | Удалить источник |
-| `khonsu check FILE --db DIR` | Проверить дашборд на графе |
-| `khonsu comments FILE` | Показать комментарии к графикам, ответить на них и закрыть их |
-| `khonsu presence FILE --doing editing --plot NAME` | Сообщить окну, какие графики вы редактируете |
+| `khonsu dash check FILE --db DIR` | Проверить дашборд на графе |
+| `khonsu dash comments FILE` | Показать комментарии к графикам, ответить на них и закрыть их |
+| `khonsu dash presence FILE --doing editing --plot NAME` | Сообщить окну, какие графики вы редактируете |
 | `khonsu open DIR` | Открыть граф в настольном приложении |
 | `khonsu open FILE.dash` | Открыть дашборд |
 | `khonsu open --state` | Прочитать граф и вкладки работающего окна |
@@ -55,13 +55,13 @@ description: Командная строка khonsu печатает JSON пос
 ## Цикл проверки
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
 # Отредактируйте файл .dash, затем проверьте его.
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 # Используйте реальный ID комментария, полученный первой командой.
-khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
+khonsu dash presence overview.dash --doing idle
 ```
 
-Пока приложение держит граф, запросы на чтение, `check` и `plugin sync` выполняются через окно и возвращают `via_window: true`. Запись запросами, `explore` и `investigation` требуют, чтобы граф был свободен. Не удаляйте блокировки, чтобы обойти это ограничение. См. [устранение неполадок](./troubleshooting).
+Пока приложение держит граф, запросы на чтение, `dash check` и `plugin sync` выполняются через окно и возвращают `via_window: true`. Запись запросами, `graph explore` и `investigate` требуют, чтобы граф был свободен. Не удаляйте блокировки, чтобы обойти это ограничение. См. [устранение неполадок](./troubleshooting).

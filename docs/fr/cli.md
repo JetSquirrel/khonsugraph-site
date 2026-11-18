@@ -11,33 +11,33 @@ La [compétence d'agent](https://github.com/JetSquirrel/KhonsuGraph/tree/main/sk
 
 | Commande | Objet |
 | --- | --- |
-| `khonsu init DIR` | Créer un graphe vide |
+| `khonsu graph init DIR` | Créer un graphe vide |
 | `khonsu schema --db DIR` | Inspecter les libellés, les relations, les propriétés et les tables |
 | `khonsu query --db DIR --cypher "…"` | Exécuter une instruction Cypher en lecture seule |
 | `khonsu query --db DIR --sql "…"` | Exécuter une instruction SQL en lecture seule |
 | `khonsu query --db DIR --file query.cypher` | Exécuter un fichier de requête ; `.sql` sélectionne SQL |
-| `khonsu explain --db DIR --cypher "…"` | Expliquer une requête |
-| `khonsu explore --db DIR --from NODE [--to NODE]` | [Partir d'un nœud vers l'extérieur](./investigations#explore) et signaler un chemin |
-| `khonsu evidence --db DIR --node NODE --rel REL` | Afficher [ce qui soutient un enregistrement](./investigations#evidence) |
-| `khonsu analyze ALGORITHM --db DIR` | Exécuter un [algorithme de graphe](./analysis) : PageRank, communautés, composantes et plus |
-| `khonsu investigation save FILE --db DIR --from NODE` | [Enregistrer une investigation](./investigations#saved-investigations) ; `reopen FILE` la réexécute |
-| `khonsu snapshot save FILE --db DIR` | Conserver les enregistrements du graphe ; [`snapshot diff A B`](./investigations#snapshots) en compare deux |
-| `khonsu rebuild --db DIR` | Reconstruire un graphe à l'ancien format depuis ses sources de données |
+| `khonsu graph explain --db DIR --cypher "…"` | Expliquer une requête |
+| `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Partir d'un nœud vers l'extérieur](./investigations#explore) et signaler un chemin |
+| `khonsu graph evidence --db DIR --node NODE --rel REL` | Afficher [ce qui soutient un enregistrement](./investigations#evidence) |
+| `khonsu graph analyze ALGORITHM --db DIR` | Exécuter un [algorithme de graphe](./analysis) : PageRank, communautés, composantes et plus |
+| `khonsu investigate save FILE --db DIR --from NODE` | [Enregistrer une investigation](./investigations#saved-investigations) ; `reopen FILE` la réexécute |
+| `khonsu graph snapshot save FILE --db DIR` | Conserver les enregistrements du graphe ; [`snapshot diff A B`](./investigations#snapshots) en compare deux |
+| `khonsu graph rebuild --db DIR` | Reconstruire un graphe à l'ancien format depuis ses sources de données |
 | `khonsu plugin list` | Lister les plugins et leurs permissions |
 | `khonsu plugin describe ID` | Afficher les champs de configuration et les types de sortie d'un plugin |
 | `khonsu plugin search [WORDS]` | Lister ce que proposent les [marketplaces](./marketplace) |
 | `khonsu plugin install ID --yes` | Installer un plugin par son nom depuis une marketplace et l'approuver |
 | `khonsu plugin install DIR --yes` | Installer un répertoire ou un ZIP de plugin et approuver ses permissions |
 | `khonsu plugin update` | Mettre à jour les plugins installés depuis une marketplace ; `--dry-run` prévisualise |
-| `khonsu marketplace list` | Lister les marketplaces ; `add` et `remove` les modifient |
+| `khonsu plugin marketplace list` | Lister les marketplaces ; `add` et `remove` les modifient |
 | `khonsu plugin sync --source ID` | Synchroniser une source ; `--dry-run` prévisualise, `--incremental` et `--append` ajoutent sans supprimer |
 | `khonsu plugin analyze ID ANALYSIS --db DIR` | Exécuter [l'analyse d'un plugin](./investigations#plugin-analyses), telle que `exposure` d'AWS |
 | `khonsu source list` | Lister les sources configurées |
 | `khonsu source add --db DIR --plugin ID --name NAME -c key=value` | Configurer une source ; `--test` la vérifie d'abord |
 | `khonsu source remove ID` | Supprimer une source |
-| `khonsu check FILE --db DIR` | Valider un tableau de bord par rapport à un graphe |
-| `khonsu comments FILE` | Lister, commenter en réponse et résoudre les commentaires de graphiques |
-| `khonsu presence FILE --doing editing --plot NAME` | Indiquer à la fenêtre les graphiques que vous modifiez |
+| `khonsu dash check FILE --db DIR` | Valider un tableau de bord par rapport à un graphe |
+| `khonsu dash comments FILE` | Lister, commenter en réponse et résoudre les commentaires de graphiques |
+| `khonsu dash presence FILE --doing editing --plot NAME` | Indiquer à la fenêtre les graphiques que vous modifiez |
 | `khonsu open DIR` | Ouvrir un graphe dans l'application de bureau |
 | `khonsu open FILE.dash` | Ouvrir un tableau de bord |
 | `khonsu open --state` | Lire le graphe et les onglets de la fenêtre en cours d'exécution |
@@ -55,13 +55,13 @@ Les échecs comportent un objet `error` avec `kind` et `message`, et éventuelle
 ## Une boucle de révision
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
 # Modifiez le fichier .dash, puis validez-le.
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 # Utilisez un ID de commentaire réel renvoyé par la première commande.
-khonsu comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash --reply c1 --text "Updated the graph panel" --resolve
+khonsu dash presence overview.dash --doing idle
 ```
 
-Lorsque l'application détient un graphe, les requêtes de lecture, `check` et `plugin sync` passent par la fenêtre et renvoient `via_window: true`. Les écritures de requête, `explore` et `investigation` exigent que le graphe soit libre. Ne supprimez pas de verrous pour forcer une écriture. Voir [dépannage](./troubleshooting).
+Lorsque l'application détient un graphe, les requêtes de lecture, `dash check` et `plugin sync` passent par la fenêtre et renvoient `via_window: true`. Les écritures de requête, `graph explore` et `investigate` exigent que le graphe soit libre. Ne supprimez pas de verrous pour forcer une écriture. Voir [dépannage](./troubleshooting).

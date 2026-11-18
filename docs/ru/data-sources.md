@@ -25,7 +25,7 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 Плагин AWS использует AWS CLI, чтобы прочитать VPC, подсети, группы безопасности, инстансы, балансировщики нагрузки и роли IAM. Сначала установите и настройте AWS CLI, затем используйте профиль только для чтения, который вы контролируете. `regions` — список через запятую, например `us-east-1,eu-west-1`.
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
@@ -45,7 +45,7 @@ khonsu plugin sync --source aws-demo
 Плагин Neo4j, появившийся в 0.3.0, копирует узлы и связи базы Neo4j в локальный граф через HTTP API Neo4j. Он отправляет только запросы на чтение. Основной сценарий — [Cartography](https://github.com/cartography-cncf/cartography), которая собирает данные AWS, GCP, Azure, Kubernetes, GitHub, Okta и других систем в Neo4j; подойдёт любая база Neo4j.
 
 ```sh
-khonsu init graphs/infra
+khonsu graph init graphs/infra
 khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test

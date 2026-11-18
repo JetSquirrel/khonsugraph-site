@@ -43,14 +43,14 @@ khonsu plugin update              # 更新已安装的插件
 ## 添加插件市场 {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # GitHub 上的 owner/repo
-khonsu marketplace add https://plugins.example.com  # 任意 HTTPS 地址
-khonsu marketplace add ~/work/team-plugins          # 本地文件夹
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # GitHub 上的 owner/repo
+khonsu plugin marketplace add https://plugins.example.com  # 任意 HTTPS 地址
+khonsu plugin marketplace add ~/work/team-plugins   # 本地文件夹
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official` 会关闭官方插件市场，`khonsu marketplace restore` 可将其恢复。
+`khonsu plugin marketplace remove official` 会关闭官方插件市场，`khonsu plugin marketplace restore` 可将其恢复。
 
 ## 发布插件 {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-该命令把插件打包到该文件夹，并写入文件夹中的 `marketplace.json`。提交并推送这个文件夹，或上传到静态托管服务；其他人用 `khonsu marketplace add` 添加一次后，就能按名称安装。再次发布同一版本会替换该平台的安装包，因此每个平台都可以发布自己的构建。见[完整的插件市场参考](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md)。
+该命令把插件打包到该文件夹，并写入文件夹中的 `marketplace.json`。提交并推送这个文件夹，或上传到静态托管服务；其他人用 `khonsu plugin marketplace add` 添加一次后，就能按名称安装。再次发布同一版本会替换该平台的安装包，因此每个平台都可以发布自己的构建。见[完整的插件市场参考](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md)。

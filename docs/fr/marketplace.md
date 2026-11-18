@@ -43,14 +43,14 @@ Une marketplace indique où se trouve un paquet et quelle est son empreinte. Ell
 ## Ajouter une marketplace {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # owner/repo sur GitHub
-khonsu marketplace add https://plugins.example.com  # n'importe quelle adresse HTTPS
-khonsu marketplace add ~/work/team-plugins          # un dossier
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # owner/repo sur GitHub
+khonsu plugin marketplace add https://plugins.example.com  # n'importe quelle adresse HTTPS
+khonsu plugin marketplace add ~/work/team-plugins   # un dossier
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official` désactive la marketplace officielle, et `khonsu marketplace restore` la rétablit.
+`khonsu plugin marketplace remove official` désactive la marketplace officielle, et `khonsu plugin marketplace restore` la rétablit.
 
 ## Publier un plugin {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-Cette commande empaquette le plugin dans le dossier et l'ajoute au `marketplace.json` de ce dossier. Validez et poussez le dossier, ou envoyez-le sur un hébergement statique. Les autres l'ajoutent une fois avec `khonsu marketplace add`, puis installent par nom. Publier à nouveau la même version remplace le paquet de cette plateforme : chaque plateforme peut donc publier sa propre compilation. Voir la [référence complète de la marketplace](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).
+Cette commande empaquette le plugin dans le dossier et l'ajoute au `marketplace.json` de ce dossier. Validez et poussez le dossier, ou envoyez-le sur un hébergement statique. Les autres l'ajoutent une fois avec `khonsu plugin marketplace add`, puis installent par nom. Publier à nouveau la même version remplace le paquet de cette plateforme : chaque plateforme peut donc publier sa propre compilation. Voir la [référence complète de la marketplace](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md).

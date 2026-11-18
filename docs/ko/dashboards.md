@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check`는 각 쿼리를 읽기 전용으로 실행하고, 플롯 열을 검증하며, 필터를 실제 값으로 시험합니다. 대시보드를 열거나 공유하기 전에 보고된 오류를 모두 수정하십시오.
+`dash check`는 각 쿼리를 읽기 전용으로 실행하고, 플롯 열을 검증하며, 필터를 실제 값으로 시험합니다. 대시보드를 열거나 공유하기 전에 보고된 오류를 모두 수정하십시오.
 
 ## 플롯과 레이아웃
 
@@ -50,13 +50,13 @@ filter "service" {
 
 ## 에이전트로 검토하기
 
-앱에서 플롯에 댓글을 남기십시오. 에이전트는 댓글을 읽고, 파일을 편집하고, `check`를 실행한 뒤 답변합니다. 댓글은 대시보드 옆의 `FILE.comments.json`에 저장됩니다. 프레즌스는 에이전트가 편집 중인 플롯을 식별할 수 있게 하며, 파일이 변경되면 창이 다시 그려집니다.
+앱에서 플롯에 댓글을 남기십시오. 에이전트는 댓글을 읽고, 파일을 편집하고, `dash check`를 실행한 뒤 답변합니다. 댓글은 대시보드 옆의 `FILE.comments.json`에 저장됩니다. 프레즌스는 에이전트가 편집 중인 플롯을 식별할 수 있게 하며, 파일이 변경되면 창이 다시 그려집니다.
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 이 형식에는 임의 함수, 조건문, 데이터에 따라 달라지는 스타일링이 없습니다. 검토 명령은 [CLI 및 에이전트](./cli)를 참고하십시오.

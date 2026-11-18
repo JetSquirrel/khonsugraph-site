@@ -25,7 +25,7 @@ khonsu source add --db graphs/demo --plugin csv --name mixed \
 Le plugin AWS utilise l'AWS CLI pour lire les VPC, les sous-réseaux, les groupes de sécurité, les instances, les équilibreurs de charge et les rôles IAM. Installez et configurez d'abord l'AWS CLI, puis utilisez un profil en lecture seule que vous contrôlez. `regions` est une liste séparée par des virgules, par exemple `us-east-1,eu-west-1`.
 
 ```sh
-khonsu init graphs/aws
+khonsu graph init graphs/aws
 khonsu plugin install aws --yes
 khonsu plugin describe aws
 khonsu source add --db graphs/aws --plugin aws --name aws-demo \
@@ -45,7 +45,7 @@ Le <a href="/docs/samples/exposure.dash" download>tableau de bord d'exposition A
 Le plugin Neo4j, ajouté dans la 0.3.0, copie les nœuds et les relations d'une base Neo4j dans un graphe local via l'API HTTP de Neo4j. Il n'envoie que des requêtes de lecture. Son usage principal est [Cartography](https://github.com/cartography-cncf/cartography), qui importe AWS, GCP, Azure, Kubernetes, GitHub, Okta et d'autres systèmes dans Neo4j ; toute base Neo4j fonctionne.
 
 ```sh
-khonsu init graphs/infra
+khonsu graph init graphs/infra
 khonsu plugin install neo4j --yes
 khonsu source add --db graphs/infra --plugin neo4j --name infra \
   -c url=http://127.0.0.1:7474 -c password=... --test

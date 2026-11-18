@@ -19,7 +19,7 @@ HawDB 图目录同一时间只能由一个进程持有。只读查询和仪表�
 
 ## 图报告 old_format {#old-format}
 
-HawDB 0.25 更改了存储格式，不再读取更早的图，因此由 KhonsuGraph 0.2.0 及更早版本写入的图会以 `old_format` 打开失败。`khonsu rebuild --db DIR` 会用数据源重新构建这张图，旧目录保留在旁边，名为 `DIR.hawdb-old`。手动写入而非同步得到的内容不会保留。
+HawDB 0.25 更改了存储格式，不再读取更早的图，因此由 KhonsuGraph 0.2.0 及更早版本写入的图会以 `old_format` 打开失败。`khonsu graph rebuild --db DIR` 会用数据源重新构建这张图，旧目录保留在旁边，名为 `DIR.hawdb-old`。手动写入而非同步得到的内容不会保留。
 
 ## 关系图面板为空
 
@@ -27,7 +27,7 @@ HawDB 0.25 更改了存储格式，不再读取更早的图，因此由 KhonsuGr
 
 ## 查询或仪表盘失败
 
-执行 `khonsu check FILE --db DIR` 并阅读所有错误。图表可能引用了缺失的列，或导入数据使用了不同标签。部分 Cypher 功能尚不支持，见[查询限制](./queries#current-limitations)。
+执行 `khonsu dash check FILE --db DIR` 并阅读所有错误。图表可能引用了缺失的列，或导入数据使用了不同标签。部分 Cypher 功能尚不支持，见[查询限制](./queries#current-limitations)。
 
 读取超出预算时，请通过条件与 `LIMIT` 缩小查询范围。单独减小 `--max-rows` 不会降低执行成本。
 

@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check` exécute chaque requête en lecture seule, valide les colonnes des graphiques et essaie les filtres avec des valeurs réelles. Corrigez chaque erreur signalée avant d'ouvrir ou de partager le tableau de bord.
+`dash check` exécute chaque requête en lecture seule, valide les colonnes des graphiques et essaie les filtres avec des valeurs réelles. Corrigez chaque erreur signalée avant d'ouvrir ou de partager le tableau de bord.
 
 ## Graphiques et mise en page
 
@@ -50,13 +50,13 @@ L'espace réservé doit être une condition `WHERE` entière, éventuellement jo
 
 ## Réviser avec un agent
 
-Commentez un graphique dans l'application. Un agent lit les commentaires, modifie le fichier, exécute `check` et répond. Les commentaires résident à côté du tableau de bord dans `FILE.comments.json`. La présence permet d'identifier les graphiques que l'agent modifie, et la fenêtre se redessine lorsque le fichier change.
+Commentez un graphique dans l'application. Un agent lit les commentaires, modifie le fichier, exécute `dash check` et répond. Les commentaires résident à côté du tableau de bord dans `FILE.comments.json`. La présence permet d'identifier les graphiques que l'agent modifie, et la fenêtre se redessine lorsque le fichier change.
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 Le format ne comporte ni fonctions arbitraires, ni conditionnelles, ni style dépendant des données. Voir [CLI et agents](./cli) pour les commandes de révision.

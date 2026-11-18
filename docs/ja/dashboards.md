@@ -23,12 +23,12 @@ plot "dependencies" {
 ```
 
 ```sh
-khonsu check overview.dash --db graphs/demo
+khonsu dash check overview.dash --db graphs/demo
 khonsu open graphs/demo
 khonsu open overview.dash
 ```
 
-`check` は各クエリを読み取り専用で実行し、プロットの列を検証し、実際の値でフィルターを試します。ダッシュボードを開いたり共有したりする前に、報告されたすべてのエラーを修正してください。
+`dash check` は各クエリを読み取り専用で実行し、プロットの列を検証し、実際の値でフィルターを試します。ダッシュボードを開いたり共有したりする前に、報告されたすべてのエラーを修正してください。
 
 ## プロットとレイアウト
 
@@ -50,13 +50,13 @@ filter "service" {
 
 ## エージェントによるレビュー
 
-アプリでプロットにコメントします。エージェントはコメントを読み、ファイルを編集し、`check` を実行して返信します。コメントはダッシュボードの隣の `FILE.comments.json` に保存されます。プレゼンスによって、エージェントが編集しているプロットを識別でき、ファイルが変更されるとウィンドウが再描画されます。
+アプリでプロットにコメントします。エージェントはコメントを読み、ファイルを編集し、`dash check` を実行して返信します。コメントはダッシュボードの隣の `FILE.comments.json` に保存されます。プレゼンスによって、エージェントが編集しているプロットを識別でき、ファイルが変更されるとウィンドウが再描画されます。
 
 ```sh
-khonsu comments overview.dash
-khonsu presence overview.dash --doing editing --plot dependencies
-khonsu check overview.dash --db graphs/demo
-khonsu presence overview.dash --doing idle
+khonsu dash comments overview.dash
+khonsu dash presence overview.dash --doing editing --plot dependencies
+khonsu dash check overview.dash --db graphs/demo
+khonsu dash presence overview.dash --doing idle
 ```
 
 このフォーマットには、任意の関数、条件分岐、データに依存したスタイリングはありません。レビュー用のコマンドについては [CLI とエージェント](./cli) を参照してください。

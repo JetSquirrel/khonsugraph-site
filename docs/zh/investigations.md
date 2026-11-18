@@ -1,5 +1,5 @@
 ---
-description: 用 khonsu explore 追踪路径，查看每条记录背后的证据，保存调查，并在数据变化后复查结论。
+description: 用 khonsu graph explore 追踪路径，查看每条记录背后的证据，保存调查，并在数据变化后复查结论。
 ---
 # 调查
 
@@ -9,10 +9,10 @@ description: 用 khonsu explore 追踪路径，查看每条记录背后的证据
 
 ## 追踪路径 {#explore}
 
-`khonsu explore` 从一个或多个节点向外探索，不需要加载整张图。在窗口中，同样的操作是图画布上的 **Path Explorer**。
+`khonsu graph explore` 从一个或多个节点向外探索，不需要加载整张图。在窗口中，同样的操作是图画布上的 **Path Explorer**。
 
 ```sh
-khonsu explore --db graphs/aws \
+khonsu graph explore --db graphs/aws \
   --from shop/cidr:internet \
   --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO
@@ -36,10 +36,10 @@ khonsu explore --db graphs/aws \
 
 ## 证据 {#evidence}
 
-`khonsu evidence` 说明一个节点或一条关系的依据：由哪个数据源和插件写入，最后一次变化的时间，以及该数据源上次同步是否完整。
+`khonsu graph evidence` 说明一个节点或一条关系的依据：由哪个数据源和插件写入，最后一次变化的时间，以及该数据源上次同步是否完整。
 
 ```sh
-khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
+khonsu graph evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 ```
 
 | 字段 | 含义 |
@@ -52,7 +52,7 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 | `assertion` | `explicit`（数据源直接报告）、`derived`（推导得出）或 `unknown` |
 | `properties`、`redacted` | 记录自身的属性，以及因疑似密钥而被遮盖的属性名 |
 
-来源字段要么是带值的已知，要么明确标为未知，不做估计。使用 `--to` 时，`khonsu explore` 会附带 `path.evidence`，列出这条路径所依赖的证据 ID。
+来源字段要么是带值的已知，要么明确标为未知，不做估计。使用 `--to` 时，`khonsu graph explore` 会附带 `path.evidence`，列出这条路径所依赖的证据 ID。
 
 一条关系的可信程度，按约定写在它自己的属性里：`confidence` 取 `confirmed`、`inferred` 或 `unconfirmed`，`evidence` 说明依据是什么。路径的可信度取决于最弱的一跳：只要有一条 `unconfirmed` 的关系，整条路径就是未确认的。
 
@@ -64,17 +64,17 @@ khonsu evidence --db graphs/aws --node shop/123456789012:us-east-1:i-web1
 khonsu plugin analyze aws exposure --db graphs/aws --verdict potential-exposure --pretty
 ```
 
-AWS 的 `exposure` 分析返回的每条发现带有结论：`potential_exposure`、`insufficient_data` 或 `not_indicated`。每条发现都会列出所用规则、检查过的条件及其依据字段、无法判断的部分（`unknowns`）、规则没有读取的内容（`assumptions`），以及可以直接交给 `khonsu explore` 的 `walk`。发现描述的是配置情况，并不代表资源一定可达或一定安全。
+AWS 的 `exposure` 分析返回的每条发现带有结论：`potential_exposure`、`insufficient_data` 或 `not_indicated`。每条发现都会列出所用规则、检查过的条件及其依据字段、无法判断的部分（`unknowns`）、规则没有读取的内容（`assumptions`），以及可以直接交给 `khonsu graph explore` 的 `walk`。发现描述的是配置情况，并不代表资源一定可达或一定安全。
 
 ## 保存调查 {#saved-investigations}
 
 保存的调查是一个独立文件，记录探索的起点和筛选条件、选定的路径、一条查询和一个仪表盘。保存不会向图中写入任何内容。
 
 ```sh
-khonsu investigation save web.investigation --db graphs/aws \
+khonsu investigate save web.investigation --db graphs/aws \
   --from shop/cidr:internet --to shop/123456789012:us-east-1:i-web1 \
   --type ROUTES_TO,FORWARDS_TO --max-hops 4
-khonsu investigation reopen web.investigation
+khonsu investigate reopen web.investigation
 ```
 
 重新打开时，会在当前的图上再执行一次探索，并说明与保存时有何不同。请先看 `graph_state`：
@@ -96,11 +96,11 @@ khonsu investigation reopen web.investigation
 快照按稳定 ID 把图中的记录保存到文件，方便以后回答“什么变了”。快照需要手动创建，同步时不会自动生成。
 
 ```sh
-khonsu snapshot save monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save monday.snapshot.json --db graphs/aws
 khonsu plugin sync --source shop
-khonsu snapshot save tuesday.snapshot.json --db graphs/aws
-khonsu snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
-khonsu snapshot check monday.snapshot.json --db graphs/aws
+khonsu graph snapshot save tuesday.snapshot.json --db graphs/aws
+khonsu graph snapshot diff monday.snapshot.json tuesday.snapshot.json --pretty
+khonsu graph snapshot check monday.snapshot.json --db graphs/aws
 ```
 
 | 列表 | 含义 |
@@ -120,7 +120,7 @@ khonsu snapshot check monday.snapshot.json --db graphs/aws
 
 ## 限制
 
-- `khonsu explore` 和 `khonsu investigation` 需要图没有被占用。窗口打开该图时，它们会以 `locked` 失败，此时请使用窗口中的 Path Explorer。
+- `khonsu graph explore` 和 `khonsu investigate` 需要图没有被占用。窗口打开该图时，它们会以 `locked` 失败，此时请使用窗口中的 Path Explorer。
 - 超过 200,000 个节点或关系的图无法创建快照，会以 `too_large` 失败。
 - 手动写入的记录没有稳定 ID，在差异中只计数，不做比较。
 - 窗口中暂时没有快照和差异视图。

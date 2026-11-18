@@ -43,14 +43,14 @@ khonsu plugin update              # インストール済みプラグインを�
 ## マーケットプレイスを追加する {#add}
 
 ```sh
-khonsu marketplace add acme/khonsu-plugins          # GitHub の owner/repo
-khonsu marketplace add https://plugins.example.com  # 任意の HTTPS アドレス
-khonsu marketplace add ~/work/team-plugins          # フォルダー
-khonsu marketplace list
-khonsu marketplace remove team-plugins
+khonsu plugin marketplace add acme/khonsu-plugins   # GitHub の owner/repo
+khonsu plugin marketplace add https://plugins.example.com  # 任意の HTTPS アドレス
+khonsu plugin marketplace add ~/work/team-plugins   # フォルダー
+khonsu plugin marketplace list
+khonsu plugin marketplace remove team-plugins
 ```
 
-`khonsu marketplace remove official` で公式マーケットプレイスを無効にし、`khonsu marketplace restore` で元に戻せます。
+`khonsu plugin marketplace remove official` で公式マーケットプレイスを無効にし、`khonsu plugin marketplace restore` で元に戻せます。
 
 ## プラグインを公開する {#publish}
 
@@ -58,4 +58,4 @@ khonsu marketplace remove team-plugins
 khonsu plugin publish ./my-plugin --to ~/work/team-plugins
 ```
 
-プラグインをそのフォルダーにパッケージし、フォルダーの `marketplace.json` に載せます。フォルダーをコミットしてプッシュするか、静的ホスティングにアップロードしてください。他の人は `khonsu marketplace add` で一度追加すれば、名前でインストールできます。同じバージョンを再び公開すると、そのプラットフォームのパッケージが置き換わるので、プラットフォームごとに自分のビルドを公開できます。[マーケットプレイスの完全なリファレンス](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md) を参照してください。
+プラグインをそのフォルダーにパッケージし、フォルダーの `marketplace.json` に載せます。フォルダーをコミットしてプッシュするか、静的ホスティングにアップロードしてください。他の人は `khonsu plugin marketplace add` で一度追加すれば、名前でインストールできます。同じバージョンを再び公開すると、そのプラットフォームのパッケージが置き換わるので、プラットフォームごとに自分のビルドを公開できます。[マーケットプレイスの完全なリファレンス](https://github.com/JetSquirrel/KhonsuGraph/blob/main/docs/marketplace.md) を参照してください。
