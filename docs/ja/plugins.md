@@ -50,7 +50,7 @@ khonsu plugin install ./folders --yes
 khonsu plugin describe folders
 ```
 
-`--yes` は宣言された権限を承認します。インストーラーはプラグインをコピーするため、ソースを変更した後は再インストールしてください。フル同期または増分同期を実装する前に、[同期の仕組み](./data-sources#sync-semantics) を参照してください。
+`--yes` は宣言された権限を承認します。AI エージェントが実行した場合は[何も承認しません](./cli#approval)。インストーラーはプラグインをコピーするため、ソースを変更した後は再インストールしてください。フル同期または増分同期を実装する前に、[同期の仕組み](./data-sources#sync-semantics) を参照してください。
 
 ## プラグインを共有する {#share}
 

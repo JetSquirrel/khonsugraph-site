@@ -16,7 +16,13 @@ description: khonsu 명령줄은 모든 명령에서 JSON을 출력하므로 Cla
 | `khonsu query --db DIR --cypher "…"` | 읽기 전용 Cypher 문 하나를 실행합니다 |
 | `khonsu query --db DIR --sql "…"` | 읽기 전용 SQL 문 하나를 실행합니다 |
 | `khonsu query --db DIR --file query.cypher` | 쿼리 파일을 실행합니다. `.sql`이면 SQL을 선택합니다 |
+| `khonsu query --db DIR --semantic --cypher "…"` | [온톨로지의 용어로 쿼리](./ontology#semantic): `Device`, `Account`, `runs_on` |
+| `khonsu query --db DIR --validate-only --cypher "…"` | 문장을 그래프와 대조해 [확인](./ontology#validate)하고 실행하지 않음 |
 | `khonsu graph explain --db DIR --cypher "…"` | 쿼리를 설명합니다 |
+| `khonsu graph ontology describe [--db DIR]` | [개념](./ontology)과 그것이 다루는 그래프 레이블 나열 |
+| `khonsu graph ontology resolve WORD…` | 단어의 의미: 개념, 동의어, 해당 레이블 |
+| `khonsu graph ontology check --db DIR --entities a,b` | 질문이 다루는 각 대상의 레코드가 그래프에 있는지 확인 |
+| `khonsu graph ontology path --from A --to B [--db DIR]` | 두 개념이 연결되는 방식을 Cypher 패턴으로 표시 |
 | `khonsu graph explore --db DIR --from NODE [--to NODE]` | [노드에서 바깥으로 걸어가며](./investigations#explore) 경로를 보고합니다 |
 | `khonsu graph evidence --db DIR --node NODE --rel REL` | [레코드를 뒷받침하는 근거](./investigations#evidence)를 표시합니다 |
 | `khonsu graph analyze ALGORITHM --db DIR` | [그래프 알고리즘](./analysis)을 실행합니다. PageRank, 커뮤니티, 연결 요소 등 |
@@ -51,6 +57,12 @@ description: khonsu 명령줄은 모든 명령에서 JSON을 출력하므로 Cla
 `--max-rows`의 기본값은 200이며 표시되는 결과를 잘라 냅니다. 쿼리 실행 작업량을 줄이지는 않습니다. 항상 `truncated`를 확인하고 범위가 제한된 쿼리를 사용하십시오.
 
 실패 시에는 `kind`와 `message`, 그리고 선택적인 `detail`을 가진 `error` 객체가 있습니다. stdout을 해석하기 전에 종료 상태를 확인하십시오. 1은 실행 오류, 2는 사용법 또는 대시보드 명세 오류를 나타냅니다.
+
+0.3.0 다음 릴리스부터 종료 코드 2는 쿼리가 [그래프와 맞지 않음](./ontology#validate)(`invalid_query`)도 뜻하고, 3은 질문이 다루는 대상의 레코드가 그래프에 없음(`not_investigable`), 4는 사람의 확인이 필요함(`needs_confirmation`)을 뜻합니다.
+
+## 승인은 사람이 합니다 {#approval}
+
+0.3.0 다음 릴리스부터 플러그인 권한 승인은 사람이 결정합니다. 에이전트가 `khonsu plugin install … --yes`, `plugin update`, `plugin approve`를 실행하면 플러그인은 설치되거나 업데이트되지만 승인되지 않으며, 명령은 종류 `needs_confirmation`으로 4를 반환하며 종료하고 해당 플러그인을 알려 줍니다. 사용자에게 앱이나 자신의 터미널에서 승인해 달라고 요청하십시오. 에이전트는 `KHONSU_AGENT` 또는 Claude Code, Codex, Cursor, Gemini CLI가 설정하는 환경 변수로 감지합니다.
 
 ## 검토 루프
 

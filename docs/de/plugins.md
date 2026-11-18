@@ -50,7 +50,7 @@ khonsu plugin install ./folders --yes
 khonsu plugin describe folders
 ```
 
-`--yes` genehmigt die deklarierten Berechtigungen. Das Installationsprogramm kopiert das Plugin; installieren Sie es nach Änderungen an der Quelle erneut. Lesen Sie [Semantik der Synchronisierung](./data-sources#sync-semantics), bevor Sie eine vollständige oder inkrementelle Synchronisierung implementieren.
+`--yes` genehmigt die deklarierten Berechtigungen. Von einem KI-Agenten ausgeführt, [genehmigt es nichts](./cli#approval). Das Installationsprogramm kopiert das Plugin; installieren Sie es nach Änderungen an der Quelle erneut. Lesen Sie [Semantik der Synchronisierung](./data-sources#sync-semantics), bevor Sie eine vollständige oder inkrementelle Synchronisierung implementieren.
 
 ## Ein Plugin teilen {#share}
 

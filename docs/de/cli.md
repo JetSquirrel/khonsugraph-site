@@ -16,7 +16,13 @@ Die [Agent-Skill](https://github.com/JetSquirrel/KhonsuGraph/tree/main/skills/kh
 | `khonsu query --db DIR --cypher "…"` | Eine schreibgeschützte Cypher-Anweisung ausführen |
 | `khonsu query --db DIR --sql "…"` | Eine schreibgeschützte SQL-Anweisung ausführen |
 | `khonsu query --db DIR --file query.cypher` | Eine Abfragedatei ausführen; `.sql` wählt SQL |
+| `khonsu query --db DIR --semantic --cypher "…"` | [In den Begriffen der Ontologie abfragen](./ontology#semantic): `Device`, `Account`, `runs_on` |
+| `khonsu query --db DIR --validate-only --cypher "…"` | [Eine Anweisung](./ontology#validate) gegen den Graphen prüfen, ohne sie auszuführen |
 | `khonsu graph explain --db DIR --cypher "…"` | Eine Abfrage erklären |
+| `khonsu graph ontology describe [--db DIR]` | [Konzepte](./ontology) auflisten und welche Labels eines Graphen sie abdecken |
+| `khonsu graph ontology resolve WORD…` | Sagen, was Wörter bedeuten: Konzepte, Synonyme und die zugehörigen Labels |
+| `khonsu graph ontology check --db DIR --entities a,b` | Ob ein Graph Datensätze zu jedem Gegenstand einer Frage enthält |
+| `khonsu graph ontology path --from A --to B [--db DIR]` | Wie zwei Konzepte zusammenhängen, als Cypher-Muster |
 | `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Von einem Knoten nach außen gehen](./investigations#explore) und einen Pfad melden |
 | `khonsu graph evidence --db DIR --node NODE --rel REL` | [Was einen Datensatz stützt](./investigations#evidence) anzeigen |
 | `khonsu graph analyze ALGORITHM --db DIR` | Einen [Graphalgorithmus](./analysis) ausführen: PageRank, Communities, Komponenten und mehr |
@@ -51,6 +57,12 @@ Jeder Befehl gibt ein JSON-Objekt auf stdout aus; `--pretty` rückt es ein. Der 
 `--max-rows` ist standardmäßig 200 und schneidet das angezeigte Ergebnis ab. Es verringert nicht den Aufwand der Abfrageausführung. Prüfen Sie stets `truncated` und verwenden Sie begrenzte Abfragen.
 
 Fehlschläge enthalten ein `error`-Objekt mit `kind` und `message` sowie optional `detail`. Prüfen Sie den Exit-Status, bevor Sie stdout interpretieren: 1 bedeutet einen Ausführungsfehler; 2 bedeutet einen Fehler in der Nutzung oder in der Dashboard-Spezifikation.
+
+Ab dem Release nach 0.3.0 bedeutet Exit-Status 2 auch eine Abfrage, die [nicht zum Graphen passt](./ontology#validate) (`invalid_query`), 3, dass der Graph keine Datensätze zu einem Gegenstand der Frage enthält (`not_investigable`), und 4, dass ein Mensch bestätigen muss (`needs_confirmation`).
+
+## Die Genehmigung bleibt bei einem Menschen {#approval}
+
+Ab dem Release nach 0.3.0 ist die Genehmigung der Berechtigungen eines Plugins die Entscheidung eines Menschen. Führt ein Agent `khonsu plugin install … --yes`, `plugin update` oder `plugin approve` aus, wird das Plugin installiert oder aktualisiert, aber nicht genehmigt, und der Befehl endet mit 4 und der Art `needs_confirmation` und nennt die Plugins. Bitten Sie den Menschen, sie in der App oder im eigenen Terminal zu genehmigen. Ein Agent wird an `KHONSU_AGENT` oder an den Variablen erkannt, die Claude Code, Codex, Cursor und Gemini CLI setzen.
 
 ## Ein Überprüfungszyklus
 

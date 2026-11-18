@@ -16,7 +16,13 @@ The [agent skill](https://github.com/JetSquirrel/KhonsuGraph/tree/main/skills/kh
 | `khonsu query --db DIR --cypher "…"` | Execute one read-only Cypher statement |
 | `khonsu query --db DIR --sql "…"` | Execute one read-only SQL statement |
 | `khonsu query --db DIR --file query.cypher` | Run a query file; `.sql` selects SQL |
+| `khonsu query --db DIR --semantic --cypher "…"` | [Query in the ontology's words](./ontology#semantic): `Device`, `Account`, `runs_on` |
+| `khonsu query --db DIR --validate-only --cypher "…"` | [Check a statement](./ontology#validate) against the graph and run nothing |
 | `khonsu graph explain --db DIR --cypher "…"` | Explain a query |
+| `khonsu graph ontology describe [--db DIR]` | List [concepts](./ontology) and which of a graph's labels they cover |
+| `khonsu graph ontology resolve WORD…` | Say what words mean: concepts, synonyms and the labels that hold them |
+| `khonsu graph ontology check --db DIR --entities a,b` | Whether a graph holds records of each thing a question is about |
+| `khonsu graph ontology path --from A --to B [--db DIR]` | How two concepts connect, as Cypher patterns |
 | `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Walk outward from a node](./investigations#explore) and report a path |
 | `khonsu graph evidence --db DIR --node NODE --rel REL` | Show [what supports a record](./investigations#evidence) |
 | `khonsu graph analyze ALGORITHM --db DIR` | Run a [graph algorithm](./analysis): PageRank, communities, components and more |
@@ -51,6 +57,12 @@ Each command prints one JSON object on stdout; `--pretty` indents it. Sync progr
 `--max-rows` defaults to 200 and truncates the displayed result. It does not reduce query execution work. Always inspect `truncated` and use bounded queries.
 
 Failures have an `error` object with `kind` and `message`, and optional `detail`. Check the exit status before interpreting stdout: 1 indicates an execution error; 2 indicates a usage or dashboard specification error.
+
+From the release after 0.3.0, exit 2 also means a query that [doesn't fit the graph](./ontology#validate) (`invalid_query`), 3 means the graph holds no records of something the question is about (`not_investigable`), and 4 means a person has to confirm (`needs_confirmation`).
+
+## Approval stays with a person {#approval}
+
+From the release after 0.3.0, approving a plugin's permissions is a person's decision. When an agent runs `khonsu plugin install … --yes`, `plugin update` or `plugin approve`, the plugin is installed or updated but not approved, and the command exits 4 with kind `needs_confirmation`, naming the plugins. Ask the person to approve them in the app or from their own terminal. An agent is detected from `KHONSU_AGENT` or the variables Claude Code, Codex, Cursor and Gemini CLI set.
 
 ## A review loop
 

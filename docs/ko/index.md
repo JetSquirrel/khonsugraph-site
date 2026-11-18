@@ -13,6 +13,7 @@ KhonsuGraph는 HawDB를 기반으로 구축된, 그래프 조사를 위한 오�
 - [CSV 가져오기, AWS 연결 또는 Neo4j 데이터베이스 복사하기](./data-sources)
 - [마켓플레이스에서 이름으로 플러그인 설치하기](./marketplace)
 - [Cypher 지원 범위와 쿼리 제한 이해하기](./queries)
+- [레이블의 의미를 밝히고 온톨로지의 용어로 질문하기](./ontology)
 - [경로를 추적하고 증거를 인용하고 조사를 저장하기](./investigations)
 - [그래프 분석으로 노드 순위를 매기고 커뮤니티 찾기](./analysis)
 - [.dash 대시보드 만들기](./dashboards)

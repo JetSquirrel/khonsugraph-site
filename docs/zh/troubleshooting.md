@@ -37,6 +37,10 @@ HawDB 0.25 更改了存储格式，不再读取更早的图，因此由 KhonsuGr
 
 失败的同步可能保留已写入记录。解决原因后再次同步以重新对齐。通过 `skipped_edges` 查看是否存在找不到端点的关系。
 
+## Agent 安装的插件没有被批准 {#needs-confirmation}
+
+类型 `needs_confirmation`（退出码 4）表示 AI Agent 请求批准插件。插件已安装，但只有人可以批准：在应用中批准，或在自己的终端里运行 `khonsu plugin approve ID`。参见[批准](./cli#approval)。
+
 ## 反馈问题
 
 在 [GitHub issue](https://github.com/JetSquirrel/KhonsuGraph/issues) 中提供应用版本、系统、命令和错误类型。复现资料中请移除凭证和私有图数据。

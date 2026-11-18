@@ -9,6 +9,7 @@ const pages = [
   ['data-sources', 'Data sources', '数据源', 'データソース', '데이터 소스', 'Sources de données', 'Datenquellen', 'Fuentes de datos', 'Fontes de dados', 'Источники данных'],
   ['marketplace', 'Marketplace', '插件市场', 'マーケットプレイス', '마켓플레이스', 'Marketplace', 'Marketplace', 'Marketplace', 'Marketplace', 'Маркетплейс'],
   ['queries', 'Cypher & SQL', 'Cypher 与 SQL', 'Cypher と SQL', 'Cypher 및 SQL', 'Cypher et SQL', 'Cypher & SQL', 'Cypher y SQL', 'Cypher e SQL', 'Cypher и SQL'],
+  ['ontology', 'Ontology', '本体', 'オントロジー', '온톨로지', 'Ontologie', 'Ontologie', 'Ontología', 'Ontologia', 'Онтология'],
   ['investigations', 'Investigations', '调查', '調査', '조사', 'Investigations', 'Untersuchungen', 'Investigaciones', 'Investigações', 'Расследования'],
   ['analysis', 'Graph analysis', '图分析', 'グラフ分析', '그래프 분석', 'Analyse de graphe', 'Graphanalyse', 'Análisis de grafos', 'Análise de grafos', 'Анализ графов'],
   ['dashboards', 'Dashboards', '仪表盘', 'ダッシュボード', '대시보드', 'Tableaux de bord', 'Dashboards', 'Paneles', 'Painéis', 'Дашборды'],

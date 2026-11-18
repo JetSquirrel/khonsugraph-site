@@ -50,7 +50,7 @@ khonsu plugin install ./folders --yes
 khonsu plugin describe folders
 ```
 
-`--yes` 表示批准声明的权限。安装操作会复制插件，修改源码后需要重新安装。实现全量或增量同步前，请阅读[同步规则](./data-sources#sync-semantics)。
+`--yes` 表示批准声明的权限。由 AI Agent 运行时，它[不会批准任何内容](./cli#approval)。安装操作会复制插件，修改源码后需要重新安装。实现全量或增量同步前，请阅读[同步规则](./data-sources#sync-semantics)。
 
 ## 分享插件 {#share}
 

@@ -72,6 +72,12 @@ KhonsuGraph 0.3.0 uses HawDB 0.29.0, whose Cypher differs from other graph datab
 
 A graph written before HawDB 0.25, by KhonsuGraph 0.2.0 or earlier, cannot be read by this version; see [troubleshooting](./troubleshooting#old-format).
 
+## Check a query, or ask in the ontology's words {#semantic}
+
+`--validate-only` checks a Cypher statement against the graph's labels, relationship types and patterns and runs nothing: a misspelt label, a relationship followed the wrong way round or a pattern the graph doesn't hold is reported with close names. `--semantic` lets a query name concepts such as `Device` and `Account` instead of a source's labels. Both arrive in the release after 0.3.0; see [ontology](./ontology#semantic).
+
 ## Read and write access
 
 CLI queries are read-only by default. `--write` explicitly enables writes. One process owns a graph directory at a time. While the app has the graph open, CLI read queries and dashboard checks route through that window. Writes and syncs require the graph to be closed there.
+
+A statement run with `--write` is in no data source, so `khonsu graph rebuild` doesn't carry it over. From the release after 0.3.0, each one is logged in `writes.jsonl` in the config folder (when, which graph, the statement with key material masked, and the agent that ran it), so it can be found and written again.
