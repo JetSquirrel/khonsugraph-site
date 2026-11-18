@@ -16,7 +16,13 @@ description: khonsu コマンドラインはすべてのコマンドで JSON を
 | `khonsu query --db DIR --cypher "…"` | 読み取り専用の Cypher 文を 1 つ実行する |
 | `khonsu query --db DIR --sql "…"` | 読み取り専用の SQL 文を 1 つ実行する |
 | `khonsu query --db DIR --file query.cypher` | クエリファイルを実行する。`.sql` を指定すると SQL が選択される |
+| `khonsu query --db DIR --semantic --cypher "…"` | [オントロジーの言葉でクエリを書く](./ontology#semantic)：`Device`、`Account`、`runs_on` |
+| `khonsu query --db DIR --validate-only --cypher "…"` | 文をグラフと照らし合わせて[確かめ](./ontology#validate)、何も実行しない |
 | `khonsu graph explain --db DIR --cypher "…"` | クエリを説明する |
+| `khonsu graph ontology describe [--db DIR]` | [概念](./ontology)と、それが対応するグラフのラベルを一覧にする |
+| `khonsu graph ontology resolve WORD…` | 言葉の意味を示す：概念、同義語、対応するラベル |
+| `khonsu graph ontology check --db DIR --entities a,b` | 質問の対象それぞれについてグラフにレコードがあるか |
+| `khonsu graph ontology path --from A --to B [--db DIR]` | 二つの概念のつながり方を Cypher のパターンで示す |
 | `khonsu graph explore --db DIR --from NODE [--to NODE]` | [ノードから外側へたどり](./investigations#explore)、経路を報告する |
 | `khonsu graph evidence --db DIR --node NODE --rel REL` | [レコードを支えるもの](./investigations#evidence)を表示する |
 | `khonsu graph analyze ALGORITHM --db DIR` | [グラフアルゴリズム](./analysis)(PageRank、コミュニティ、連結成分など)を実行する |
@@ -51,6 +57,12 @@ description: khonsu コマンドラインはすべてのコマンドで JSON を
 `--max-rows` は既定で 200 で、表示される結果を切り詰めます。クエリ実行の処理量は減りません。常に `truncated` を確認し、上限付きのクエリを使用してください。
 
 失敗時には、`kind` と `message`、および任意の `detail` を持つ `error` オブジェクトがあります。stdout を解釈する前に終了ステータスを確認してください。1 は実行エラー、2 は使用方法またはダッシュボード仕様のエラーを示します。
+
+0.3.0 の次のリリースからは、終了コード 2 はクエリが[グラフに合わない](./ontology#validate)こと（`invalid_query`）も表し、3 は質問の対象のレコードがグラフにないこと（`not_investigable`）、4 は人の確認が必要なこと（`needs_confirmation`）を表します。
+
+## 承認は人が行う {#approval}
+
+0.3.0 の次のリリースからは、プラグインの権限の承認は人が決めることになります。エージェントが `khonsu plugin install … --yes`、`plugin update`、`plugin approve` を実行すると、プラグインはインストールまたは更新されますが承認はされず、コマンドは種類 `needs_confirmation` で 4 を返して終了し、該当するプラグインを挙げます。アプリまたはご自身のターミナルで承認するよう、利用者に依頼してください。エージェントは `KHONSU_AGENT`、または Claude Code、Codex、Cursor、Gemini CLI が設定する環境変数から検出されます。
 
 ## レビューループ
 

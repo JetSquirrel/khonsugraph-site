@@ -16,7 +16,13 @@ A [skill de agente](https://github.com/JetSquirrel/KhonsuGraph/tree/main/skills/
 | `khonsu query --db DIR --cypher "…"` | Executa uma instrução Cypher somente leitura |
 | `khonsu query --db DIR --sql "…"` | Executa uma instrução SQL somente leitura |
 | `khonsu query --db DIR --file query.cypher` | Executa um arquivo de consulta; `.sql` seleciona SQL |
+| `khonsu query --db DIR --semantic --cypher "…"` | [Consultar com as palavras da ontologia](./ontology#semantic): `Device`, `Account`, `runs_on` |
+| `khonsu query --db DIR --validate-only --cypher "…"` | [Verificar uma instrução](./ontology#validate) contra o grafo sem executar nada |
 | `khonsu graph explain --db DIR --cypher "…"` | Explica uma consulta |
+| `khonsu graph ontology describe [--db DIR]` | Lista os [conceitos](./ontology) e quais rótulos do grafo eles cobrem |
+| `khonsu graph ontology resolve WORD…` | Diz o que as palavras significam: conceitos, sinônimos e os rótulos correspondentes |
+| `khonsu graph ontology check --db DIR --entities a,b` | Se o grafo tem registros de cada coisa de que trata uma pergunta |
+| `khonsu graph ontology path --from A --to B [--db DIR]` | Como dois conceitos se ligam, como padrões Cypher |
 | `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Explora a partir de um nó](./investigations#explore) e relata um caminho |
 | `khonsu graph evidence --db DIR --node NODE --rel REL` | Mostra [o que sustenta um registro](./investigations#evidence) |
 | `khonsu graph analyze ALGORITHM --db DIR` | Executa um [algoritmo de grafo](./analysis): PageRank, comunidades, componentes e mais |
@@ -51,6 +57,12 @@ Cada comando imprime um objeto JSON em stdout; `--pretty` o indenta. O progresso
 `--max-rows` usa 200 por padrão e trunca o resultado exibido. Ele não reduz o trabalho de execução da consulta. Sempre inspecione `truncated` e use consultas limitadas.
 
 Falhas têm um objeto `error` com `kind` e `message`, e `detail` opcional. Verifique o status de saída antes de interpretar o stdout: 1 indica erro de execução; 2 indica erro de uso ou de especificação do painel.
+
+A partir da versão seguinte à 0.3.0, o código 2 também indica uma consulta que [não se encaixa no grafo](./ontology#validate) (`invalid_query`), 3 indica que o grafo não tem registros de algo de que trata a pergunta (`not_investigable`) e 4 que uma pessoa precisa confirmar (`needs_confirmation`).
+
+## A aprovação é de uma pessoa {#approval}
+
+A partir da versão seguinte à 0.3.0, aprovar as permissões de um plugin é decisão de uma pessoa. Quando um agente executa `khonsu plugin install … --yes`, `plugin update` ou `plugin approve`, o plugin é instalado ou atualizado, mas não aprovado, e o comando termina com 4 e o tipo `needs_confirmation`, citando os plugins. Peça à pessoa que os aprove no app ou no próprio terminal. Um agente é detectado por `KHONSU_AGENT` ou pelas variáveis que Claude Code, Codex, Cursor e Gemini CLI definem.
 
 ## Um ciclo de revisão
 

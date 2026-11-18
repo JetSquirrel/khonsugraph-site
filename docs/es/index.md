@@ -13,6 +13,7 @@ Es un proyecto independiente construido sobre HawDB, publicado bajo Apache-2.0.
 - [Importa CSV, conecta AWS o copia una base de datos Neo4j](./data-sources)
 - [Instala plugins por su nombre desde un marketplace](./marketplace)
 - [Entiende la compatibilidad de Cypher y los límites de las consultas](./queries)
+- [Indica qué significan las etiquetas y pregunta con las palabras de la ontología](./ontology)
 - [Traza una ruta, cita evidencia y guarda una investigación](./investigations)
 - [Clasifica nodos y encuentra comunidades con el análisis de grafos](./analysis)
 - [Crea un panel .dash](./dashboards)

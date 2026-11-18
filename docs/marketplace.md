@@ -36,7 +36,7 @@ Every installation starts with the `official` marketplace. It is served from `ma
 
 - The package must match the SHA-256 the marketplace lists, and hold the plugin and version listed. Otherwise nothing is installed, and what was installed before stays.
 - Indexes and packages are read over HTTPS only.
-- Installing is not approving. A plugin from a marketplace needs approval before it runs, and an updated one needs it again. `--yes` approves in the same step.
+- Installing is not approving. A plugin from a marketplace needs approval before it runs, and an updated one needs it again. `--yes` approves in the same step. Run by an AI agent, it approves nothing and exits 4; see [approval](./cli#approval).
 
 A marketplace says where a package is and what its hash is. It does not make the plugin safe. Review the declared permissions before you approve; they are declarations, not a sandbox. See [plugin development](./plugins).
 

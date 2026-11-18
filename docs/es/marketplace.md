@@ -36,7 +36,7 @@ Toda instalación empieza con el marketplace `official`. Se sirve desde `marketp
 
 - El paquete debe coincidir con el SHA-256 que lista el marketplace y contener el plugin y la versión listados. Si no, no se instala nada y lo que estaba instalado se mantiene.
 - Los índices y paquetes se leen solo por HTTPS.
-- Instalar no es aprobar. Un plugin de un marketplace necesita aprobación antes de ejecutarse, y otra vez tras actualizarse. `--yes` aprueba en el mismo paso.
+- Instalar no es aprobar. Un plugin de un marketplace necesita aprobación antes de ejecutarse, y otra vez tras actualizarse. `--yes` aprueba en el mismo paso. Si lo ejecuta un agente de IA, no aprueba nada y termina con 4; consulta [aprobación](./cli#approval).
 
 Un marketplace dice dónde está un paquete y cuál es su hash. No hace que el plugin sea seguro. Revisa los permisos declarados antes de aprobar: son declaraciones, no un sandbox. Consulta [desarrollo de plugins](./plugins).
 

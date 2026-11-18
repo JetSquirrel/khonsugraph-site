@@ -37,6 +37,10 @@ Run `khonsu plugin describe ID` and check configuration fields. Ensure the packa
 
 A failed sync may leave already written records. Correct the cause, then sync again to reconcile. Inspect `skipped_edges` for unresolved endpoints.
 
+## An agent's install was not approved {#needs-confirmation}
+
+Kind `needs_confirmation` (exit 4) means an AI agent asked to approve a plugin. The plugin is installed, but only a person can approve it: approve it in the app, or run `khonsu plugin approve ID` in your own terminal. See [approval](./cli#approval).
+
 ## Report an issue
 
 Include the app version, operating system, command and error kind in a [GitHub issue](https://github.com/JetSquirrel/KhonsuGraph/issues). Remove credentials and private graph values from reproductions.

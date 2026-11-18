@@ -72,6 +72,12 @@ KhonsuGraph 0.3.0 verwendet HawDB 0.29.0, dessen Cypher sich von anderen Graphda
 
 Ein Graph, der vor HawDB 0.25 geschrieben wurde, also von KhonsuGraph 0.2.0 oder früher, kann von dieser Version nicht gelesen werden; siehe [Fehlerbehebung](./troubleshooting#old-format).
 
+## Eine Abfrage prüfen oder in den Begriffen der Ontologie fragen {#semantic}
+
+`--validate-only` prüft eine Cypher-Anweisung gegen die Labels, Beziehungstypen und Muster des Graphen und führt nichts aus: Ein falsch geschriebenes Label, eine in falscher Richtung verfolgte Beziehung oder ein Muster, das der Graph nicht enthält, wird mit ähnlichen Namen gemeldet. Mit `--semantic` kann eine Abfrage Konzepte wie `Device` und `Account` statt der Labels einer Quelle nennen. Beides kommt mit dem Release nach 0.3.0; siehe [Ontologie](./ontology#semantic).
+
 ## Lese- und Schreibzugriff
 
 CLI-Abfragen sind standardmäßig schreibgeschützt. `--write` aktiviert Schreibvorgänge ausdrücklich. Jeweils ein Prozess besitzt ein Graphverzeichnis. Solange die App den Graphen geöffnet hat, werden CLI-Leseabfragen und Dashboard-Prüfungen über dieses Fenster geleitet. Schreibvorgänge und Synchronisierungen erfordern, dass der Graph dort geschlossen ist.
+
+Eine mit `--write` ausgeführte Anweisung stammt aus keiner Datenquelle, daher übernimmt `khonsu graph rebuild` sie nicht. Ab dem Release nach 0.3.0 wird jede solche Anweisung in `writes.jsonl` im Konfigurationsordner protokolliert (wann, welcher Graph, die Anweisung mit maskiertem Schlüsselmaterial und der Agent, der sie ausgeführt hat), damit sie sich finden und erneut schreiben lässt.

@@ -50,7 +50,7 @@ khonsu plugin install ./folders --yes
 khonsu plugin describe folders
 ```
 
-`--yes`는 선언된 권한을 승인합니다. 설치 프로그램은 플러그인을 복사하므로, 소스를 변경한 뒤에는 다시 설치하십시오. 전체 동기화나 증분 동기화를 구현하기 전에 [동기화 방식](./data-sources#sync-semantics)을 참고하십시오.
+`--yes`는 선언된 권한을 승인합니다. AI 에이전트가 실행하면 [아무것도 승인하지 않습니다](./cli#approval). 설치 프로그램은 플러그인을 복사하므로, 소스를 변경한 뒤에는 다시 설치하십시오. 전체 동기화나 증분 동기화를 구현하기 전에 [동기화 방식](./data-sources#sync-semantics)을 참고하십시오.
 
 ## 플러그인 공유 {#share}
 

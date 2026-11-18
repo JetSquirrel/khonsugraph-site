@@ -37,6 +37,10 @@ Führen Sie `khonsu plugin describe ID` aus und prüfen Sie die Konfigurationsfe
 
 Eine fehlgeschlagene Synchronisierung kann bereits geschriebene Datensätze hinterlassen. Beheben Sie die Ursache und synchronisieren Sie dann erneut, um sie abzugleichen. Prüfen Sie `skipped_edges` auf unaufgelöste Endpunkte.
 
+## Die Installation durch einen Agenten wurde nicht genehmigt {#needs-confirmation}
+
+Die Art `needs_confirmation` (Exit-Status 4) bedeutet, dass ein KI-Agent die Genehmigung eines Plugins verlangt hat. Das Plugin ist installiert, aber nur ein Mensch kann es genehmigen: in der App, oder mit `khonsu plugin approve ID` im eigenen Terminal. Siehe [Genehmigung](./cli#approval).
+
 ## Ein Problem melden
 
 Geben Sie die App-Version, das Betriebssystem, den Befehl und die Fehlerart in einem [GitHub-Issue](https://github.com/JetSquirrel/KhonsuGraph/issues) an. Entfernen Sie Anmeldedaten und private Graphwerte aus Reproduktionen.

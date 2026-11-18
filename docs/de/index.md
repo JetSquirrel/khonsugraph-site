@@ -13,6 +13,7 @@ Es ist ein unabhängiges Projekt, das auf HawDB aufbaut und unter Apache-2.0 ver
 - [CSV importieren, AWS verbinden oder eine Neo4j-Datenbank kopieren](./data-sources)
 - [Plugins per Namen aus einem Marketplace installieren](./marketplace)
 - [Cypher-Unterstützung und Abfragegrenzen verstehen](./queries)
+- [Festhalten, was Labels bedeuten, und in den Begriffen der Ontologie fragen](./ontology)
 - [Einen Pfad verfolgen, Belege anführen und eine Untersuchung speichern](./investigations)
 - [Knoten bewerten und Communities mit der Graphanalyse finden](./analysis)
 - [Ein .dash-Dashboard erstellen](./dashboards)

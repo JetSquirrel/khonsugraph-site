@@ -72,6 +72,12 @@ KhonsuGraph 0.3.0 usa HawDB 0.29.0, cuyo Cypher difiere del de otras bases de da
 
 Un grafo escrito antes de HawDB 0.25, por KhonsuGraph 0.2.0 o anterior, no se puede leer con esta versión; consulta [solución de problemas](./troubleshooting#old-format).
 
+## Comprueba una consulta o pregunta con las palabras de la ontología {#semantic}
+
+`--validate-only` comprueba una sentencia Cypher contra las etiquetas, los tipos de relación y los patrones del grafo, y no ejecuta nada: una etiqueta mal escrita, una relación recorrida en sentido contrario o un patrón que el grafo no tiene se informa con nombres parecidos. `--semantic` permite que una consulta nombre conceptos como `Device` y `Account` en lugar de las etiquetas de una fuente. Ambos llegan en la versión posterior a 0.3.0; consulta [ontología](./ontology#semantic).
+
 ## Acceso de lectura y escritura
 
 Las consultas de la CLI son de solo lectura por defecto. `--write` habilita explícitamente las escrituras. Un proceso posee un directorio de grafo a la vez. Mientras la aplicación tiene el grafo abierto, las consultas de lectura de la CLI y las comprobaciones de paneles se enrutan a través de esa ventana. Las escrituras y las sincronizaciones requieren que el grafo esté cerrado allí.
+
+Una sentencia ejecutada con `--write` no está en ninguna fuente de datos, así que `khonsu graph rebuild` no la conserva. A partir de la versión posterior a 0.3.0, cada una se registra en `writes.jsonl` en la carpeta de configuración (cuándo, qué grafo, la sentencia con el material de claves enmascarado y el agente que la ejecutó), para poder encontrarla y volver a escribirla.

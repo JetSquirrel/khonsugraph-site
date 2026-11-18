@@ -36,7 +36,7 @@ Jede Installation beginnt mit dem Marketplace `official`. Er wird von `marketpla
 
 - Das Paket muss zur SHA-256 passen, die der Marketplace listet, und das gelistete Plugin in der gelisteten Version enthalten. Andernfalls wird nichts installiert, und was vorher installiert war, bleibt.
 - Indizes und Pakete werden nur über HTTPS gelesen.
-- Installieren ist nicht Genehmigen. Ein Plugin aus einem Marketplace braucht vor dem Ausführen eine Genehmigung, nach einem Update erneut. `--yes` genehmigt im selben Schritt.
+- Installieren ist nicht Genehmigen. Ein Plugin aus einem Marketplace braucht vor dem Ausführen eine Genehmigung, nach einem Update erneut. `--yes` genehmigt im selben Schritt. Von einem KI-Agenten ausgeführt, genehmigt es nichts und endet mit 4; siehe [Genehmigung](./cli#approval).
 
 Ein Marketplace sagt, wo ein Paket liegt und welchen Hash es hat. Er macht das Plugin nicht sicher. Prüfen Sie die deklarierten Berechtigungen vor der Genehmigung; sie sind Deklarationen, keine Sandbox. Siehe [Plugin-Entwicklung](./plugins).
 

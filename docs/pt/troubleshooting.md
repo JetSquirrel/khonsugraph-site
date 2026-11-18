@@ -37,6 +37,10 @@ Execute `khonsu plugin describe ID` e verifique os campos de configuração. Gar
 
 Uma sincronização com falha pode deixar registros já gravados. Corrija a causa e sincronize de novo para reconciliar. Inspecione `skipped_edges` para extremidades não resolvidas.
 
+## A instalação feita por um agente não foi aprovada {#needs-confirmation}
+
+O tipo `needs_confirmation` (código 4) significa que um agente de IA pediu para aprovar um plugin. O plugin está instalado, mas só uma pessoa pode aprová-lo: aprove no app ou execute `khonsu plugin approve ID` no seu próprio terminal. Veja [aprovação](./cli#approval).
+
 ## Relate um problema
 
 Inclua a versão do app, o sistema operacional, o comando e o tipo de erro em uma [issue no GitHub](https://github.com/JetSquirrel/KhonsuGraph/issues). Remova credenciais e valores privados do grafo das reproduções.

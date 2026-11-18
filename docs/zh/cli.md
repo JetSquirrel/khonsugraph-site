@@ -16,7 +16,13 @@ description: khonsu 命令行对每条命令都输出 JSON，方便 Claude Code 
 | `khonsu query --db DIR --cypher "…"` | 执行一条只读 Cypher |
 | `khonsu query --db DIR --sql "…"` | 执行一条只读 SQL |
 | `khonsu query --db DIR --file query.cypher` | 执行查询文件；`.sql` 使用 SQL |
+| `khonsu query --db DIR --semantic --cypher "…"` | [用本体的词语查询](./ontology#semantic)：`Device`、`Account`、`runs_on` |
+| `khonsu query --db DIR --validate-only --cypher "…"` | 根据图[检查语句](./ontology#validate)，不执行 |
 | `khonsu graph explain --db DIR --cypher "…"` | 查看查询计划 |
+| `khonsu graph ontology describe [--db DIR]` | 列出[概念](./ontology)及其覆盖的图标签 |
+| `khonsu graph ontology resolve WORD…` | 说明词语的含义：概念、同义词及对应的标签 |
+| `khonsu graph ontology check --db DIR --entities a,b` | 图中是否有问题所涉及的每类事物的记录 |
+| `khonsu graph ontology path --from A --to B [--db DIR]` | 两个概念如何相连，以 Cypher 模式给出 |
 | `khonsu graph explore --db DIR --from NODE [--to NODE]` | [从节点向外探索](./investigations#explore)并给出路径 |
 | `khonsu graph evidence --db DIR --node NODE --rel REL` | 查看[一条记录的依据](./investigations#evidence) |
 | `khonsu graph analyze ALGORITHM --db DIR` | 运行[图算法](./analysis)：PageRank、社区发现、连通分量等 |
@@ -51,6 +57,12 @@ description: khonsu 命令行对每条命令都输出 JSON，方便 Claude Code 
 `--max-rows` 默认 200，只截断展示结果，不减少查询执行成本。请检查 `truncated` 并限制查询规模。
 
 失败结果包含带 `kind`、`message` 和可选 `detail` 的 `error` 对象。解析 stdout 前先检查退出状态：1 表示执行错误，2 表示用法或仪表盘规格错误。
+
+从 0.3.0 之后的版本起，退出码 2 也表示查询[与图不符](./ontology#validate)（`invalid_query`），3 表示图中没有问题所涉及事物的记录（`not_investigable`），4 表示需要人来确认（`needs_confirmation`）。
+
+## 批准由人来做 {#approval}
+
+从 0.3.0 之后的版本起，批准插件权限是人的决定。当 Agent 运行 `khonsu plugin install … --yes`、`plugin update` 或 `plugin approve` 时，插件会被安装或更新但不会被批准，命令以 4 退出，类型为 `needs_confirmation`，并列出这些插件。请让用户在应用中或在自己的终端里批准。KhonsuGraph 通过 `KHONSU_AGENT` 或 Claude Code、Codex、Cursor 和 Gemini CLI 设置的环境变量识别 Agent。
 
 ## 审阅循环
 

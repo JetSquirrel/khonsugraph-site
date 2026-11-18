@@ -16,7 +16,13 @@ description: Командная строка khonsu печатает JSON пос
 | `khonsu query --db DIR --cypher "…"` | Выполнить одну инструкцию Cypher только на чтение |
 | `khonsu query --db DIR --sql "…"` | Выполнить одну инструкцию SQL только на чтение |
 | `khonsu query --db DIR --file query.cypher` | Выполнить файл запроса; расширение `.sql` выбирает SQL |
+| `khonsu query --db DIR --semantic --cypher "…"` | [Запрос словами онтологии](./ontology#semantic): `Device`, `Account`, `runs_on` |
+| `khonsu query --db DIR --validate-only --cypher "…"` | [Проверить запрос](./ontology#validate) по графу, ничего не выполняя |
 | `khonsu graph explain --db DIR --cypher "…"` | Объяснить запрос |
+| `khonsu graph ontology describe [--db DIR]` | Перечислить [понятия](./ontology) и метки графа, которые они охватывают |
+| `khonsu graph ontology resolve WORD…` | Что значат слова: понятия, синонимы и соответствующие метки |
+| `khonsu graph ontology check --db DIR --entities a,b` | Есть ли в графе записи о каждом предмете вопроса |
+| `khonsu graph ontology path --from A --to B [--db DIR]` | Как связаны два понятия, в виде шаблонов Cypher |
 | `khonsu graph explore --db DIR --from NODE [--to NODE]` | [Обойти граф от узла](./investigations#explore) и сообщить путь |
 | `khonsu graph evidence --db DIR --node NODE --rel REL` | Показать, [что подтверждает запись](./investigations#evidence) |
 | `khonsu graph analyze ALGORITHM --db DIR` | Запустить [графовый алгоритм](./analysis): PageRank, сообщества, компоненты и другое |
@@ -51,6 +57,12 @@ description: Командная строка khonsu печатает JSON пос
 `--max-rows` по умолчанию равно 200 и обрезает отображаемый результат. Оно не уменьшает объём работы при выполнении запроса. Всегда проверяйте `truncated` и используйте запросы с ограничениями.
 
 При сбое возвращается объект `error` с полями `kind` и `message` и необязательным `detail`. Прежде чем толковать stdout, проверьте код возврата: 1 означает ошибку выполнения, 2 — ошибку использования или описания дашборда.
+
+Начиная с выпуска после 0.3.0 код 2 также означает запрос, который [не подходит к графу](./ontology#validate) (`invalid_query`), 3 — что в графе нет записей о предмете вопроса (`not_investigable`), а 4 — что нужно подтверждение человека (`needs_confirmation`).
+
+## Одобряет человек {#approval}
+
+Начиная с выпуска после 0.3.0 одобрение разрешений плагина — решение человека. Когда агент выполняет `khonsu plugin install … --yes`, `plugin update` или `plugin approve`, плагин устанавливается или обновляется, но не одобряется, а команда завершается с кодом 4 и видом `needs_confirmation`, называя плагины. Попросите человека одобрить их в приложении или в своём терминале. Агент определяется по `KHONSU_AGENT` или по переменным, которые задают Claude Code, Codex, Cursor и Gemini CLI.
 
 ## Цикл проверки
 
